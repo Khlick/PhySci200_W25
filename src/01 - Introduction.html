@@ -1,0 +1,4009 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Introduction Advanced Experimental Statistics
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/felipec.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/bg_bimodal_3.png" data-background-size="fill" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Introduction
+              </h2>
+              <h3>
+                Advanced Experimental Statistics
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                Lecture 01
+              </p>
+              <p class="byinfo">
+                PS200
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>
+              Welcome!
+            </p>
+          </aside>
+        </section>
+        <section data-background-image="lib/img/mice_logistics_1.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1 .section-number {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+
+
+<section>
+
+<style>
+
+.admin-two-col {
+
+grid-template-columns: 1fr 1fr;
+
+align-items: end;
+
+grid-column-gap: 5vw;
+
+grid-auto-rows: auto;
+
+}
+
+
+
+/* Table styles */
+
+.admin-two-col table {
+
+width: 100%;
+
+border-collapse: collapse;
+
+}
+
+
+
+/* Header styles */
+
+.admin-two-col table th {
+
+border-bottom: 2px solid black;
+
+padding: 8px;
+
+text-align: left;
+
+}
+
+
+
+/* Row styles */
+
+.admin-two-col table td {
+
+padding: 8px;
+
+text-align: left;
+
+font-size: 70%;
+
+}
+
+
+
+/* Banded rows */
+
+.admin-two-col table tr:nth-child(even) {
+
+background-color: lightgray;
+
+}
+
+
+
+/* Grid container */
+
+.admin-container {
+
+display: grid;
+
+grid-auto-rows: auto;
+
+row-gap: 16px;
+
+}
+
+
+
+/* First and third rows */
+
+.admin-item:nth-child(1),
+
+.admin-item:nth-child(4) {
+
+align-self: end;
+
+border-bottom: 3px solid var(--r-heading-color);
+
+}
+
+
+
+/* Last row */
+
+.admin-item:last-child {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+column-gap: 16px;
+
+}
+
+
+
+/* Emoji size */
+
+#bigemoji:before {
+
+font-size: 150%;
+
+}
+
+#medemoji:before {
+
+font-size: 125%;
+
+}
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header" style="align-items: center">
+
+</div>
+
+<div class="content small">
+
+<div class="grid-generic admin-two-col">
+
+<div>
+
+<!-- left -->
+
+<h3>Office Hours and Locations</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th></th>
+
+<th>Day</th>
+
+<th>Location</th>
+
+<th>Time</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Khris Griffis, Ph.D. <span class="em">(Instructor)</span></td>
+
+<td>Tuesday</td>
+
+<td>Hershey Hall 309</td>
+
+<td>4:00p-5:00p</td>
+
+</tr>
+
+<tr>
+
+<td>Alejandro Miron <span class="em">(TA)</span></td>
+
+<td>TBD</td>
+
+<td>TBD</td>
+
+<td>TBD</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="admin-container">
+
+<div class="admin-item" style="height: 8vh; align-content: end">
+
+<p>Requirements</p>
+
+</div>
+
+<div class="admin-item small">
+
+<ul>
+
+<li id="medemoji" class="emoji-floppy_disk" style="padding-left: 2em">
+
+<a
+
+href="https://www.python.org/downloads/"
+
+>Python ($\geq 3.12$)</a
+
+>
+
+</li>
+
+<li id="medemoji" class="emoji-floppy_disk" style="padding-left: 2em">
+
+<a href="https://www.cursor.com/">Cursor</a> or <a href="https://code.visualstudio.com/">VSCode</a> IDE
+
+</li>
+
+<li id="medemoji" class="emoji-floppy_disk" style="padding-left: 2em">
+
+<a href="https://pandoc.org/">Pandoc</a> & a <a href="https://www.latex-project.org/get/#tex-distributions">LaTeX</a> distribution
+
+</li>
+
+</ul>
+
+<ul>
+
+<li
+
+id="medemoji"
+
+class="emoji-exclamation"
+
+style="padding-left: 2em"
+
+>
+
+<span class="danger">Attendance Is Mandatory</span>
+
+</li>
+
+<li id="medemoji" class="emoji-exclamation" style="padding-left: 2em">
+
+There's no textbook!
+
+</li>
+
+<li id="medemoji" class="emoji-party_popper" style="padding-left: 2em">
+
+We'll use Canvas for all course materials.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<!-- right -->
+
+<div class="admin-container">
+
+<div class="admin-item">Contact</div>
+
+<div class="admin-item">
+
+<p>Khris: <a href="mailto:khrisgriffis@ucla.edu">khrisgriffis@ucla.edu</a><br /></p>
+
+<p class="em danger">
+
+Please email directly from your UCLA email. <br />
+
+</p>
+
+<p>Alejandro: <a href="mailto:mironalejandro@ucla.edu">mironalejandro@ucla.edu</a></p>
+
+</div>
+
+<div class="admin-item" style="height: 8vh"></div>
+
+<div class="admin-item fragment" data-fragment-index="1">Course Specifics</div>
+
+<div class="admin-item">
+
+<ul class="fragment" data-fragment-index="1">
+
+<li
+
+id="bigemoji"
+
+class="emoji-report fragment"
+
+data-fragment-index="1"
+
+style="padding-left: 2em"
+
+>
+
+Weekly Assignments
+
+</li>
+
+<li
+
+id="bigemoji"
+
+class="emoji-chart fragment"
+
+data-fragment-index="2"
+
+style="padding-left: 2em"
+
+>
+
+Final Term Report
+
+</li>
+
+</ul>
+
+<ul class="fragment" data-fragment-index="1">
+
+<li class="fragment" data-fragment-index="1">Assigned in Lab, due following week</li>
+
+<li class="fragment" data-fragment-index="2">Due finals week</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>I prefer MikTex for latex distribution as it comes with the necessary tools to compile latex using the command line.</p>
+
+<p>There's no book for this course, everything we'll develop will be done here in lecture or in the lab.</p>
+
+<p>I'll be using <a href="https://www.cursor.com/">Cursor</a> for the IDE, but you can use <a href="https://code.visualstudio.com/">VSCode</a> if you prefer, or another IDE. You may wish to use the Jupyter lab or notebook interface, but I find the VS Code interface more useful, we'll go over how to set up the code environment in the first lab.</p>
+
+<p>Assignments will consist of a mix of coding, writing, lab reports.</p>
+
+<p>
+
+The term project will be a short scientific report, based on your own research, or if you don't have any, Alejandro and I may provide something.
+
+The report will be written in the same format as the labs/assignments, but will be more detailed and will require references, etc.. That is, we will be using
+
+a tool called LabPaper, to format the report in a Springer Nature submission format. We'll learn more about this in the first lab.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Syllabus -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Course Outline</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify smaller">
+
+<p>
+
+The purpose of this course is to acquaint students with a new approach to statistics, through applications to typical physiological data.
+
+</p>
+
+<p>
+
+We'll be using Python, and the Jupyter notebook interface, to explore the data and apply statistical methods.
+
+</p>
+
+<h4>Requirements</h4>
+
+<p>
+
+All enrolled students will be required to finish weekly problem sets.
+
+The final term project will be a short scientific report, applying methods of the course to a dataset relevant to the student's research (preferred), or one supplied by the instructor.
+
+</p>
+
+<p>
+
+Grading will be on an absolute scale, however the professor may make adjustments to benefit the students. <span class="u-info">Homework and final project will each count for 50% of the final grade.</span>
+
+</p>
+
+</div>
+
+<div>
+
+<h4>Course Schedule</h4>
+
+<table class="latex-style-table-row-labels smaller">
+
+<thead>
+
+<tr class="small">
+
+<th>Week</th>
+
+<th>Dates</th>
+
+<th>Topics</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Week 1</td>
+
+<td>Jan. 7 &amp; 9</td>
+
+<td>Introduction, Data Types, Data Visualization, and the Bootstrap</td>
+
+</tr>
+
+<tr>
+
+<td>Week 2</td>
+
+<td>Jan. 14 &amp; 16</td>
+
+<td>Frequentism, Normality, and Quantifying Uncertainty</td>
+
+</tr>
+
+<tr>
+
+<td>Week 3</td>
+
+<td>Jan. 21 &amp; 23</td>
+
+<td>Null Significance in One and Two Sample Tests</td>
+
+</tr>
+
+<tr>
+
+<td>Week 4</td>
+
+<td>Jan. 28 &amp; 30</td>
+
+<td>Comparing Quantitative Variables: 2-Sample Tests</td>
+
+</tr>
+
+<tr>
+
+<td>Week 5</td>
+
+<td>Feb. 4 &amp; 6</td>
+
+<td>Comparing Quantitative Variables: N-Sample Tests</td>
+
+</tr>
+
+<tr>
+
+<td>Week 6</td>
+
+<td>Feb. 11 &amp; 13</td>
+
+<td>Comparing Categorical Variables: independence and Risk</td>
+
+</tr>
+
+<tr>
+
+<td>Week 7</td>
+
+<td>Feb. 18 &amp; 20</td>
+
+<td>Bivariate Data: Correlation and Regression</td>
+
+</tr>
+
+<tr>
+
+<td>Week 8</td>
+
+<td>Feb. 25 &amp; 27</td>
+
+<td>Extended Linear Models and Statistical Power</td>
+
+</tr>
+
+<tr>
+
+<td>Week 9</td>
+
+<td>Mar. 4 &amp; 6</td>
+
+<td>Bayesian Statistics</td>
+
+</tr>
+
+<tr>
+
+<td>Week 10</td>
+
+<td>Mar. 11 &amp; 13</td>
+
+<td>Special Topics</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg_bimodal_3.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Motivation
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Motivation slide 1 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding $\phantom{}\gt\phantom{}$ Knowing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.35fr;grid-auto-rows:auto;gap:5vw;align-items:end">
+
+<div> <!-- left -->
+
+<img src="lib/img/answer.png" class="framed" style="max-height:100%;">
+
+</div>
+
+<div class="smaller"> <!-- right -->
+
+<p>
+
+Getting an answer is one thing, but knowing <span class="info">WHAT</span> the question is
+
+and <span class="danger">WHY</span> we get this answer is crucial.
+
+</p>
+
+<p style="margin-bottom: 0;" class="fragment" data-fragment-index="1">
+
+Understanding statistics means understanding the
+
+<span class="warning">underlying process</span> that leads to the answer, not just the
+
+result itself.
+
+</p>
+
+<div class="fragment note-script" data-fragment-index="3">
+
+<p class="small">
+
+The answer to the great question of life, the universe, and everything is 42. But the real challenge is to
+
+know what the question is.
+
+</p>
+
+<p class="right-justify smaller">
+
+- Douglas Adams, <span class="em">The Hitchhiker's Guide To The Galaxy</span>
+
+</p>
+
+</div>
+
+<img src="lib/img/push-button.svg" class="fragment" style="width:45%;justify-self:center;" data-fragment-index="4">
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+We believe understanding how things work is far more interesting
+
+and useful, because it can be applied and tweaked to very specific situations.
+
+</p>
+
+<p>
+
+Douglas Adams hits on something philosophically important;
+
+having a result is meaningless without knowing how it was obtained,
+
+and why the result should be what it is.
+
+</p>
+
+<p>
+
+Traditional statistics classes are focused on the formula, which inherently
+
+hides the underlying process.
+
+</p>
+
+</aside>
+
+
+
+</section>
+
+
+
+<!-- What this course isn't -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What this course <span class="danger u">isn't</span></h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="0">
+
+<p><i class="no_entry"></i> A Formula Memorization Exercise</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="no_entry"></i> Strictly <span class="warning">Parametric</span></p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="no_entry"></i> A <span class="danger">Plug-n-Chug</span> Approach</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="no_entry"></i> Focused on Hypothesis Rejection Alone</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p><i class="no_entry"></i> Bound by outdated (and often incorrect) techniques</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="5">
+
+<p><i class="no_entry"></i> An "AI" prompt engineering exercise</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<ul>
+
+<li>You won't be memorizing formulas or applying statistical tests without understanding their context.</li>
+
+<li>We're not constrained by traditional methods that rely on rigid assumptions about normality or homogeneity of variance.</li>
+
+<li>This isn't about blindly applying mehotds to get a result; it's about critically thinking about your data.</li>
+
+<li>We're not just testing whether to reject or fail to reject $H_0$; the focus is broader.</li>
+
+<li>This isn't about sticking to methods developed for pre-computer statistics when more robust tools are available.</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- What this course is -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What this course <span class="success u">is</span></h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom">
+
+<p><i class="check success-before"></i> Flexible and Modern</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="check success-before"></i> Practical and Applied</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="check success-before"></i> Data-Driven and Adaptive</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="check success-before"></i> Focused on Understanding</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p><i class="check success-before"></i> Exploratory and Visual</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="5">
+
+<p><i class="check success-before"></i> Scientifically Grounded</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<ul>
+
+<li>
+
+A focus on Monte Carlo simulations, bootstrapping, and other resampling techniques to handle real-world data challenges.
+
+</li>
+
+<li>
+
+You'll learn methods tailored to physiological data, directly applicable to your research or field of study.
+
+</li>
+
+<li>
+
+Instead of forcing data into predefined models, you'll use simulations to reflect the actual experimental design.
+
+</li>
+
+<li>
+
+This class emphasizes the 'why' behind statistical methods, helping you make informed decisions about your analyses.
+
+</li>
+
+<li>
+
+We'll use visualizations and iterative approaches to uncover meaningful insights rather than just producing p-values.
+
+</li>
+
+<li>
+
+Every method and concept is tied back to sound scientific principles and the needs of experimental design.
+
+</li>
+
+</ul>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/mice_banner_stats.jpg" data-background-size="fit" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Statistics
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.25) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.25) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>What is "Statistics"?</p>
+
+<ul>
+
+<li>Boring?</li>
+
+<li>Uncontroversial?</li>
+
+<li>Reliable and Objective?</li>
+
+<li>Formulas?</li>
+
+<li>Stupid thing the journal/my PI wants me to do?</li>
+
+</ul>
+
+<p>
+
+It doesn't have to be!
+
+</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Traditional Statistics -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Traditional Statistics</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<ul>
+
+<li class="fragment" data-fragment-index="0">Focus on <span class="danger">Parametric</span> models:
+
+<ul>
+
+<li>Assumptions of Normality</li>
+
+<li>Assumptions of Equal Variance</li>
+
+<li>Heavy reliance on analytic formulas for p-values and confidence intervals</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="1">Frequentist Paradigm:
+
+<ul>
+
+<li>Emphasis on <span class="em">fixed</span> <span class="danger">sampling distributions</span></li>
+
+<li>Hypothesis testing with <span class="em">fixed</span> <span class="danger">error rates</span></li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="2">Tools and Methods:
+
+<ul>
+
+<li>Rigid reliance on <span class="danger">formulas</span> and tables</li>
+
+<li>Standardized tests (e.g. ANOVA, t-tests, etc.)</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="3">Limitations:
+
+<ul>
+
+<li class="pop">Assumptions are often violated</li>
+
+<li>Lack of flexibility</li>
+
+<li>Lack of intuitive <span class="em">interpretation</span></li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="fragment framed border-info smaller no-hang" data-fragment-index="4">
+
+<div class="fragment" data-fragment-index="4">
+
+<p class="big">$t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{s_p^2\left( \frac{1}{n_1} + \frac{1}{n_2} \right)}}$</p>
+
+<p class="fragment" data-fragment-index="5">If $t>1.98$ then  $p < 0.05$.</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="6">
+
+<p>What is the purpose of these formulas?</p>
+
+<p class="fragment danger" data-fragment-index="7">To generate <span class="strong">p-values</span></p>
+
+</div>
+
+<div class="fragment" data-fragment-index="8">
+
+<p>Why do we want a "p-value"?</p>
+
+<p class="fragment danger" data-fragment-index="9">To tell if the result is <span class="strong">statistically significant</span>.</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="10">
+
+<p>What is <span class="danger">Statistical Significance</span>?</p>
+
+<p class="fragment warning" data-fragment-index="11">A way to determine whether a metric (observation) could have occurred by chance.</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="12">
+
+<p>Why do we care about chance?</p>
+
+<p class="fragment" data-fragment-index="13"><i class="thinking" style="font-size:400%;"></i></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Statistics is so much more than just formulas!</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What is statistics -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is statistics<span class="emoji" role="img" style="font-size:90%;">&#x2753;</span></h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-wrapper">
+
+<div class="content" style="display: grid; grid-template-rows: 1fr 3fr; grid-template-columns: 1fr;align-items:start;">
+
+<div style="display: grid; grid-template-rows: 1fr; grid-template-columns: 1fr 1fr; grid-column-gap: 5vmin;align-items:start;">
+
+<img src="lib/img/data.svg" style="max-height:25vh;justify-self:end;height:100%;">
+
+<img src="lib/img/statistics-wordcloud.svg" style="max-height:25vh;justify-self:start;height:100%;">
+
+</div>
+
+<div style="display: grid; grid-template-rows: 1fr; grid-template-columns: 1fr 1fr 1fr 1fr; grid-column-gap: 1vmin;align-items:center">
+
+<div style="justify-self: end;">
+
+<p>Statistics is the <span class="u-accent">science</span> of</p>
+
+</div>
+
+<div class="border-left accent fragment" data-fragment-index="1" style="justify-self: start;justify-items:start;text-align:start;padding-left:10px;">
+
+<span class="highlight-current-danger">collecting,</span> <br>
+
+<span class="highlight-current-danger">organizing,</span> <br>
+
+<span class="highlight-current-danger">presenting,</span> <br>
+
+<span class="highlight-current-danger">analyzing,</span> <br>
+
+<span class="highlight-current-danger">interpreting,</span> <br>
+
+<span class="highlight-current-danger">and quantifying uncertainty</span>
+
+</div>
+
+<div style="justify-self: center;" class="fragment" data-fragment-index="2">of <span class="u-accent">DATA</span></div>
+
+<div style="justify-self: start;" class="fragment" data-fragment-index="3">So we can make <span class="fragment highlight-bg-accent-white" data-fragment-index="4">better,
+
+more informed and critical decisions</span> about the world around us.</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<aside class="notes">
+
+<p>
+
+We did not say: To determine if something should happen by chance!
+
+</p>
+
+<p>
+
+Where in here is the idea of "Statistical Significance"?
+
+</p>
+
+<p>
+
+We have Sir Ronald Fisher to thank for this.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The History of the Alpha Level in Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2 class="danger">Statistical Significance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify small fragment" data-fragment-index="1">
+
+The <span class="danger">alpha level</span> of 0.05, a <span class="em">standard threshold</span> for statistical significance, was popularized by Ronald A. Fisher in the 1920s. Originally suggested as a <span class="info">convenient cut-off</span> for rejecting the null hypothesis, it implied a result would only occur <span class="pop">by chance</span> about 1 in 20 times <span class="u-muted">under the null hypothesis</span>.
+
+</p>
+
+<p class="left-justify small fragment" data-fragment-index="2">
+
+<span class="u-muted">Despite its arbitrary nature</span>, the 0.05 level became widely adopted due to its balance between <span class="danger">Type I</span> and <span class="danger">Type II</span> errors. Over time, <span class="em">it has become the conventional standard</span> across various scientific disciplines.
+
+</p>
+
+</div>
+
+<div style="height:100%;" class="fragment" data-fragment-index="3">
+
+<p class="left-justify small">
+
+Recent debates challenge this standard, suggesting adjustments or alternative approaches like <span class="success">confidence intervals</span>, <span class="success">effects sizes</span>, or <span class="success">Bayesian</span> statistics to better reflect the complexity of scientific evidence.
+
+</p>
+
+<div class="note-script fragment box-width" data-fragment-index="4">
+
+<p>
+
+It is convenient to take this point as a limit in judging whether a deviation is to be considered significant or not.
+
+</p>
+
+<p class="right-justify">-Ronald Fisher</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In fact, the whole notion of "statistical significance" is a bit dangerous. Why do we need to reduce the hard work we do down to a binary decision?
+
+</p>
+
+<p>If you say "or else you can't publish", this simply isn't true.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Retire Statistical Significance -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<img src="lib/img/nature_retire_statsig.png" alt="Retire Statistical Significance" style="max-height:25vh;">
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment quoted danger bg-muted-alpha-02 border-danger" data-fragment-index="1">We... call for the entire concept of statistical significance to be abandoned.</p>
+
+<p class="fragment em" data-fragment-index="2">The authors (+800) argue rigid application of significance <span class="em">thresholds</span> leads to misinterpretation of data, with <span class="warning">non-significant</span> results being incorrectly equated to 'no effect', and significant results potentially overstated.</p>
+
+<p class="fragment note-script left-justify" data-fragment-index="3">Decisions are seldom necessary in scientific reporting. However, when they are required (as in clinical practice), they should be made based on the costs, benefits, and likelihoods of all possible outcomes, not via arbitrary cutoffs applied to statistical summaries such as p-values which capture little of this picture.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section data-auto-animate data-background-image="lib/img/statistical_significance_cave.png" data-background-size="contain">
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<img src="lib/img/nature_retire_statsig.png" alt="Retire Statistical Significance" style="max-height:15vh;">
+
+</div>
+
+<div class="content">
+
+<div style="height: 70vh;">
+
+
+
+</div>
+
+</div>
+
+<div class="foot-left">
+
+<p class="left-justify big"><a class="pop" href="https://www.nature.com/articles/d41586-019-00857-9" target="_blank">Source</a></p>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>They mean setting a threshold is arbitrary, the social ramifications should be considered, and 'non-significant' results are not always 'no effect'.</p>
+
+<p>They also mean that the p-value is not a good measure of evidence.</p>
+
+<p>There are many calls to retire the p-value altogether.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Why retire statistical significance?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="big in">Is there a problem in scientific reporting?</p>
+
+<div style="height:60vh;align-self:center;align-items:center;">
+
+<p class="danger fragment" style="font-size:400%;" data-fragment-index="1">Yes!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Irreproducible research -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<img src="lib/img/bostonglobe_reproducibility_problem.png" alt="Irreproducible research" style="max-height:25vh;">
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="align-self:center;align-items:center;">
+
+<img src="lib/img/view_pvalues.png" alt="View p-values" style="width:100%;">
+
+</div>
+
+<div class="left-justify small">
+
+<p class="danger">Attempts to quantify how much research is wrong have been sobering.</p>
+
+<ul class="small">
+
+<li>
+
+Scientists at Bayer HealthCare reported that when they tried to reproduce 67 published discoveries in oncology, women's health, and cardiovascular disease, <span class="u-danger">only a quarter of the time</span> were their in-house results completely consistent with what had been reported.
+
+</li>
+
+<li>
+
+A scientist at Amgen disclosed that, despite concerted effort, the company had successfully repeated <span class="u-danger">only six of 53</span> major cancer findings.
+
+</li>
+
+<li>
+
+Last year, neuroscience researchers tried to repeat five studies that showed 17 links between certain brain structures and behaviors - for example, a finding that people with more gray matter in particular brain regions also have more Facebook friends. The researchers could <span class="u-danger">not replicate any of the connections</span> and found evidence for what scientists call the <span class="s-quote">null hypothesis</span> - the idea that there was no relationship.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Reproducibility Crisis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Reproducibility Crisis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%;">
+
+<img src="lib/img/plos-one-replication-biomedical.png" class="framed" width=100%>
+
+</div>
+
+<div style="height:100%;">
+
+<p class="quoted small">
+
+Newspapers never covered initial studies reporting null findings
+
+and rarely reported subsequent null observations. Only 48.7% of the
+
+156 studies reported by newspapers were confirmed by the corresponding
+
+meta-analyses.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:3fr 6fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div style="height:100%;">
+
+<img src="lib/img/nature-pvalue-statistical-errors.png" class="fragment framed" data-fragment-index=1 width=100%>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2vmin;height:100%;">
+
+<p class="quoted fragment smaller" data-fragment-index=1>
+
+The p-value was never meant to be used the way
+
+it's used today
+
+</p>
+
+<div style="justify-content: center;height:100%;align-content:center;">
+
+<img src="lib/img/plos-medicine-why-research-false.png" class="fragment framed down-6" data-fragment-index=2 width=100%>
+
+</div>
+
+<p class="quoted fragment smaller" data-fragment-index=2>
+
+It can be proven that most claimed research findings are false.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Food Cancer -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Worse Than Irreproducible</h3>
+
+<p class="small em">Everything We Eat Causes AND Prevents Cancer!</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:6.5fr 4fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 360">
+
+<use xlink:href="lib/img/food-cancer-relative-risk.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<p class="sided">
+
+Each <i class="fas fa-circle info smaller"></i> is one medical study
+
+</p>
+
+<p class="smallest">
+
+Schoenfeld J. and Ioannidis JPA (2013). '<span class="em">Is
+
+everything we eat associated with cancer? A systematic cookbook
+
+review</span>'. Am J Clin Nutr 97:1 127-134
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Are Wrong Answers The Rule? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Are Wrong Answers The Rule?</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/newsweek_medicine_is_wrong.png" alt="Wrong answers rule" style="width:100%;">
+
+</div>
+
+<div>
+
+<img src="lib/img/slegfried_odds_its_wrong.png" alt="Wrong answers rule" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="foot-center">
+
+<p class="bigger">See <a href="https://youtu.be/6sLv0l3pCFg">https://youtu.be/6sLv0l3pCFg</a>.</p>
+
+</div>
+
+<div class="foot-right">
+
+<p class="small muted">
+
+Slegfried (2010). <span class="em">Science News</span>
+
+</p>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>"Why Almost Everything You Hear About Medicine Is Wrong" by Sharon Begley, Newsweek, January 24, 2011. Delves into the prevalence of incorrect or misleading medical information resulting from flawed research methodologies and systemic issues within biomedical studies.</p>
+
+<ul>
+
+<li><strong>Fluctuating Medical Advice:</strong> The public often encounters contradictory health recommendations, such as changing views on the benefits of garlic for cholesterol or hormone replacement therapy for heart disease. (<a href="https://www.newsweek.com/why-almost-everything-you-hear-about-medicine-wrong-66947">newsweek.com</a>)</li>
+
+<li><strong>Systemic Research Flaws:</strong> The article references scholars who argue that the very framework of medical investigation may be off-kilter, leading to findings that are at best unproved and at worst dangerously wrong. (<a href="https://www.newsweek.com/why-almost-everything-you-hear-about-medicine-wrong-66947">newsweek.com</a>)</li>
+
+<li><strong>Influence of John Ioannidis:</strong> The work of John Ioannidis is highlighted, particularly his assertion that a significant portion of published medical research findings may be false due to biases and methodological issues. (<a href="https://www.newsweek.com/why-almost-everything-you-hear-about-medicine-wrong-66947">newsweek.com</a>)</li>
+
+<li><strong>Implications for Healthcare:</strong> These flawed studies can lead to the adoption of ineffective or harmful medical practices, resulting in wasted resources and potential harm to patients. (<a href="https://www.newsweek.com/why-almost-everything-you-hear-about-medicine-wrong-66947">newsweek.com</a>)</li>
+
+</ul>
+
+<p>"Odds Are, It's Wrong" by Tom Siegfried, Science News, March 27, 2010. Critiques the scientific community's reliance on statistical methods, particularly the misuse and misunderstanding of statistical significance, which can lead to erroneous conclusions.</p>
+
+<ul>
+
+<li><strong>Misuse of Statistics:</strong> The article argues that the "scientific method" of testing hypotheses by statistical analysis stands on a flimsy foundation, leading to numerous erroneous conclusions in scientific literature. (<a href="https://www.sciencenews.org/article/odds-are-its-wrong">sciencenews.org</a>)</li>
+
+<li><strong>Philosophical Conflicts:</strong> The piece discusses the inconsistencies between different statistical philosophies, such as frequentist and Bayesian approaches, and how these conflicts contribute to confusion in interpreting data. (<a href="https://www.sciencenews.org/article/odds-are-its-wrong">sciencenews.org</a>)</li>
+
+<li><strong>Consequences for Scientific Research:</strong> The widespread misuse of statistical methods makes science more like a crapshoot, resulting in countless erroneous conclusions and contradictory findings in scientific literature. (<a href="https://www.sciencenews.org/article/odds-are-its-wrong">sciencenews.org</a>)</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- Why Most Published Research Findings Are False -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Why Most Published Research Findings Are False</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;align-content:center;">
+
+<p class="quoted border-warning biggest">There is increasing concern that most
+
+current published research findings are
+
+false. ... Simulations show that for most study designs and settings, it is more likely for
+
+a research claim to be false than true.
+
+</p>
+
+<p class="right-justify small"><a href="https://doi.org/10.1371/journal.pmed.0020124" class="muted">PloS Medicine 2005</a></p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Example after Example -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example after Example</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="position: relative; width: 100%; height: 80vh;justify-self:center;justify-content:center;">
+
+<img src="lib/img/biopsych_schiz.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/AmJP_cand_gene.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" class="fragment" data-fragment-index="1" />
+
+<img src="lib/img/pnas_clusterfailure_1.png" style="position: absolute; top: 10%; left: 10%; width: 100%; max-height: 80%; object-fit: contain;display:none;" />
+
+<img src="lib/img/nature_power_failure.png" style="position: absolute; top: 15%; left: 15%; width: 100%; max-height: 80%; object-fit: contain;display:none;" />
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example after Example</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="position: relative; width: 100%; height: 80vh;justify-self:center;justify-content:center;">
+
+<img src="lib/img/biopsych_schiz.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/AmJP_cand_gene.png" style="position: absolute; top: 5%; left: 5%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/pnas_clusterfailure_1.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" class="fragment" data-fragment-index="1" />
+
+<img src="lib/img/nature_power_failure.png" style="position: absolute; top: 15%; left: 15%; width: 100%; max-height: 80%; object-fit: contain;display:none;" />
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example after Example</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="position: relative; width: 100%; height: 80vh;justify-self:center;justify-content:center;">
+
+<img src="lib/img/biopsych_schiz.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/AmJP_cand_gene.png" style="position: absolute; top: 5%; left: 5%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/pnas_clusterfailure_1.png" style="position: absolute; top: 10%; left: 10%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/nature_power_failure.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" class="fragment" data-fragment-index="1" />
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example after Example</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="position: relative; width: 100%; height: 80vh;justify-self:center;justify-content:center;">
+
+<img src="lib/img/biopsych_schiz.png" style="position: absolute; top: 0; left: 0; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/AmJP_cand_gene.png" style="position: absolute; top: 5%; left: 5%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/pnas_clusterfailure_1.png" style="position: absolute; top: 10%; left: 10%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+<img src="lib/img/nature_power_failure.png" style="position: absolute; top: 15%; left: 15%; width: 100%; max-height: 80%; object-fit: contain;" />
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- It Can All Be Confusing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>It Can All Be Confusing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;gap:3vmin;">
+
+<p class="sided border-pop left-justify" style="grid-column: 1/5;">
+
+A single study is rarely the final answer.
+
+<br>
+
+And yet for reporters, new studies are irresistible - a bold new finding makes a great headline.
+
+</p>
+
+<div class="fragment" data-fragment-index="1">
+
+<p>
+
+Apr 2014
+
+</p>
+
+<img src="lib/img/fruits-health-good7.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p>
+
+Jul 2014
+
+</p>
+
+<img src="lib/img/fruits-health-no-effect.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="3">
+
+<p>
+
+Nov 2016
+
+</p>
+
+<img src="lib/img/fruits-health-unrealistic.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="4">
+
+<p>
+
+Feb 2017
+
+</p>
+
+<img src="lib/img/fruits-health-good10.jpeg" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- What Are The Causes? -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What's Causing This Crisis?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment" data-fragment-index="1" style="justify-content:center;justify-items:center;align-content:center;align-items:center;">
+
+<img src="lib/img/nature_weak_stat_standards.png" alt="Nature weak stat standards" style="max-width:45vw;">
+
+</div>
+
+<div class="fragment" data-fragment-index="1" style="justify-content:center;justify-items:center;align-content:center;align-items:center;">
+
+<img src="lib/img/pnas_johnson_revised_standards.png" alt="PNAS Johnson revised standards" style="max-width:45vw;">
+
+<p class="small quoted bg-info-alpha-04" class="fragment" data-fragment-index="2">
+
+... a root cause of nonreproducibility is traced to the conduct of significance tests at inappropriately high levels of significance.
+
+</p>
+
+</div>
+
+<div class="framed border-danger full-width fragment" data-fragment-index="3" style="grid-column:1/3;">
+
+<p class="bigger danger">Bad Statistics!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Generally speaking, the problem is even bigger than just the statistics, but for us, we can get a start on fixing the statistical problems.</p>
+
+<p>Listen, your PI is going to want a p-value before your paper can even get to a conference, let alone a journal.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What Are The Causes? -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What's Causing This Crisis?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="align-self:center;align-items:center;justify-content:center;justify-items:center;">
+
+<img class="framed img fragment" data-fragment-index="0" src="lib/img/nature_fickle_p.png" alt="Nature weak stat standards" style="max-width:45vw;">
+
+</div>
+
+<div style="align-self:center;align-items:center;">
+
+<h4 class="danger fragment" data-fragment-index="1">What is a <span class="s-quote">p-value</span> ?</h4>
+
+<p class="small fragment" data-fragment-index="2">
+
+A probability.
+
+<span class="em warning fragment" data-fragment-index="3">The probability of observing something by chance!</span>
+
+</p>
+
+<h4 class="danger fragment" data-fragment-index="4">Why should we care?</h4>
+
+<p class="small info fragment" data-fragment-index="5">
+
+The p-value may indicate how unlikely the observed result is, <span class="em">with some assumptions.</span>
+
+</p>
+
+<div style="width:100%;justify-content:center;align-items:center;">
+
+<img src="lib/img/monkey-huh.gif" alt="Monkey huh?" class="gif-control fragment" style="width:30%;" data-fragment-index="6">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What are "bad statistics"? Well, it stems from the p-value, and the notion of statistical significance.</p>
+
+<p>On gif, elaborate the p-value indicates our "amount of surprise".</p>
+
+<p>All of you here are likely to have encountered the troublesome p-value.</p>
+
+<p>The statistics part comes from what is oft referred to as "formal hypothesis testing".</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Pitfalls -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h4>Formal Hypothesis Testing</h4>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<p class="sided border-danger">
+
+Hypothesis testing is very powerful, as it helps shed light on <span class="danger">the likelihood that an observed effect could be due to random chance</span>.
+
+</p>
+
+<p class="sided border-pop">
+
+However, statistical significance <span class="u-pop">is not foolproof</span>, and <span class="pop">it is possible to make the wrong decision</span>, rejecting a true null hypothesis or not rejecting a false null hypothesis.
+
+</p>
+
+<div class="grid-generic fragment" data-fragment-index="1" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto;gap:1vmin;">
+
+<img src="lib/img/meme_statistically_noise.png" alt="It's just noise" style="width:100%;">
+
+<img src="lib/img/meme_stuck_at_05.png" alt="Stuck at 0.05" style="width:100%;">
+
+<img src="lib/img/meme_distractedboyfriend_drug_discovery.jpg" alt="Distracted Boyfriend" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Hypothesis testing itself isn't the real problem, we use maths to model literally everything, but only in statistics do we find fallacy of
+
+prescribing a single number to "truth".
+
+</p>
+
+<p>
+
+If you're not aware, which I suspect you are since no-one here is a mathematician or physicist, then all mathematical models are wrong. They are the distillation of how we think the world works, but they are not the world itself.
+
+</p>
+
+<p>
+
+For example, in Newtonian mechanics, you may plug-in a "negative mass" and get a solution where the object accelerates into an applied force, which is clearly wrong. But it turns out you may observe something that looks like this behavior, but it's not actually a negative mass, there's something else going on.
+
+</p>
+
+<p>
+
+This is why we need to be careful with our models, and why we need to be careful with our statistics.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+
+
+
+<!-- P-Values -->
+
+<!-- <section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is a p-value?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Scientists are obsessed with p-values, but...</p>
+
+<div style="grid-row:2/3;grid-column:1/2;justify-items:center;">
+
+<video data-autoplay src="lib/video/all.mp4" controls class="box-width"></video>
+
+</div>
+
+<div
+
+class="fragment rotation-325 huge bg-danger-light framed border-danger border-2x"
+
+style="font-family: 'Playfair Display', serif;grid-row:2/3;grid-column:1/2;width:fit-content;justify-self:center;align-self:center;">
+
+No one has a clue!
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Here's a quote from the interviewer:</p>
+
+<p>To be clear, everyone I spoke with at METRICS could tell me the technical definition of a p-value - the probability of getting results at least as extreme as the ones you observed, given that the null hypothesis is correct - but almost no one could translate that into something easy to understand.</p>
+
+<p>Try to distill the p-value down to an intuitive concept and it loses all its nuances and complexity, said science journalist Regina Nuzzo, a statistics professor at Gallaudet University. "Then people get it wrong, and this is why statisticians are upset and scientists are confused." </p>
+
+<p>You can get it right, or you can make it intuitive, but it's all but impossible to do both.</p>
+
+</aside>
+
+</section> -->
+        </section>
+        <section data-background-image="lib/img/micesci_4.png" id="section-title-4">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-4">
+              <div class="section-number">
+                <span class="large-number">
+                  4
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Fixing Bad Statistics
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-4.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.75) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.75) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>You're asking, "Khris, what are we going to do?"</p>
+
+<p><strong>IS THE SITUATION HOPELESS?</strong></p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- The Future Is Now! -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Future Is Now!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-items:center;">
+
+<img src="lib/img/efron_tibshirani_statdatinComputerAge.jpg" style="width:80%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Efron and Tibshirani point out that most of our familiar statistical approaches were originally developed in the 19th century, and that the computer age has allowed us to do things that were previously impossible.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- General Rule: Use Simulations! -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>General Rule: Use Simulations!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="bigger left-justify">
+
+<ul>
+
+<li class="emoji-brain">Calculate probabilities (p-values), estimate uncertainty, and test hypotheses by simulation, not by formulas based on <span class="em">dubious</span> assumptions.</li>
+
+</ul>
+
+<h4 class="fragment" data-fragment-index="1">Steps:</h4>
+
+<ol>
+
+<li class="emoji-star fragment small" data-fragment-index="1">Construct/Formulate a <span class="danger">chance model</span> that represents the hypothesis</li>
+
+<li class="emoji-star fragment" data-fragment-index="2">Iterate the chance model <span class="em">thousands</span> of times</li>
+
+<li class="emoji-star fragment" data-fragment-index="3">Inspect the results, i.e., <span class="em">count</span> the number of times the event of interest occurs</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This is an oversimplification, there are many nuances we'll cover later.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- What's The Probability -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What's The Probability</h2>
+
+<h4>It happens <span class="s-quote">by chance</span>?</h4>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment question big" data-fragment-index="0">How often will a mouse litter of 5 pups have at least 4 females?</p>
+
+<div class="fragment" data-fragment-index="1">
+
+<svg width="100%" viewBox="0 0 195 41" xmlns="http://www.w3.org/2000/svg">
+
+<use xlink:href="lib/img/mouse_lineup.svg#layer1" />
+
+</svg>
+
+</div>
+
+<p class="fragment" data-fragment-index="2">
+
+<span class="warning"><i class="fa-solid fa-triangle-exclamation big"></i></span> The only assumptions we need to <span class="em">simulate</span> the problem are: (A) the probability of any one pup being female is $\frac{1}{2}$ and (B) we only care about litters with 5 pups.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>PAUSE: Anyone here know what analytical approach would be taught in a normal stats class?</p>
+
+<p>How many possible outcomes are there? How many different "events" are there?</p>
+
+<p>What is the probability of a pup being female?</p>
+
+<p>Note: the assumptions for simulation are flexible.</p>
+
+<p>Let's look at the analytical approach first.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Plug-n-Chug Approach -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Analytical (Formula) Approach</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;" class="small no-hang">
+
+<ol>
+
+<li class="emoji-memo">
+
+The number of pups is 5 ($n = 5$, <span class="em">fixed</span>) and the number of females is at least 4 ($x \geq 4$)
+
+</li>
+
+<li class="emoji-exclamation danger fragment" data-fragment-index="1">
+
+Assume a "Null" hypothesis: The probability of a pup being female is <span class="em">always</span> $\frac{1}{2}$ ($p_{\text{null}} = 0.5$)
+
+</li>
+
+<li class="emoji-exclamation danger fragment" data-fragment-index="2">
+
+Assume each pup's gender is <span class="em">independent</span> of the others
+
+</li>
+
+<li class="emoji-double_exclamation danger fragment" data-fragment-index="3">
+
+Assume a binomial distribution:
+
+$X \sim \text{Binomial}(n, x, p_{\text{null}}) = p(x|n, p_{\text{null}}) = \frac{n!}{x!(n-x)!} p_{\text{null}}^x (1-p_{\text{null}})^{n-x}$
+
+</li>
+
+<li role="fa" data-icon="&#xf1ec" class="info fragment" data-fragment-index="4">
+
+Calculate the probability of the event of interest: <br />
+
+$P(X \geq 4) = \sum_{x=4}^{5} \binom{5}{x} p_{\text{null}}^x (1-p_{\text{null}})^{5-x}$
+
+</li>
+
+</ol>
+
+</div>
+
+<div class="fragment" data-fragment-index="5">
+
+$$\begin{align*}
+
+P(X \geq 4) &= \binom{5}{4}(0.5)^4(0.5)^1 + \binom{5}{5}(0.5)^5(0.5)^0 \\
+
+&= \frac{5!}{4!(5-4)!}(0.5)^4(0.5)^1 + \frac{5!}{5!(5-5)!}(0.5)^5(0.5)^0 \\
+
+&= 0.1875 \\
+
+\therefore & \text{The probability of 4 or more girls in 5 pups is:} \\
+
+p &= 0.1875
+
+\end{align*}$$
+
+</div>
+
+<div>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_1" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_2" class="fragment" data-fragment-index="3" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_3" class="fragment" data-fragment-index="5" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_4" class="fragment" data-fragment-index="5" />
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Point out here that the p-value is the sum of 4 and 5 girls, since these are the only outcomes we're interested in.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Simulate The Hypothesis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Simulate The Hypothesis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<ol>
+
+<li>Define our "null hypothesis" $\Rightarrow$ The probability of a pup being female is $\frac{1}{2}$ (<span class="em">equal chance</span>)</li>
+
+<li>Randomly select $n$ from {"male","female"}, with replacement</li>
+
+<li>Count the number of "female"s</li>
+
+<li>Repeat the process, say 10,000 times</li>
+
+<li>Calculate the proportion of times counts were at least $x$ (p-value)</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We get to define our testing hypothesis, here the null, and we could define it based on some other information, like the fact that we currently have 50.5 percent females in the US Population.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- The Algorithm -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Algorithm</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<p class="muted u bigger">Pseudocode</p>
+
+<pre class="language-bash full-width"><code class="small">
+
+initializations()
+
+for (i = 1,2,...,10000) {
+
+&#9selection = randomly select from {0,1} with replacement
+
+&#9female_count[i] = count(selection == 1)
+
+}
+
+p_value = count(female_count >= 4) / 10000
+
+</code></pre>
+
+</div>
+
+<div class="small fragment" data-fragment-index="1">
+
+<p class="u bigger">Python Code</p>
+
+<pre class="language-python full-width"><code class="smaller">
+
+import numpy as np
+
+
+
+# Run 10000 simulations
+
+n_sims = 10000
+
+n_mice = 5  # Sample size in original data
+
+p_null = 0.5 # Probability of a pup being female
+
+
+
+# Initialize array to store female counts
+
+female_counts = np.zeros(n_sims)
+
+choices = ["male","female"]
+
+
+
+# Run simulations
+
+for i in range(n_sims):
+
+&#9# Randomly select "male" or "female" with replacement
+
+&#9selection = np.random.choice(choices, size=n_mice, p=[1-p_null, p_null])
+
+&#9# Count number of females
+
+&#9female_counts[i] = np.sum(selection == "female")
+
+
+
+# Calculate p-value (proportion of simulations with >= 4 females)
+
+p_value = np.mean(female_counts >= 4)
+
+print(f"The probability of 4 or more girls in 5 pups is: p={p_value:.4f}")
+
+</code></pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Run The Simulation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Run The Simulation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<vizzy data-src="lib/interactives/mice/mice.html" style="height:80vh;">
+
+_fragments = [
+
+{
+
+activate: () => {
+
+window.simulate(1);
+
+},
+
+reverse: () => {
+
+window.doReset();;
+
+window.simulate(1);
+
+},
+
+index: 1
+
+},
+
+{
+
+activate: () => {
+
+window.simulate(1);
+
+},
+
+reverse: () => {
+
+window.doReset();
+
+window.simulate(1);
+
+},
+
+index: 2
+
+},
+
+{
+
+activate: () => {
+
+window.simulate(3);
+
+},
+
+reverse: () => {
+
+window.doReset();
+
+window.simulate(1);
+
+},
+
+index: 3
+
+},
+
+{
+
+activate: () => {
+
+window.simulate(5);
+
+},
+
+reverse: () => {
+
+window.doReset();
+
+window.simulate(1);
+
+},
+
+index: 4
+
+},
+
+{
+
+activate: () => {
+
+window.simulate(10);
+
+},
+
+reverse: () => {
+
+window.doReset();
+
+window.simulate(1);
+
+},
+
+index: 5
+
+},
+
+{
+
+activate: () => {
+
+window.simulate(980);
+
+},
+
+reverse: () => {
+
+window.doReset();
+
+window.simulate(1);
+
+},
+
+index: 6
+
+}
+
+]
+
+</vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>For the first simulation, prompt the students to calculate reason the p-value.</p>
+
+<p>At 1000 simulations, reason the p-value again. Point out that we are doing an integration of the simulation distribution and the simulation distribution is a representation of the null hypothesis' distribution.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Compareison -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What's The Difference?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed left-justify fragment" data-fragment-index="1" style="height:100%;">
+
+<p class="small fragment" data-fragment-index="1">
+
+For discrete events, the binomial hypothesis is a fixed probability calculation <span class="danger">if and only if the underlying assumptions are true</span>.
+
+</p>
+
+<p class="small fragment" data-fragment-index="2">
+
+The bootstrap method is a resampling technique that allows us to estimate probabilities by sampling from the observed data. <span class="success">This approach doesn't rely on strict theoretical assumptions, making it more adaptable to real-world complexities where ideal conditions may not be met.</span>
+
+</p>
+
+<p class="small fragment" data-fragment-index="3">
+
+While the binomial approach offers exact probabilities under ideal assumptions, the bootstrap method provides flexibility, allowing for more accurate approximations in practical scenarios. <span class="info">This is mostly what we'll focus on in this course.</span>
+
+</p>
+
+</div>
+
+<div>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 475 320" xmlns="http://www.w3.org/2000/svg" version="1.1" class="fragment" data-fragment-index="1">
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_1" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_2" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_3" />
+
+<use xlink:href="lib/img/boygirl_binomial.svg#axes_4" />
+
+</svg>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="-10 0 480 320" xmlns="http://www.w3.org/2000/svg" version="1.1" class="fragment" data-fragment-index="2">
+
+<use xlink:href="lib/img/boygirl_bootstrap.svg#figure_1" />
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>So it must be the case that the probability of being a female is <em>exactly</em> 0.5.</p>
+
+<p>For bootstrapping, we don't have to rely on the exact assumption of 0.5 probability.</p>
+
+<p>While the binomial approach offers exact probabilities under ideal assumptions, the bootstrap method provides flexibility, allowing for more accurate approximations in practical scenarios. This distinction underscores the frequentist interpretation of probability, which defines probability as the long-run frequency of an event occurring over repeated trials under the same conditions.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- What's The Key? -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What's The Key?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="huge fragment" data-fragment-index="0">
+
+<span class="yellow"><i class="fa-solid fa-lightbulb"></i></span>
+
+<span class="em">Simulate</span> the null hypothesis to estimate the probability of the event of interest.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+We can employ Frequentists' concepts and leverage computing power to simulate <span class="em">any</span> probability distribution.
+
+</p>
+
+<p class="fragment pop" data-fragment-index="2">
+
+Even those with no theoretical basis!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>To start fixing the problem, we'll need to play along with rules, leveraging "modern" technology to improve our understanding.</p>
+
+<p>For p-values, thats simulating the null hypothesis.</p>
+
+<p>As we progress through the course, we'll see how this approach can be broadened.</p>
+
+<p>We need to understand a fundamental concept in statistics: <em>random variables</em>.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/mouse_probabilities.png" id="section-title-5">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-5">
+              <div class="section-number">
+                <span class="large-number">
+                  5
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  There Are Darker Problems
+                </h2>
+                <h3>
+                  There Are Three Kinds Of Lies: Lies, Damned Lies, And Statistics. - Mark Twain
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-5.section-title-content {
+
+background-color: rgba(20, 20, 20, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(20, 20, 20, 0.6) !important;
+
+align-self: center;
+
+}
+
+#section-content-5.section-title-content .headlines h3 {
+
+color: white;
+
+}
+
+#section-content-5.section-title-content .section-number .large-number {
+
+color: rgba(230, 230, 230, 0.7);
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>So we've introduced the plan for producing better statistics. But there are some darker problems.</p>
+
+<p>These are more along social and ethical issues, but again they start with you and your decisions to do the right thing.</p>
+
+<p>Mark Twain's quote is a commentary on the idea that statistics can be persuasive, even when used inappropriately.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Definition -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Publication Bias</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p class="quoted">
+
+Publication bias refers to the fact that <span class="strong">usually only the significant results get published</span>.
+
+</p>
+
+<p>
+
+<i class="fa fa-arrow-circle-right danger"></i>
+
+The one study that turns out significant gets published, and no one knows about all the insignificant results (also known as the <span class="danger">file drawer problem</span>)
+
+</p>
+
+<div class="bordered border-pop">
+
+<p>Publication bias, <span class="u">combined with the problem of multiple testing</span> can yield very misleading results.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Cartoon 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-1.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;" data-id="img-overlay">
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-2.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;height:100%;" data-id="img-overlay">
+
+<svg width="960" height="700" viewBox="0 0 960 700">
+
+<rect x="10" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: purple;"/>
+
+<rect x="195" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: brown;"/>
+
+<rect x="380" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: pink;"/>
+
+<rect x="565" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: blue;"/>
+
+<rect x="750" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: teal;"/>
+
+<rect x="10" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: salmon;"/>
+
+<rect x="195" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: red;"/>
+
+<rect x="380" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: turquoise;"/>
+
+<rect x="565" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: magenta;"/>
+
+<rect x="750" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: yellow;"/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 3 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-3.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;height:100%;" data-id="img-overlay">
+
+<svg width="960" height="700" viewBox="0 0 960 700">
+
+<rect x="10" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: grey;"/>
+
+<rect x="195" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: tan;"/>
+
+<rect x="380" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: cyan;"/>
+
+<rect x="565" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: green;"/>
+
+<rect x="750" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #E0B0FF;"/>
+
+<rect x="10" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: beige;"/>
+
+<rect x="195" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #C8A2C8;"/>
+
+<rect x="380" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: black;"/>
+
+<rect x="565" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #FFE5B4;"/>
+
+<rect x="750" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: orange;"/>
+
+<rect class="fragment" x="550" y="20" width="180" height="320" style="fill: none; stroke-width:8;stroke:green" />
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 4 -->
+
+<section data-auto-animate>
+
+<style>
+
+@keyframes bounceGrowRotate {
+
+0%, 100% {
+
+transform: translateY(0) scale(1) rotate(0deg);
+
+}
+
+20%, 80% {
+
+transform: translateY(-5px) scale(1.03) rotate(-2deg);
+
+}
+
+50% {
+
+transform: translateY(-10px) scale(1.05) rotate(2deg);
+
+}
+
+}
+
+
+
+img.bouncy {
+
+animation: bounceGrowRotate 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+
+}
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img class="bouncy" width="960px" src="lib/img/xkcd-jelly-beans-4.png">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- This should scare you! -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple Testing and Publication Bias</h2>
+
+</div>
+
+<div class="content" style="gap:10vmin;">
+
+<ol>
+
+<li>
+
+$\alpha$ of all tests with true null hypotheses will yield <span class="strong">significant results just by chance</span>
+
+</li>
+
+<li>
+
+The one that <span class="u-pop">happens to be significant</span> is the one that <span class="pop">gets published</span>
+
+</li>
+
+</ol>
+
+<div class="framed border-danger fragment bigger">
+
+<span class="danger strong">THIS SHOULD SCARE YOU!</span><br>
+
+<span class="smallest">And make you more suspicious when you get or see a stunning result!</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PNAS (2012) -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header left-justify">
+
+<h3>PNAS (2012)</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="half-width">
+
+<img src="lib/img/pnas2012_misconduct_headline.png" alt="PNAS (2012) misconduct headline">
+
+<img src="lib/img/pnas2012_misconduct_abstract.png" alt="PNAS (2012) misconduct abstract">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Ivan Oransky & RetractionWatch.com -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Ivan Oransky & RetractionWatch.com</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 3fr;grid-auto-rows:auto;gap:1vmin;">
+
+<img src="lib/img/lacour_retraction_announce.png" alt="Lacour retraction announcement">
+
+<img src="lib/img/lacour_retraction_prompt.png" alt="Lacour retraction prompt" class="fragment" data-fragment-index="1">
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>RetractionWatch.com is a website that tracks retractions of scientific papers.</p>
+
+<p>Don't get yourself in this situation!</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Retractions Correlate With Impact Factor -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Retractions Correlate With Impact Factor</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="half-width">
+
+<img src="lib/img/retractions_correlate_with_IF.png" alt="Retractions Correlate With Impact Factor">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Higher cited / read journals are more likely to retract papers, as of 2011 at least.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Pharma Marketing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Pharma Marketing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-content:center;align-content:center;display:grid;">
+
+<img style="width:100%;" src="lib/img/ucla_feinberg_paxil.png" alt="David Feinberg Paxil Scandal">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- How Did This Happen? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Did This Happen?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 4fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/CultOfStatSig.jpg" alt="Cult of Statistical Significance">
+
+</div>
+
+<div>
+
+<div class="framed border-danger">
+
+<p class="quoted left-justify small">
+
+There is no god of profitable scientific action, but Sir Ronald Fisher is his prophet.
+
+And computation of p-values is the central ritual of the cult.
+
+</p>
+
+<p class="right-justify smaller muted">- Ziliak & McCloskey (2008)</p>
+
+</div>
+
+<div class="fragment smallest" data-fragment-index="1">
+
+<ul>
+
+<li role="fa" data-icon="&#xf201;">
+
+<span class="strong">W. Edwards Deming:</span>
+
+<span class="s-quote">Statisticians and management misguide each other and keep the vicious cycle [of calculating t-tests] going.</span>
+
+(1982)
+
+</li>
+
+<li role="fa" data-icon="&#xf155;">
+
+<span class="strong">William Kruskal:</span>
+
+<span class="s-quote">Well, I guess it's a cheap way to get marketable results.</span>
+
+</li>
+
+<li role="fa" data-icon="&#xf085;">
+
+<span class="strong">Modernism:</span>
+
+Fisher emerged as mechanical methods in all fields, from math to manufacturing, were coming to climax. Medicine, biology, social work, and the social sciences were just developing their national associations and developing standards.
+
+</li>
+
+<li role="fa" data-icon="&#xf19c;">
+
+<span class="strong">Robert Merton:</span>
+
+<span class="s-quote">Bureaucratization of Knowledge</span> and increasing systematization of modern life in large organizations. <span class="s-quote">Adherence to the rules, originally conceived as a means, becomes transformed into an end-in-itself. Formalism, even ritualism ensures with an unchallenged insistence upon punctilious adherence to formalized procedures. This may be exaggerated to the point where primary concern with conformity to the rules interferes with the achievement of the purposes of the organization.</span>
+
+(1949)
+
+</li>
+
+<li role="fa" data-icon="&#xf09c;">
+
+<span class="strong">Ziliak and McCloskey:</span>
+
+<span class="s-quote">The trick is to unshackle the bureaucracy of scientism, to break its mechanical rules, change its prejudiced incentives, create new rituals, train capacity. No simple trick.</span>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/micesci_3.png" id="section-title-6">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-6">
+              <div class="section-number">
+                <span class="large-number">
+                  6
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Environment Setup
+                </h2>
+                <h3>
+                  Get Your Laptops Ready
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-6.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Required Software -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Required Software</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<p>
+
+Install the following software on your laptop:
+
+<ol>
+
+<li class="fragment" data-fragment-index="0">Python (3.12.8 recommended)
+
+<ul>
+
+<li>Download from: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></li>
+
+<li>During installation, make sure to check "Add Python to PATH"</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="1">Pandoc (document converter)
+
+<ul>
+
+<li>Download from: <a href="https://pandoc.org/installing.html">https://pandoc.org/installing.html</a></li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="2">MikTeX (LaTeX distribution)
+
+<ul>
+
+<li>Download from: <a href="https://miktex.org/download">https://miktex.org/download</a></li>
+
+<li>Choose the "Basic MiKTeX Installer"</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="3">Visual Studio Code (VS Code)
+
+<ul>
+
+<li>Download from: <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/</a></li>
+
+<li>After installation, install the Python extension from the Extensions marketplace</li>
+
+<li class="muted small">Optionally, use a VS Code port with an AI assistant to help you write code. I recommend Cursor (<a href="https://www.cursor.com/">https://www.cursor.com/</a>), but you can use any other VS Code extension that supports AI code assistance.</li>
+
+</ul>
+
+</li>
+
+</ol>
+
+</p>
+
+</div> <!-- Left -->
+
+<div>
+
+<img src="lib/img/python_download.png" alt="Python Download" style="width:100%;height:auto;" class="fragment" data-fragment-index="0">
+
+<div class="fragment grid-generic" data-fragment-index="3" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/vscode_logo.png" alt="VS Code Logo" style="width:100%;height:auto;">
+
+</div>
+
+<div>
+
+<img src="lib/img/cursor_logo.png" alt="Cursor Logo" style="width:100%;height:auto;">
+
+</div>
+
+</div>
+
+</div> <!-- Right -->
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Setup Your Environment -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Setup Your Environment</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<ul>
+
+<li>Once everything is installed, create a new folder on your desktop (or preferred location) called <span class="s-quote">PS200</span></li>
+
+<li class="fragment" data-fragment-index="1">Right-click (Cmd+click) on the folder and select <span class="s-quote">Open with VS Code</span></li>
+
+<li class="fragment" data-fragment-index="2">In vscode, open a terminal (Ctrl/Cmd+~) and create and activate a new Python virtual environment</li>
+
+<li class="fragment" data-fragment-index="3">Install the base set of packages</li>
+
+<li class="fragment" data-fragment-index="4">Install the Python VS Code extension</li>
+
+</ul>
+
+</div>
+
+<div class="small">
+
+<div class="fragment" data-fragment-index="2">
+
+<p>On Windows:</p>
+
+<pre class="language-bash full-width"><code class="smaller">
+
+python -m venv .pyenv
+
+.\.pyenv\Scripts\activate
+
+</code></pre>
+
+<p>On Mac/Linux:</p>
+
+<pre class="language-bash full-width"><code class="smaller">
+
+python3 -m venv .pyenv
+
+source ./.pyenv/bin/activate
+
+</code></pre>
+
+</div>
+
+<div class="fragment" data-fragment-index="3">
+
+<p>Upgrade pip and install the required packages</p>
+
+<pre class="language-bash full-width"><code class="smaller">
+
+python -m pip install --upgrade pip
+
+python -m pip install jupyter numpy pandas matplotlib seaborn scipy labpaper
+
+</code></pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 01
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

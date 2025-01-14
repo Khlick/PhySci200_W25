@@ -1,0 +1,77 @@
+{
+  "name": "PS200_W25",
+  "version": "1.1.2",
+  "description": "PS200: Advanced Experimental Statistics",
+  "main": "main.js",
+  "authors": [
+    "Khris Griffis, Ph.D. <khrisgriffis@ucla.edu>"
+  ],
+  "author": "Khris Griffis, Ph.D.",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-builder --win",
+    "package-mac": "electron-builder --mac",
+    "test": "echo \"No tests specified\" && exit 1"
+  },
+  "keywords": [
+    "reveal.js",
+    "statistics",
+    "stats lectures",
+    "physiology",
+    "advanced experimental statistics",
+    "experimental methods"
+  ],
+  "devDependencies": {
+    "electron": "^31.4.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.ps200_w25",
+    "productName": "PS200_W25",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "main.js"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "assets/icons/win/icon.ico",
+      "artifactName": "PS200_W25-v${version}-win-${arch}.exe"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64",
+            "universal"
+          ]
+        }
+      ],
+      "icon": "assets/icons/mac/icon.icns",
+      "minimumSystemVersion": "10.12",
+      "artifactName": "PS200_W25-v${version}-mac-${arch}.dmg",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PS200: Advanced Experimental Statistics"
+    }
+  }
+}
