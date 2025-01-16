@@ -1,0 +1,4377 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Frequentism Normality, and the Central Limit Theorem
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/felipec.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/normality_bg.webp" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Frequentism
+              </h2>
+              <h3>
+                Normality, and the Central Limit Theorem
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                Lecture 03
+              </p>
+              <p class="byinfo">
+                PS200
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>
+              Welcome!
+            </p>
+          </aside>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="grid-template-columns: 1fr; grid-auto-rows: 1fr; row-gap: 5vmin; align-content:center;"
+
+>
+
+<div></div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p>
+
+<i class="target"></i> Utilize quantiles, probability points, and
+
+scatter plots to assess the normality of data distributions.
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p>
+
+<i class="target"></i> Understand the concept of sampling
+
+distributions and their <span class="em">properties</span>.
+
+</p>
+
+</div>
+
+<div></div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Our main goal is to introduce some new concepts around quantifying uncertainty.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/mouse_probabilities.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Introduction
+                </h2>
+                <h3>
+                  To Frequentist Probability
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Frequentist and Bayes -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Frequentism and Bayesian Probability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<div class="fragment framed" style="height:100%;">
+
+<h3>The Frequentist's Approach</h3>
+
+<p>The frequentist's perspective emphasizes the importance of repeated trials in understanding probability.</p>
+
+<ul>
+
+<li>Views probability as long-term event frequency.</li>
+
+<li>Based on repeated, identical trials.</li>
+
+</ul>
+
+</div>
+
+<div class="fragment framed" style="height:100%;">
+
+<h3>The Bayesian Approach</h3>
+
+<p>Bayesian probability focuses on subjective belief rather than objective data.</p>
+
+<ul>
+
+<li>Defines probability as a measure of belief, 0 to 1 scale.</li>
+
+<li>Subjective, based on opinion rather than inherent system traits.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<style>
+
+.speaker-controls-notes .value p {
+
+font-size: larger; /* Adjust the font size as needed */
+
+}
+
+</style>
+
+<p>2 major approaches, while they treat probabilities similarly, they differ in their interpretations.</p>
+
+<p>
+
+Real-world: breast cancer. Prevalence (13%, death 2.6%) of women.
+
+Mammograms are good, but not great, meaning it can miss some cancers, and misdiagnose non-cancers, all of which lead to poor prognosis for the patient.
+
+So how do we decide how often and who should get tested?
+
+</p>
+
+<p>
+
+Freq.  probabilities are interpreted as the long-run frequency of events.
+
+They analyze the probability of a positive test result in terms of the
+
+relative frequencies observed in large numbers of similar patients. They use
+
+sensitivity (true pos) and specificity (true neg) of the test, along with prev.
+
+of that cancer to calculate the probability of having cancer given a + test result.
+
+</p>
+
+<p>
+
+Bayes: Probabilities are degrees of belief, subjective probability, base on prior knowledge.
+
+Bayesian would start with a prior probability of having breast cancer
+
+(based on factors like age, family history, and population prevalence).
+
+Upon receiving a test result (positive or negative), the Bayesian updates this probability,
+
+also  incorporating the sensitivity and specificity of the test. Bayesian approach
+
+is to update prior belief (probability) with additional data, in this case to produce
+
+the posterior probability of having cancer given the test.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What is Probability -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is Probability?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<div>
+
+<p class="fragment left-justify sided-bg-muted-alpha-02 border-black small" data-fragment-index="0">
+
+Probability is the measure of the likelihood that an event will occur.
+
+It quantifies uncertainty and is expressed as a number between 0 and 1,
+
+where <span class="fragment highlight-danger" data-fragment-index="1">0 indicates impossibility</span>
+
+and <span class="fragment highlight-pop" data-fragment-index="2">1 indicates certainty</span>.
+
+</p>
+
+<div class="grid-generic small" style="grid-template-columns:auto 1fr;grid-auto-rows:auto;gap:1vmin;align-items:center;">
+
+<p class="fragment" data-fragment-index="3"><span class="strong em u">Terminology</span></p>
+
+<p class="fragment" data-fragment-index="3"><span class="strong em u">Meaning</span></p>
+
+<p class="fragment" data-fragment-index="4">Sample Space ($S$):</p>
+
+<p class="fragment sided bg-info-alpha-03 small left-justify border-info" data-fragment-index="4">The set of all possible outcomes of a probabilistic experiment. For example, in a genetic test for a disease mutation, the sample space might include outcomes like 'Carrier' and 'Non-carrier'.</p>
+
+<p class="fragment" data-fragment-index="5">Event:</p>
+
+<p class="fragment sided bg-success-alpha-03 small left-justify border-success" data-fragment-index="5">A subset of the sample space. An event can consist of one or more outcomes. For instance, the event 'Person is a Carrier' includes all outcomes where the genetic test indicates presence of the mutation.</p>
+
+<p class="fragment" data-fragment-index="6">Probability of an Event ($P(A)$):</p>
+
+<p class="fragment sided bg-orange-alpha-03 small left-justify border-orange" data-fragment-index="6">The likelihood of an event occurring, which is a number between 0 and 1. If $P(A) = 1$, the event is certain to happen, and if $P(A) = 0$, the event is impossible. For example, if the probability of being a carrier for a specific genetic mutation is 0.05, it can be written as $P(\text{Carrier}) = 0.05$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>I keep using this term "probability", but we need to give it a formal definition.</p>
+
+<p>For event, this isn't quite a straight forward as you might think. We'll explore this more shortly.</p>
+
+<p>In this pass/fail paradigm, the sample space is binary, the event is one of those categories.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Probability Types -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Approaches</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small">
+
+Probability theory deals with the likelihood of different outcomes in various scenarios. There are
+
+three primary approaches:
+
+</p>
+
+<div class="fragment" data-fragment-index="1">
+
+<table class="latex-style-table-row-labels">
+
+<thead>
+
+<tr class="fragment" data-fragment-index="1">
+
+<th>Approach</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody class="fragment" data-fragment-index="1">
+
+<tr class="fragment" data-fragment-index="1">
+
+<td>Subjective</td>
+
+<td class="small">
+
+Based on personal judgment and available information. It is often
+
+used in scenarios where hard data is scarce, and decisions are made
+
+based on <span class="em">beliefs</span> or <span class="info">expert knowledge</span>.
+
+</td>
+
+</tr>
+
+<tr class="fragment" data-fragment-index="2">
+
+<td>Classical</td>
+
+<td class="small">
+
+Assumes that all outcomes in a sample space are <span class="info">equally likely</span>.
+
+It is best suited for situations where you can clearly define all
+
+possible outcomes, and each outcome has the same chance of occurring, i.e., symmetrical weight.
+
+</td>
+
+</tr>
+
+<tr class="fragment" data-fragment-index="3">
+
+<td>Empirical</td>
+
+<td class="small">
+
+Relies on <span class="info">actual data collected from experiments or observations</span>.
+
+Empirical probability is calculated by dividing the number of times
+
+an event occurs by the total number of trials or observations.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="fragment sided-bg-info" data-fragment-index="4">
+
+Each approach offers a unique
+
+perspective and methodology for determining the likelihood of events.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+There are three primary approaches to understanding and calculating probability:
+
+</p>
+
+<ul>
+
+<li>Subjective: a doctor might use subjective probability to estimate the likelihood of a patient's recovery based on their experience and the patient's symptoms. Useful when thinking about how to test or experiment something.</li>
+
+<li>Classical: An example is tossing a fair coin, where the chances of landing heads or tails are both 50%.</li>
+
+<li>Empirical: It is particularly useful in situations where historical data is available, such as calculating the probability of rain based on weather records.</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- Classical Probability - Intro -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Classical Probability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="fragment">
+
+Probability is a measure of the likelihood that an event will occur.
+
+$$
+
+P(A) = \frac{\text{Number of outcomes in event}}{\text{Number of outcomes in sample space}}
+
+$$
+
+</p>
+
+<p class="fragment">
+
+In the context of medicine, may be used to assess the effectiveness of treatments and predict patient outcomes.
+
+</p>
+
+<p class="sided-bg-info border-info fragment">
+
+For example, if a treatment has a 95 in 100 chance of successfully treating a condition under certain circumstances, its probability of success is 0.95.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note that "favorable" is a bit a misnomer. We really want to know the number of interesting events.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Classical Probability - Examples -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Classical Probability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed fragment" style="height:100%;">
+
+<h3 class="u">Coin Flip</h3>
+
+<ul class="smaller">
+
+<li>A fair coin has two equally likely outcomes: <br />Heads or Tails.</li>
+
+<li>The probability of getting Heads (H) is:
+
+<p>$$ P(H) = \frac{1}{2} $$</p>
+
+</li>
+
+<li>The probability of getting Tails (T) is:
+
+<p>$$ P(T) = \frac{1}{2} $$</p>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="framed fragment" style="height:100%;">
+
+<h3 class="u">Six-Sided Die</h3>
+
+<ul class="smaller">
+
+<li>A fair six-sided die has six outcomes: 1, 2, 3, 4, 5, 6.</li>
+
+<li>The probability of rolling a specific number (e.g., 4) is:
+
+<p>$$ P(4) = \frac{1}{6} $$</p>
+
+</li>
+
+<li>The probability of rolling an even number (2, 4, or 6) is:
+
+<p>
+
+$$\begin{aligned}
+
+P(\text{Even}) &= P(2) + P(4) + P(6) \\
+
+&= \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} \\
+
+&= \frac{1}{2}
+
+\end{aligned}
+
+$$
+
+</p>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Point out the Sample Space, Event, and Probability.</p>
+
+<p>What is the sample space of a 6-sided die?</p>
+
+<p>Notice here I haven't thrown the die, I'm just purely assuming each face has equal likelihood of landing face up and calculating from there.</p>
+
+<p>Q: In a deck of standard playing cards, what the probability of randomly drawing an Ace? explain.</p>
+
+<p>Q: What about rolling 2 six-sided dice? What is the sample space? What is the event?</p>
+
+<p>Before we can move on to more complex probabilities we'll need for our purposes, we need to interlude to set theory.</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Empirical Probability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+Empirical probability is calculated based on observed data or past
+
+experiences. It measures the likelihood of an event by dividing the
+
+number of observed occurrences by the total number of observations.
+
+</p>
+
+<p class="fragment quoted" data-fragment-index="1">
+
+Relative frequency, the ratio of an event's occurrences to total trials, forms the empirical basis for calculating an event's probability.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+$$
+
+\text{Relative Frequency} = \frac{\text{Frequency of the event occurring}}{\text{Total number of trials}}
+
+$$
+
+</p>
+
+<div class="framed full-width fragment small" data-fragment-index="3">
+
+<p>
+
+Example: Consider a biomechanical experiment where a prosthetic knee is subjected to repeated stress tests. Out of 500 tests, the knee joint fails 5 times. The relative frequency of failure is calculated as:
+
+$$
+
+\text{Relative Frequency of Failure} = \frac{5}{500} = 0.01
+
+$$
+
+This means that the probability of failure in a single stress test, based on past data, is 1%.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Random Variables -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Quantitative Variables</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="bg-success-alpha-02 em small quoted">
+
+A <span class="strong">random variable $X$</span> is a function that maps outcomes from
+
+a sample space $\Omega$ to real numbers.
+
+</p>
+
+<div class="no-hang">
+
+<p>
+
+Mathematically, we write this as:
+
+</p>
+
+$$X: \Omega \rightarrow \mathbb{R}$$
+
+</div>
+
+<p>There are two types:</p>
+
+</div>
+
+<div class="framed">
+
+<h4>Discrete Random Variables</h4>
+
+<p>Discrete random variables measure outcomes at distinct or finite points.</p>
+
+<p>Examples include the number of action potentials fired by a neuron or the count of red blood cells in a blood sample.</p>
+
+</div>
+
+<div class="framed">
+
+<h4>Continuous Random Variables</h4>
+
+<p>Continuous random variables can assume any value within a range of real numbers.</p>
+
+<p>Examples include blood pressure measurements, membrane potentials of neurons, or hormone concentrations in plasma.</p>
+
+</div>
+
+<p class="small sided bg-info-alpha-03 border-info" style="grid-column:1/3;">Understanding random variables is crucial for analyzing data and making predictions in various fields.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In probability theory, a random variable is a fundamental concept that helps us quantify uncertain outcomes. A random variable is essentially a function that assigns numerical values to each outcome in a sample space. This allows us to work mathematically with probabilities and outcomes, converting qualitative events into quantitative analysis.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Random Variables -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Random Variables</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid: auto rows 1fr;gap:1vmin;">
+
+<div style="height:100%;">
+
+<div class="framed left-justify small">
+
+<p>
+
+The <span class="info">expectation</span> (or expected value) of a random variable is a measure of the <span class="strong">central tendency</span> of its distribution.
+
+</p>
+
+<p class="small">For a random variable \( X \) with discrete outcomes \( x_i \) and corresponding probabilities \( P(X = x_i) \), the expectation is given by:</p>
+
+<div class="no-hang small">
+
+$$E[X] = \sum_{i=1} x_i \cdot P(X = x_i)$$
+
+<span class="fragment" data-fragment-index="1"></span>
+
+</div>
+
+<div class="fragment small" data-fragment-index="2">
+
+<p>
+
+Consider a random variable with 2 equal bins: Bin $1\rightarrow 0$, Bin $2 \rightarrow 1$.
+
+</p>
+
+<div class="no-hang small">
+
+\( E[X] = 0 \cdot \frac{1}{2} + 1 \cdot \frac{1}{2} = 0 + \frac{1}{2} = \frac{1}{2} \)
+
+</div>
+
+</div>
+
+<div class="fragment small no-hang" data-fragment-index="3">
+
+<p>
+
+Now consider a scenario with 7 bins: <span class="small em">mapped to 0 through 6 values</span>
+
+</p>
+
+<div class="smaller">
+
+\( E[X] = 0 \cdot \frac{1}{7} + 1 \cdot \frac{1}{7} + 2 \cdot \frac{1}{7} + 3 \cdot \frac{1}{7} + 4 \cdot \frac{1}{7} + 5 \cdot \frac{1}{7} + 6 \cdot \frac{1}{7} \)
+
+<p>
+
+Simplifying:
+
+</p>
+
+\( E[X] = \frac{1}{7} (0 + 1 + 2 + 3 + 4 + 5 + 6) = \frac{1}{7} \cdot 21 = 3 \)
+
+</div>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="5">
+
+<p class="question smaller">How would the expectation change if the bins were unequal sizes</p>
+
+</div>
+
+</div>
+
+<vizzy data-src="lib/interactives/random-variables.html" style="height:650px;align-self:center;"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Recall what this sum is? Weighted mean, or "weighted sum".</p>
+
+<p>Expectation is defined as the weighted sum of all possible values, where the weights are the probabilities of those values occurring.</p>
+
+<p>To illustrate, let's consider splitting our sample space into bins and calculating the expectation as we increase the number of bins.</p>
+
+<p>Describe hexagon bins as sample space and imagine partitions, show the single bin and state what expected value in bin 1 maps to 0? Correct, 0.</p>
+
+<p>For 2 bins, this is like a coin flip. Each bin has an equal probability of 1/2.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Random Variables in Biological Sciences -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Random Variables in Biological Sciences</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 720px;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify no-hang small">
+
+<p class="small">
+
+<span class="em">Scenario:</span> You suspect a specific gene mutation affects the development of certain traits in a population of lab mice.
+
+You decide to test the mutation's impact by examining the presence of a phenotypic trait, hypothesized to occur at a rate of 40% in the experimental group.
+
+</p>
+
+<p class="small question fragment" data-fragment-index="0">
+
+What is our <span class="pop">statistical hypothesis</span>, and how could we test it?
+
+</p>
+
+<ul class="fragment" data-fragment-index="1">
+
+<li>We can model it:</li>
+
+<li>$p= 0.4$ <span class="em info">The probability of the trait being present</span></li>
+
+<li>$(1-p)=0.6$ <span class="em danger">The probability of the trait being absent</span></li>
+
+</ul>
+
+<p class="small fragment" data-fragment-index="2">
+
+Recall: $E[X] = \sum_{i=1} x_i \cdot P(X = x_i)$,<br />
+
+Thus, $E[X]=0\cdot(1-p)+1\cdot p$ <span class="fragment info" data-fragment-index="3">$=0.4$ expected rate of the trait</span>
+
+</p>
+
+<p class="fragment smaller" data-fragment-index="4">
+
+If I examine 10 mice, how many with and without the trait should I expect? <span class="fragment" data-fragment-index="5"><span class="info">4</span> & <span class="danger">6</span></span>
+
+</p>
+
+<p class="fragment smaller" data-fragment-index="8">
+
+And after testing 1000 mice, what can we say the expected proportion is? <span class="info fragment" data-fragment-index="9">$\approx 40\%$</span>
+
+</p>
+
+</div>
+
+<vizzy data-src="lib/interactives/phenotype-experiment.html" style="min-height:600px;">
+
+_fragments = [
+
+{
+
+activate: () => {window.simulate(10, 1000)},
+
+reverse: () => {window.undoSimulate(10, 20)},
+
+index: 6,
+
+},
+
+{
+
+activate: () => {window.simulate(490, 2500)},
+
+reverse: () => {window.undoSimulate(490, 100)},
+
+index: 7,
+
+},
+
+{
+
+activate: () => {window.simulate(500, 2500)},
+
+reverse: () => {window.undoSimulate(500, 100)},
+
+index: 8,
+
+}
+
+]
+
+</vizzy>
+
+<div style="grid-column: 1/3;" class="fragment framed border-info" data-fragment-index="10">
+
+<p class="small">
+
+Frequentists statistics are based on the idea of the <span class="info">long run</span> probability of an event. That is, the probability of an event is the limit of the proportion of times the event occurs in a large number of repeated trials.
+
+</p>
+
+<p class="small fragment danger" data-fragment-index="11">
+
+Statistical formulas estimate this probability based on integral calculus.
+
+</p>
+
+<p class="small fragment success" data-fragment-index="12">
+
+Computer simulations estimate this based on the data at hand.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<aside class="notes">
+
+<p>We can conduct Bernoulli Trials, which have binary outcomes.</p>
+
+<p>
+
+Encourage students to question where the model comes from and if it reflects the biological reality of the system being studied.
+
+</p>
+
+<p>
+
+Could this be enough evidence to conclude the gene mutation affects the trait? If not, what further experiments might be conducted to increase confidence in the results?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Probability Distributions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability Distributions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="grid-column:1/3;">
+
+<p class="sided border-info left-justify">A probability distribution is a mathematical function that describes the <span class="info">likelihood</span> of various outcomes in an experiment.</p>
+
+</div>
+
+<div class="framed fragment"  style="height:100%;">
+
+<h4 class="u">Discrete Distributions</h4>
+
+<p class="small">Discrete distributions are used when the set of possible outcomes is countable.</p>
+
+<img src="lib/img/binom_dist.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="binom dist">
+
+<p class="em small">Individual probabilities are calculated with a PMF</p>
+
+</div>
+
+<div class="framed fragment" style="height:100%;">
+
+<h4 class="u">Continuous Distributions</h4>
+
+<p class="small">Continuous distributions apply when outcomes come from a continuous random variable.</p>
+
+<img src="lib/img/norm_pdf.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="norm pdf">
+
+<p class="em small">Outcome probability is calculated by integration (PDF)</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>pop quiz: continuous variable or discrete?</p>
+
+<ul>
+
+<li>
+
+<strong>The time until a projectile returns to earth</strong> - Continuous
+
+</li>
+
+<li>
+
+<strong>The number of times a transistor in a computer memory changes state in one operation</strong> - Discrete
+
+</li>
+
+<li>
+
+<strong>The outside diameter of a machined shaft</strong> - Continuous
+
+</li>
+
+</ul>
+
+<p>Let's look at the 2 most encountered distributions in most experimental analyses, and how we can relate them to data</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/norm_pdf.svg" data-background-repeat="no-repeat" data-background-size="contain" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Normal Distributions
+                </h2>
+                <h3>
+                  The Central Limit Theorem
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Here is where one of the biggest issues lies, the normal distribution is a theoretical distribution that is used to model the behavior of many real-world phenomena. However, it is not always possible to directly observe the normal distribution in practice.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="height:100%;"> <!-- Left Column: Definition and Example -->
+
+<p class="quoted">The normal (or Gaussian) distribution is a continuous probability distribution characterized by a symmetric, bell-shaped curve.</p>
+
+<div>
+
+<div class="no-hang"><p class="strong left-justify">PDF:</p> $$f(\class{warning}{x}; \class{info}{\mu}, \class{info}{\sigma}) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</div>
+
+<div class="full-width small">
+
+<ul class="two-column-list no-hang">
+
+<li><span class="info">$\mu$</span> = Central Tendency ($E[X]$)</li>
+
+<li class="smaller">
+
+68% of the observations lie within 1 standard "distance" of the center
+
+</li>
+
+<li><span class="info">$\sigma$</span> = Spread ($E[X-E[X]]$)</li>
+
+<li class="smaller">
+
+95% lie within 1.96 standard "distance" of the center
+
+</li>
+
+<li><span class="warning">$x$</span> = Specific value of the continuous variable</li>
+
+<li class="smaller">
+
+99% lie within 2.58 standard "distance" of the center
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<!-- <img src="lib/img/normal-distribution-standardized-distances.svg" alt="coinflip" width="100%;"> -->
+
+<svg width="100%"  viewBox="0 0 468 288" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_1"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_2"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_6"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#matplotlib.axis_1"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_8"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_9"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_10"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_11"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_12"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_13"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_14"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_9"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_10"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_6"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_11"></use>
+
+</svg>
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;">
+
+<p class="sided border-success small">
+
+Often denoted $\mathcal{N}(\mu, \sigma^2)$, the normal distribution is
+
+special as it underscores the <span class="strong info">Central Limit Theorem</span>'s revelation
+
+that sums of independent variables universally converge to this form,
+
+regardless of their initial distributions.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The normal distribution stands as a fundamental pillar in statistics. We will cover many other continuous distributions as we go along, but we start with the gaussian.
+
+</p>
+
+<p>
+
+We talk about the x values being a certain "distance" from the center, mu, in terms of HOW FREQUENT.
+
+</p>
+
+<p>
+
+Karl Pearson (dwg) called the PDF the "Frequency Curve". Just like the counting we did
+
+for discrete distributions, these smooth curves represent the relative count at
+
+any given X value. If the area under the curve sums to 1 and represents the sum
+
+of all P(X=X), then any point X_i has the probability f(x;mu,sigma).
+
+</p>
+
+<p>fragment 1, equation. While it looks quite complicated, there are 2 parameters we are concerned with, mu and sigma</p>
+
+<p>
+
+The symmetry and shape of this distribution allows us to think about how
+
+extreme data might be. The weights of data lie in the central bell shape,
+
+while the probability of taking a value further and further away from 0,
+
+in this case, becomes increasingly unlikely.
+
+</p>
+
+<p>
+
+It turns out that the normal distribution describes the distribution of many
+
+natural phenomena. Let's see why that is.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Central Limit Theorem</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.5fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<div class="small left-justify">
+
+<p class="sided border-info small">
+
+From the central limit theorem, we assume that the sampling distribution
+
+of <span class="info">any common statistic</span> should be normally distributed, <span class="danger">if a large number of independent, identically distributed samples are taken</span>.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+Consider a single sample (Size N) and the statistic: <span class="danger">Mean</span>.
+
+</p>
+
+<p class="fragment question small" data-fragment-index="2">
+
+How often will repeated samples from the population be close to my sample
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+What about as the number of samples taken gets large?
+
+</p>
+
+<p class="fragment" data-fragment-index="5">
+
+What about when the population has some other distribution?
+
+</p>
+
+<p class="fragment" data-fragment-index="7">
+
+What about other statistics?
+
+</p>
+
+</div>
+
+<vizzy data-src="lib/interactives/clt-animation.html"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In the 18th century, a few mathematicians, abraham de moivre, and later
+
+Pierre-Simon Laplace then Carl Gauss and others, observed that if you looked
+
+at the averages of many samples, the distribution of those averages converged
+
+on the normal distribution. Even when the samples were taken from a underlying
+
+distribution which was not normally distributed.
+
+</p>
+
+<p>
+
+Adjust parameters, run simulations.
+
+</p>
+
+<p>
+
+The Central Limit Theorem (CLT) states that the distribution of the sum (or average) of a large number of independent, identically distributed random variables, each with a finite mean and variance, will approximate a normal distribution, regardless of the original distribution of the variables. This convergence towards normality occurs as the sample size increases, underscoring the normal distribution's significance in probability and statistics.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Example: Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example: Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:4.5fr 5.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed small left-justify">
+
+<p>
+
+<span class="strong">Example:</span> In auditory biomechanics research, the Young's modulus of the human tympanic membrane is <span class="em danger">assumed</span> to be <span class="success">normally distributed</span> with a mean ($\mu$) of 45 MPa and a standard deviation ($\sigma$) of 10 MPa.
+
+</p>
+
+<p>
+
+What is the probability that a randomly sampled eardrum tissue has a Young's modulus <span class="em">at least as great as</span> <span class="strong">55 MPa</span>?
+
+</p>
+
+<p class="fragment small" data-fragment-index="2">$P(X \geq 55) = 1 - P(X < 55) =$ $$1 - \int_{-\infty}^{55} f(x)\,dx$$</p>
+
+<p class="fragment small" data-fragment-index="3">Where $f(x)\,dx$ is the PDF ($f(x;\mu,\, \sigma)$), then $\int_{-\infty}^{\infty} f(x)\,dx = 1$ is the <span class="info">cumulative density function</span>.</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="-5 5 432 280" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/TM_stress_prob.svg#axes_1" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/TM_stress_prob.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/TM_stress_prob.svg#axes_3" class="fragment" data-fragment-index="1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The mu and sigma suggest that IF NORMAL, the most likely value is 45 MPa, the liklihood of being somewhere in within a radius of 10 MPa drops at a rate of 1/e.</p>
+
+<p>Recall the 4 or more females in litter of 5, we summed the probability of 4 and 5 to get the p-value. Here, we are summing from 55 Mpa to +infty to get our p-value. This is how a p-value is calculated, in "shitty" stats classes, by integration, in this class, by empirical probabilities. Fun, right?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Cumulative Density Function -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Cumulative Density Function</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6.5fr 3.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="height:100%;"> <!-- LEFT -->
+
+<p class="left-justify small">A Cumulative Density Function (CDF) is a function that indicates the probability that a random variable takes on a value less than or equal to a given point. It's a way to describe the distribution of random variables, providing a complete picture of the probability distribution.</p>
+
+<p class="left-justify small">The CDF starts at 0 and increases to 1 as you move along the x-axis, with the rate of increase depending on the distribution of the variable. It gives insights into the percentiles and probabilities of the underlying distribution, making it a fundamental tool in statistics and probability theory.</p>
+
+<p class="left-justify small fragment" data-fragment-index="1">
+
+Put 55 in terms of <span class="info">Standard Distance</span> from $\mu$: $\frac{55 - 45}{10}=1$ standard distance.
+
+</p>
+
+<p class="left-justify small fragment" data-fragment-index="2">
+
+Recall 68% of values lie within 1 standard distance, so 32% are in symmetrical "extremes", thus $\approx 16\%$ in the upper extreme.
+
+</p>
+
+</div>
+
+<div> <!-- RIGHT -->
+
+<img src="lib/img/TM_stress_prob_cdf.svg" width="100%">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Again, we will revisit this idea of cumulative probability over and over. The specific CDF can be calculated easily in matlab and depends on the pdf of the distribution of interest.</p>
+
+<p>
+
+Similar to the binomial example, we add up the probabilities greater than our
+
+</p>
+
+<p>This integral of the probability density function is call the cumulative density function.</p>
+
+<p>This is just a skim on the surface, the rest of the semester will be spent exploring various version of this.</p>
+
+</aside>
+
+<!-- </section>  -->
+        </section>
+        <section data-background-image="lib/img/normality-bg.png" data-background-size="cover" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  When Is A Distribution Normal?
+                </h2>
+                <h3>
+                  In Biology, Hardly Ever
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>CLT, Law of large numbers, etc., are ill-suited assumptions for biological data.</p>
+
+<p>In biology, we are often interested in the distribution of a small number of observations.</p>
+
+<p>How can you</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted small" style="grid-column: 1/3;">The Normal distribution's shape indicates values closer to the center are <span class="pop">more probable</span>.</p>
+
+<div class="small" style="height:100%;">
+
+<!-- Left Column: Definition and Example -->
+
+<div>
+
+<div class="fragment left-justify small" data-fragment-index="2">
+
+<p><strong>Standard Normal Distribution:</strong></p>
+
+<p>
+
+The standard normal distribution is a normal distribution with a <span class="info">mean of 0</span> and a <span class="success">standard deviation of 1</span>, denoted as $\mathcal{N}(0, 1)$.
+
+<span class="em">It serves as a reference for converting any normal distribution to this standard form using the Z-score.</span>
+
+</p>
+
+</div>
+
+<div class="fragment left-justify small" data-fragment-index="3">
+
+<p class="strong">Z-Score:</p>
+
+<p>
+
+The Z-score represents the number of standard deviations a data point is from the mean. It is calculated using the formula:
+
+</p>
+
+$$Z = \frac{x - \mu}{\sigma}$$
+
+<p>
+
+where $x$ is the data point, $\mu$ the mean, and $\sigma$ the standard deviation.
+
+</p>
+
+<p class="em framed border-info fragment" data-fragment-index="4">
+
+To determine if our data are normal, we need to understand more about how the data are distributed...
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div style="height:100%;align-items:start;">
+
+<!-- Right Column: Placeholder for Graphic -->
+
+<div class="full-width no-hang">
+
+<svg width="100%" viewBox="0 0 468 288" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#matplotlib.axis_1"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_8"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_9"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_10"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_11"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_12"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_13"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_14"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_9"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_10"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_6"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_11"></use>
+
+</svg>
+
+</div>
+
+<p class="strong">PDF: <br>$f(\class{warning}{x}; \class{info}{\mu}, \class{info}{\sigma}) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$</p>
+
+<p class="strong">CDF: <br>$P(\class{smaller}{-\infty \leq \class{warning}{x} \leq \infty})\int_{-\infty}^{\infty} f(\class{warning}{x}; \class{info}{\mu}, \class{info}{\sigma})\,dx = 1$</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The normal distribution stands as a fundamental pillar in statistics. We will cover many other continuous distributions as we go along, but we start with the Gaussian.
+
+</p>
+
+<p>
+
+The standard normal distribution has a mean of 0 and a standard deviation of 1, allowing for the comparison of different datasets through Z-scores, which show how many standard deviations away a point is from the mean.
+
+</p>
+
+<p>
+
+Z-scores are useful in determining how extreme a value is and in standardizing data for comparison, highlighting the importance of the standard normal distribution in practical data analysis.
+
+</p>
+
+<p>
+
+How can we compare the standard Z values to our data sample? Well we first have to determine where in the distribution our data points are.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Understanding Quantiles -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding Quantiles</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted">Quantiles are values that mark where specific proportions of your data fall below.</p>
+
+<p>
+
+The quantile function is generally defined as:
+
+$\class{success}{Q_{i}(p) = (1 - \gamma)x_{j} + \gamma x_{j+1}}$,
+
+<br />where $j = \lfloor k \rfloor$ for $k = np + m$ and $\gamma = k - j$.
+
+</p>
+
+<p class="small">
+
+For quantile method 8 (unbiased median), the quantile function is defined as<br />
+
+\(Q_{8}(p) = (1 - \gamma)x_{j} + \gamma x_{j+1}\), <br />where
+
+\(j=\lfloor k \rfloor\), \(m = \frac{p + 1}{3}\), \(k = np + m\), and
+
+\(\gamma = k - j\).
+
+</p>
+
+<p class="tiny muted right-justify">Reference: Hyndman and Fan (1996) for a detailed explanation on quantile types and their applications.</p>
+
+<div class="grid-generic full-width small" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify">Given dataset: <span class="small">\([-0.977, -0.151, -0.103, 0.4, 0.411, 0.95, 0.979, 1.764, 1.868, 2.241]\)</span></p>
+
+<div>
+
+<p>Calculating the median from $Q_8(\class{danger}{0.5})$:</p>
+
+<p>\(Q_{8}(\class{danger}{0.5}) = (1 - \class{pop}{\gamma}) x_{\class{info}{5}} + \class{pop}{\gamma}x_{\class{info}{5}+1} = (1-\class{pop}{0.5}) 0.411 + (\class{pop}{0.5})0.95 = 0.6805\)</p>
+
+</div>
+
+<p class="small">
+
+Calculating the median from taking mean of middle 2 elements:<br />
+
+$ m = \frac{0.411 + 0.95}{2} = 0.6805$
+
+</p>
+
+</div>
+
+<div class="small">
+
+<ul>
+
+<li class="emoji-check">\(n = 10\)</li>
+
+<li class="emoji-check">\(p = \class{danger}{0.5}\)</li>
+
+<li class="emoji-check">\(m = \frac{p + 1}{3} = \frac{0.50 + 1}{3} = \frac{1.5}{3} = 0.5\)</li>
+
+<li class="emoji-check">\(k = np + m = 10 \times 0.50 + 0.5 = 5.5\)</li>
+
+<li class="emoji-check">\(j = \lfloor k \rfloor = \lfloor 5.5 \rfloor = \class{info}{5}\)</li>
+
+<li class="emoji-check">\(\gamma = k - j = 5.5 - 5 = \class{pop}{0.5}\)</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Quantiles are essential in understanding the distribution of data.</p>
+
+<p>There are several methods or types for quantile calculation, we will use type 8, an unbiased median estimator</p>
+
+<p>
+
+What is the data space (units) of the quantile function? The same as the data.
+
+That is, we get a location in the dataset where the pth fraction of the number of data points falls below.
+
+</p>
+
+<p><strong>
+
+How does this relate to the normal distribution?
+
+</strong>
+
+We can use a similar approach and map our data points to the cdf values of the normal distribution.
+
+To do that, we need another function.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Quantile Probability Points -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Quantile Probability Points</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment sided border-info" data-fragment-index="1">
+
+<p class="left-justify">Probability points are used to determine the specific quantiles of a distribution for a given dataset of size N. These points help in mapping data to their respective quantiles in a theoretical distribution.</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p class="left-justify">For a dataset of size \(N\), the \(i^{th}\) probability point \(p_i\) is calculated as:</p>
+
+<p>
+
+\(p_i = \frac{i - \alpha}{N + 1 - 2\alpha}\), <br />
+
+<span class="smaller">where \(i\) ranges from 1 to \(N\), and \(\alpha\) is an adjustment factor (commonly 0.5 or \(\frac{3}{8}\) for small samples).</span>
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns: auto auto;grid-auto-rows:auto;gap:1vmin;align-items:center;">
+
+<div class="fragment" data-fragment-index="3">
+
+<p class="left-justify">Example for \(N = 10\):</p>
+
+<ul>
+
+<li>Using \(\alpha = 0.5\), calculate \(p_i\) for \(i = 1\) to \(10\).</li>
+
+<li>\(p_1 = \frac{1 - 0.5}{10 + 1 - 2 \times 0.5} = \frac{0.5}{10} = 0.05\)</li>
+
+<li>Similarly, \(p_{10} = \frac{10 - 0.5}{10 + 1 - 2 \times 0.5} = \frac{9.5}{10} = 0.95\)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment" data-fragment-index="4">
+
+<ul>
+
+<li class="emoji-loudspeaker">\(N < 10\): \(\alpha=0.375\)</li>
+
+<li class="emoji-loudspeaker">\(10 \leq N < 50\): \(\alpha=0.4\)</li>
+
+<li class="emoji-loudspeaker">\(N \geq 50\): \(\alpha = 0.5\)</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Now we can map our sample size to the cumulative probability points in the normal distribution.
+
+More specifically, to the standard normal with mean 0 and standard deviation of 1.
+
+</p>
+
+<p>
+
+But, recall I said the standard normal distribution assumes values on the interval -infty to + infty?
+
+We have to deal with that.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Probability Points -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h4>Probability Points And The ECDF</h4>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<div class="framed">
+
+<p class="em">Empirical Cumulative Density Function (ECDF)</p>
+
+<p class="smaller info">A step function that estimates the cumulative distribution function of a sample by mapping each data point to its corresponding percentile rank within the sample</p>
+
+<p>\(F_n(x) = \frac{1}{n} \sum_{i=1}^{n} I(X_i \le x)\)</p>
+
+</div>
+
+<p class="small left-justify">
+
+The formula for probability points is
+
+adjusted from the ECDF's simple \(1/n\) weighting to accommodate the
+
+range of the inverse quantile function of a normal distribution.
+
+</p>
+
+<p class="small left-justify">
+
+Specifically, as the inverse quantile function approaches infinity at \(p = 1\),
+
+using a midpoint approach <span class="center-justify">\(\left(\frac{i - 0.5}{n}\right)\)</span> prevents
+
+the calculation of impossible values and
+
+<span class="fragment highlight-current-info" data-fragment-index="1">better aligns</span>
+
+with the theoretical distribution, providing a more accurate comparison.
+
+</p>
+
+</div>
+
+<div style="align-self: center;">
+
+<svg width="100%" viewbox="0 0 447 432">
+
+<use xlink:href="lib/img/qq_build_ecdf.svg#axes_1"></use>
+
+<use xlink:href="lib/img/qq_build_ecdf.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/qq_build_ecdf.svg#axes_3" class="fragment" data-fragment-index="1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Recall the cumulative density function for the normal distribution is the sum of the probability density function. The total area under the curve is 1, the upper limit of the CDF.
+
+</p>
+
+<p>Because the CDF (theory) expects values from -infty to +infty, we can't simply map our sample to the CDF. Instead, we use the empirical cumulative density function (ECDF) to estimate the CDF.</p>
+
+<p>
+
+If we have probability points that map directly to the sample, we would end up with a cumulative
+
+density of 1, which would correspond to the +infinity value, so our probability points formula
+
+allows us to adjust for this, making the estimates from the standard normal distribution more
+
+accurate.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Assessing Normality -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessing Normality</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="sided bg-background-warning-alpha-02">
+
+Before using methods that <span class="em pop">assume</span> a <span class="info em">Normal Distribution</span>,
+
+we need to assess whether the data are normally distributed.
+
+</p>
+
+<div class="fragment small" data-fragment-index="1">
+
+<p no-hang>
+
+Calculate probability points for sample quantiles:
+
+$$p_i = \frac{i - \alpha}{N + 1 - 2\alpha}$$
+
+</p>
+
+<p class="fragment small" data-fragment-index="2">
+
+Choose \(\alpha\) based on sample size:
+
+</p>
+
+<ul class="small fragment" data-fragment-index="3">
+
+<li>\(N < 10\): \(\alpha=0.375\) (Blom's adjustment)</li>
+
+<li class="fragment highlight-current-success" data-fragment-index="4">\(10 \leq N < 50\): \(\alpha=0.4\) (improves mid-range fit)</li>
+
+<li>\(N \geq 50\): \(\alpha = 0.5\) (median rank)</li>
+
+</ul>
+
+</div>
+
+<p class="fragment smaller" data-fragment-index="5">
+
+The inverse quantile function allows us to calculate the standard normal value:
+
+</p>
+
+<div class="fragment smaller" data-fragment-index="5">
+
+$$F^{-1}(p) = Z_p \quad \text{where} \quad P(Z \leq Z_p) = p$$
+
+<pre class="language-python">
+
+<code data-trim>
+
+import scipy.stats as stats
+
+stats.norm.ppf(0.03921) # -> -1.7599
+
+</code>
+
+</pre>
+
+</div>
+
+</div>
+
+<div class="smaller">
+
+<table class="latex-style-table-row-labels full-grid-table">
+
+<thead>
+
+<tr style="text-align: right;" class="small strong">
+
+<th class="fragment" data-fragment-index="3">Probability Points</th>
+
+<th>Sample Quantiles</th>
+
+<th class="fragment" data-fragment-index="5">Normal Quantiles</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.0392</td>
+
+<td>166.6</td>
+
+<td class="fragment" data-fragment-index="5">-1.7599</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.1373</td>
+
+<td>400.6</td>
+
+<td class="fragment" data-fragment-index="5">-1.0927</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.2353</td>
+
+<td>407.9</td>
+
+<td class="fragment" data-fragment-index="5">-0.7215</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.3333</td>
+
+<td>415.1</td>
+
+<td class="fragment" data-fragment-index="5">-0.4307</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.4314</td>
+
+<td>445.1</td>
+
+<td class="fragment" data-fragment-index="5">-0.1729</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.5294</td>
+
+<td>466.1</td>
+
+<td class="fragment" data-fragment-index="5">0.0738</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.6275</td>
+
+<td>557.9</td>
+
+<td class="fragment" data-fragment-index="5">0.3251</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.7255</td>
+
+<td>664.2</td>
+
+<td class="fragment" data-fragment-index="5">0.5992</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.8235</td>
+
+<td>729.7</td>
+
+<td class="fragment" data-fragment-index="5">0.9289</td>
+
+</tr>
+
+<tr>
+
+<td class="fragment" data-fragment-index="3">0.9216</td>
+
+<td>794.2</td>
+
+<td class="fragment" data-fragment-index="5">1.4157</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Standard Normal was </p>
+
+<p>Choosing the right \(\alpha\) is crucial for accurate Q-Q plots:</p>
+
+<ul>
+
+<li><strong>Small Sample Sizes (\(N < 10\)):</strong> Use \(\alpha=0.375\) as suggested by Blom to minimize bias in the tails.</li> <li><strong>Moderate Sample Sizes (\(10 \leq N < 50\)):</strong> Use \(\alpha=0.4\) to improve the fit by balancing the mid-range and tail representations.</li> <li><strong>Large Sample Sizes (\(N \geq 50\)):</strong> Use \(\alpha = 0.5\) (median rank), which becomes increasingly reliable as the sample size grows, with minimal effect on the plot's accuracy.</li>
+
+</ul>
+
+<p>References:
+
+<ol>
+
+<li>Blom, G. (1958). Statistical Estimates and Transformed Beta Variables. Wiley.</li>
+
+<li>Hyndman, R. J., & Fan, Y. (1996). Sample quantiles in statistical packages. The American Statistician, 50(4), 361-365.</li>
+
+<li>Wilk, M. B., & Gnanadesikan, R. (1968). Probability plotting methods for the analysis of data. Biometrika, 55(1), 1-17.</li>
+
+</ol>
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Normality -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Viewing Normality: QQ plot</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="no-hang" style="align-self: center;">
+
+<svg width="100%" viewbox="0 0 447 432">
+
+<use xlink:href="lib/img/qq_build_quant.svg#axes_1"></use>
+
+<use xlink:href="lib/img/qq_build_quant.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+</div>
+
+<div class="smaller no-hang">
+
+<ul>
+
+<li class="fragment" data-fragment-index="1">The sample data are plotted against the standard normal (theoretical) quantiles.</li>
+
+<li class="fragment" data-fragment-index="2">The unity line represents perfect normality; sample points should cluster around this line.</li>
+
+<li class="fragment" data-fragment-index="3">Points on the unity line suggest that the sample distribution is similar to a normal distribution.</li>
+
+<li class="fragment" data-fragment-index="4">Deviation from the unity line implies potential skewness or kurtosis in the sample distribution.</li>
+
+<li class="fragment" data-fragment-index="5">The <span class="info">Quantile-Quantile Plot</span> provides a visual comparison between empirical data quantiles and theoretical normal quantiles.</li>
+
+</ul>
+
+<p class="fragment left-justify sided bg-info-alpha-02" data-fragment-index="6">
+
+The QQ plot visualizes the sample quantiles against the theoretical quantiles from a standard normal distribution. A linear relationship suggests normality; deviations from this can inform about the distribution's skewness or tail behavior.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What about the uncertainty in the quantiles?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Quantile Simulation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Quantile Simulation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small">
+
+<p>Procedure for the Quantile-Quantile simulation:</p>
+
+<ol>
+
+<li class="fragment" data-fragment-index="1">Sort the data</li>
+
+<li class="fragment" data-fragment-index="2">Determine the probability points</li>
+
+<li class="fragment" data-fragment-index="2">Calculate the normal quantiles and QLine</li>
+
+<li class="fragment" data-fragment-index="3">Initialize arrays for simulations</li>
+
+<li class="fragment" data-fragment-index="4">For each simulation:</li>
+
+<ol>
+
+<li class="fragment" data-fragment-index="4">Draw a random sample of size N with replacement from the data (sorted)</li>
+
+<li class="fragment" data-fragment-index="5">Fit the Q1 and Q3</li>
+
+<li class="fragment" data-fragment-index="6">Calculate the QLine</li>
+
+</ol>
+
+<li class="fragment" data-fragment-index="7">Calculate the confidence bands</li>
+
+</ol>
+
+</div>
+
+<div class="full-width smallest fragment" data-fragment-index="8">
+
+<pre class="language-python">
+
+<code># Data:  [166.6 400.6 407.9 415.1 445.1 466.1 557.9 664.2 729.7 794.2]
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import scipy.stats as stats
+
+# Get data properties
+
+N = len(data)
+
+B = 10000
+
+# Sort the data (ascending)
+
+sorted_data = np.sort(data)
+
+# Determine Probability points
+
+alpha = 0.375 if N < 10 else 0.4 if N < 50 else 0.5
+
+ppoints = (np.arange(N) + alpha(N)) / (N + 1 - 2 * alpha(N))
+
+# Calculate the corresponding normal distribution quantiles
+
+normal_quantiles = stats.norm.ppf(ppoints)
+
+# Actual qline:
+
+qline = np.polyval(
+
+&#9;np.polyfit(
+
+&#9;&#9;np.quantile(normal_quantiles, [0.25, 0.75], method='median_unbiased'),
+
+&#9;&#9;np.quantile(sorted_data, [0.25, 0.75], method='median_unbiased'),
+
+&#9;&#9;1), normal_quantiles
+
+)
+
+# initialize arrays for bootstraps
+
+bootstrap_qlines = np.zeros((N,B))
+
+for i in range(B):
+
+&#9;# Draw a random sample of size N with replacement from the data (sorted)
+
+&#9;bootstrap_sample = np.sort(np.random.choice(data, size=N, replace=True))
+
+&#9;# fit to Q1 and Q3
+
+&#9;bootstrap_qlines[:,i] = np.polyval(
+
+&#9;&#9;np.polyfit(
+
+&#9;&#9;&#9;np.quantile(normal_quantiles, [0.25, 0.75], method='median_unbiased'),
+
+&#9;&#9;&#9;np.quantile(bootstrap_sample, [0.25, 0.75], method='median_unbiased'),
+
+&#9;&#9;&#9;1), normal_quantiles
+
+&#9;)
+
+# Calculate confidence bands (2.5th and 97.5th percentiles)
+
+confidence_bands = np.percentile(bootstrap_qlines, [2.5, 97.5], axis=1).T</code>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Quantile&rArr;Normal -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Quantile&rArr;Normal</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.25fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p>
+
+The <span class="info">QQ plot</span> compares <em>sample quantiles</em> to <em>theoretical quantiles</em>, with the grey shaded area representing a <strong>95% confidence band</strong> obtained through <span class="info">simulation</span>.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+Points falling <u>within</u> this band are <span class="success">consistent with normal sampling variation</span>, while points <u>outside</u> suggest <span class="danger">significant departures from normality</span>.
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+This <span class="info">uncertainty visualization</span> helps distinguish between <em>random sampling fluctuations</em> and <span class="warning">true non-normal features</span> in the data's distribution.
+
+</p>
+
+<p class="fragment framed border-danger" data-fragment-index="4">
+
+While an important part of assessing normality, you should always confirm with other methods<i class="fa-solid fa-triangle-exclamation danger"></i>
+
+</p>
+
+</div>
+
+<div class="no-hang" style="align-self: center;">
+
+<svg width="100%" viewbox="0 0 467 432">
+
+<use xlink:href="lib/img/qq_bootstrap.svg#axes_3" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/qq_bootstrap.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/qq_bootstrap.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In this case, the theoretical quantiles are the normal quantiles, but in general, they could be any distribution.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Interpreting QQ Plots -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpreting QQ Plots</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:100%;">
+
+<img src="lib/img/qq_norm_skew.svg" style="width:100%">
+
+</div>
+
+<div class="small">
+
+<p class="success">
+
+Deviations from the unity line have different implications:
+
+</p>
+
+<ul class="smaller">
+
+<li>
+
+<span class="strong">Normal:</span> Points closely follow the unity line, indicating a normal distribution.
+
+</li>
+
+<li>
+
+<span class="strong">Left Skew:</span> Points curve <span class="danger">below</span>
+
+at the lower end and <span class="danger">below</span> the line at the upper end,
+
+reflecting a <span class="pop">longer</span> tail on the left and
+
+<span class="warning">shorter</span> on the right.
+
+</li>
+
+<li>
+
+<span class="strong">Right Skew:</span> Points curve <span class="success">above</span>
+
+the line at the lower end and <span class="success">above</span>
+
+at the upper end, indicating a <span class="pop">longer</span>
+
+tail on the right and <span class="warning">shorter</span> on the left.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Interpreting QQ Plots -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpreting QQ Plots</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:100%;">
+
+<img src="lib/img/qq_bimode_tails.svg" style="width:100%">
+
+</div>
+
+<div class="small">
+
+<p class="success">
+
+Deviations from the unity line have different implications:
+
+</p>
+
+<ul class="smaller">
+
+<li>
+
+<span class="strong">Bimodal:</span> Shows a distinctive
+
+"<span class="danger">S</span>" shaped curve or multiple clusters
+
+along the QQ line, indicating multiple peaks in the data distribution.
+
+</li>
+
+<li>
+
+<span class="strong">Fat Tails:</span> Points diverge from the
+
+unity line at the ends, suggesting excess kurtosis and a higher
+
+likelihood of extreme values (i.e., <span class="pop">longer</span>
+
+tails at both ends).
+
+</li>
+
+<li>
+
+<span class="strong">Skinny Tails:</span> Points diverge from the
+
+unity line at the ends, indicating a lower likelihood of
+
+extreme values (i.e., <span class="warning">shorter</span>
+
+tails on both sides).
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Note that bimodal crosses in the middle and then also has skinny tails here.
+
+Where the skinny tails distribution doesn't cross so much (but might have multiple peaks randomly due to construction)
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- ASSESS NORMALITY 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessment of NORMALITY</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;width:80%;">
+
+<div style="grid-column:1/2;grid-row:1/2">
+
+<div class="u">
+
+<span class="circled-bg-info">1</span>Visual inspection: <span class="info strong">QQ-plot</span>
+
+</div>
+
+<div style="font-size:80%;">
+
+A Quantile-Quantile plot is a scatterplot created by plotting two sets of quantiles against one another.
+
+</div>
+
+<div style="font-size:80%;">
+
+<i class="fas fa-arrow-circle-right"></i> If both sets of quantiles came from the same distribution
+
+(e.g., normal distribution), we should see the points forming a line that's roughly straight.
+
+</div>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:1/2;">
+
+<img src="lib/img/qqplot.svg">
+
+</div>
+
+<div class="fragment" style="grid-column:1/3;grid-row:2/3;display:grid;grid-template-columns:3fr 7fr;grid-auto-rows:auto;gap:1vmin;width:80%;">
+
+<div>
+
+<p data-id="svg-words">
+
+To get a sense, we need to understand the <span class="pop">cumulative density functions (CDF)</span>:
+
+</p>
+
+</div>
+
+<div>
+
+<svg viewBox="0 0 1008 468" width="100%" data-id="svg-box">
+
+<use xlink:href="lib/img/cumprob.svg#figure_1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ASSESS NORMALITY 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessment of NORMALITY</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;width:80%;">
+
+<div style="grid-column:1/2;grid-row:1/2;" data-id="static-box">
+
+<div class="u">
+
+<span class="circled-bg-info">1</span>Visual inspection: <span class="info strong">QQ-plot</span>
+
+</div>
+
+<div style="font-size:80%;">
+
+A Quantile-Quantile plot is a scatterplot created by plotting two sets of quantiles against one another.
+
+</div>
+
+<div style="font-size:80%;">
+
+<i class="fas fa-arrow-circle-right"></i> If both sets of quantiles came from the same distribution
+
+(e.g., normal distribution), we should see the points forming a line that's roughly straight.
+
+</div>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:1/2;">
+
+<img src="lib/img/qqplot.svg">
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;grid-row:2/3;display:grid;grid-template-columns:3fr 7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p data-id="svg-words">
+
+To get a sense of them, we need to understand the <span class="pop">cumulative density functions (CDF)</span> and how it relates to the Q~Q Plot:
+
+</p>
+
+</div>
+
+<div>
+
+<svg viewBox="0 0 720 225" width="100%" data-id="svg-box">
+
+<use xlink:href="lib/img/qq_pdf_ecdf_norm.svg#axes_1"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_norm.svg#axes_2" class="fragment fade-left"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_norm.svg#axes_3" class="fragment fade-left"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ASSESS NORMALITY 3 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessment of NORMALITY</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;width:80%;">
+
+<div style="grid-column:1/2;grid-row:1/2;" data-id="static-box">
+
+<div class="u">
+
+<span class="circled-bg-info">1</span>Visual inspection: <span class="info strong">QQ-plot</span>
+
+</div>
+
+<div style="font-size:80%;">
+
+A Quantile-Quantile plot is a scatterplot created by plotting two sets of quantiles against one another.
+
+</div>
+
+<div style="font-size:80%;">
+
+<i class="fas fa-arrow-circle-right"></i> If both sets of quantiles came from the same distribution
+
+(e.g., normal distribution), we should see the points forming a line that's roughly straight.
+
+</div>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:1/2;">
+
+<img src="lib/img/qqplot.svg">
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;grid-row:2/3;display:grid;grid-template-columns:3fr 7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p data-id="svg-words" class="info">
+
+And how differences between the sample distribution and the normal distribution affect our outcome (and procedure).
+
+</p>
+
+</div>
+
+<div>
+
+<svg viewBox="0 0 720 225" width="100%" data-id="svg-box">
+
+<use xlink:href="lib/img/qq_pdf_ecdf_lskew.svg#axes_1"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_lskew.svg#axes_2" class="fragment fade-left"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_lskew.svg#axes_3" class="fragment fade-left"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ASSESS NORMALITY 4 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessment of NORMALITY</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;width:80%;">
+
+<div style="grid-column:1/2;grid-row:1/2;" data-id="static-box">
+
+<div class="u">
+
+<span class="circled-bg-info">1</span>Visual inspection: <span class="info strong">QQ-plot</span>
+
+</div>
+
+<div style="font-size:80%;">
+
+A Quantile-Quantile plot is a scatterplot created by plotting two sets of quantiles against one another.
+
+</div>
+
+<div style="font-size:80%;">
+
+<i class="fas fa-arrow-circle-right"></i> If both sets of quantiles came from the same distribution
+
+(e.g., normal distribution), we should see the points forming a line that's roughly straight.
+
+</div>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:1/2;">
+
+<img src="lib/img/qqplot.svg">
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;grid-row:2/3;display:grid;grid-template-columns:3fr 7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p data-id="svg-words" class="warning">
+
+And how differences between the sample distribution and the normal distribution affect our outcome (and procedure).
+
+</p>
+
+</div>
+
+<div>
+
+<svg viewBox="0 0 720 225" width="100%" data-id="svg-box">
+
+<use xlink:href="lib/img/qq_pdf_ecdf_rskew.svg#axes_1"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_rskew.svg#axes_2" class="fragment fade-left"></use>
+
+<use xlink:href="lib/img/qq_pdf_ecdf_rskew.svg#axes_3" class="fragment fade-left"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Additional Normality Tests -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Additional Normality Tests</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Beyond QQ plots, several statistical tests can assess normality:</p>
+
+<ul>
+
+<li>Shapiro-Wilk Test</li>
+
+<li>Kolmogorov-Smirnov Test</li>
+
+<li>Anderson-Darling Test</li>
+
+<li>Lilliefors Test</li>
+
+</ul>
+
+<p>The Shapiro-Wilk test is particularly highlighted for its sensitivity in detecting deviations from normality.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/probability_abstract.png" id="section-title-4">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-4">
+              <div class="section-number">
+                <span class="large-number">
+                  4
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  The Frequentist
+                </h2>
+                <h3>
+                  In Action
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-4.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Frequentism relies on the Central Limit Theorem to make inferences about the population from sample data.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Goal of Statistics -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Purpose</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic"
+
+style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;justify-items:center;">
+
+<div>
+
+<p>
+
+<i class="arrowr"></i> To answer a question about a population (of data).
+
+</p>
+
+<div class="bordered rounded border-dashed">
+
+<p style="text-align:justify;text-justify:inter-word;" class="small">
+
+In a perfect world, we would have access to the full
+
+<span class="info">population</span> so we would be able to answer the question
+
+based on data collected on all the <span class="u">observational units</span>
+
+of the population. We would know the value of the
+
+<span class="info">true parameter</span> we are interested in.
+
+</p>
+
+</div>
+
+<p>
+
+But usually we just have <span class="danger">one sample</span>.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Statistics is about using a <span class="danger">sample</span>, or many samples,
+
+</p>
+
+<p class="left-justify">
+
+to make <span class="warning">inferences</span> about the <span class="info">population</span> parameters.
+
+</p>
+
+</div>
+
+<div style="justify-content:center;">
+
+<svg viewBox="0 0 864 432" class="graphic" style="height:55vh;">
+
+<use xlink:href="lib/img/inferences.svg#figure_1"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_2"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_3"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+I keep showing you this slide, because as we get more and more into the weeds with formulas and concepts,
+
+I want you to have the purpose, the big picture, in the back of your mind at all times!
+
+</p>
+
+<p>
+
+In statistics, the process of making inferences results in estimating the sampling distribution.
+
+This is <strong>always</strong> what we are endeavoring to do. NO MATTER THE STATISTIC!
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Salaries At A Big University -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Salaries At A Big University</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>From <a href="https://ucannualwage.ucop.edu/wage/" target="_blank" rel="noopener noreferrer">the internet</a>, we have the following data on salaries of employees at <span class="danger as-code smaller">&lt;Institution&gt;</span> in 2023:</p>
+
+<div class="grid-generic" style="grid-template-columns:2fr 1.2fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="full-width">
+
+<svg width="100%" viewBox="0 0 713 388">
+
+<use xlink:href="lib/img/ucla_salaries_histogram.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ucla_salaries_histogram.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/ucla_salaries_histogram.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="0"><span class="strong">Population</span> salary statistics:</p>
+
+<p class="fragment" data-fragment-index="1"><span class="ucla-darkest-gold huge">$\mu=\$94,416$</span>,</p>
+
+<p class="fragment" data-fragment-index="2"><span class="ucla-darkest-blue huge">$m=\$78,922$</span>.</p>
+
+<p class="fragment small left-justify" data-fragment-index="3">Consider you are trying to estimate the median salary of the <span class="em">entire</span> population.</p>
+
+<p class="fragment small left-justify" data-fragment-index="4">You randomly pick 50 people and ask them their salary.</p>
+
+<p class="fragment small left-justify question" data-fragment-index="5">How well can you estimate the <span class="s-quote">true median</span> salary</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>How would you describe this population?</p>
+
+<p>Which central tendency descriptor would be closer to the most frequent salary?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The Experiment -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Experiment</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%"viewBox="0 0 1073 425" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/salaries_random_samples_swarm.svg#axes_1"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm.svg#axes_3" class="fragment" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm.svg#axes_4" class="fragment" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm.svg#axes_5" class="fragment" data-fragment-index="5"></use>
+
+</svg>
+
+</div>
+
+<div class="small left-justify">
+
+<p>You select 50 people at random and ask them their salary: <span class="burgundy">$m=\$81,093.50$</span>.</p>
+
+<p class="fragment" data-fragment-index="1">You recruit 4 friends who <span class="em">replicate</span> the experiment.</p>
+
+<p class="fragment" data-fragment-index="2">Friend 1: <span class="lavender">$m=\$96,694.50$</span></p>
+
+<p class="fragment" data-fragment-index="3">Friend 2: <span class="skyblue">$m=\$88,316.50$</span></p>
+
+<p class="fragment" data-fragment-index="4">Friend 3: <span class="coral">$m=\$67,109.00$</span></p>
+
+<p class="fragment" data-fragment-index="5">Friend 4: <span class="crimson">$m=\$76,750.00$</span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Because you're always told to perform replicates, you recruit 4 friends who perform the same experiment.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Sample Center (Estimates) -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Sample Center (Estimates)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 711 388" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_1"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_2"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_3" class="fragment current-visible" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_4" class="fragment current-visible" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_5" class="fragment current-visible" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_6" class="fragment current-visible" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_7" class="fragment current-visible" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_3" class="fragment current-visible" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_4" class="fragment current-visible" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_5" class="fragment current-visible" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_6" class="fragment current-visible" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_7" class="fragment current-visible" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/salaries_random_samples_swarm_with_medians.svg#axes_8" class="fragment" data-fragment-index="7"></use>
+
+</svg>
+
+</div>
+
+<div class="small left-justify">
+
+<p>You select 50 people at random and ask them their salary.</p>
+
+<p class="fragment" data-fragment-index="1">You: <span class="burgundy">$m=\$81,093.50$</span></p>
+
+<p class="fragment" data-fragment-index="2">Friend 1: <span class="lavender">$m=\$96,694.50$</span></p>
+
+<p class="fragment" data-fragment-index="3">Friend 2: <span class="skyblue">$m=\$88,316.50$</span></p>
+
+<p class="fragment" data-fragment-index="4">Friend 3: <span class="coral">$m=\$67,109.00$</span></p>
+
+<p class="fragment" data-fragment-index="5">Friend 4: <span class="crimson">$m=\$76,750.00$</span></p>
+
+<p class="fragment smaller" data-fragment-index="6">Each sample is slightly different but similar to the true median.</p>
+
+<p class="fragment smaller" data-fragment-index="7">Imagine you have 10,000 friends and you create a histogram of their medians.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>With 10,000 friends you can create a distribution of medians. Think about how often you'd see a median close to the true median.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Sampling Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.75fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 520 413" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/salaries_clt_median_sampling.svg#axes_1"></use>
+
+<use xlink:href="lib/img/salaries_clt_median_sampling.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+</svg>
+
+</div>
+
+<div class="small left-justify">
+
+<p>With 10,000 medians from 10,000 identical, random samples, you can estimate the <span class="em">true median</span> salary.</p>
+
+<p class="fragment" data-fragment-index="1">This <span class="info">sampling distribution</span> is centered on the true median.</p>
+
+<p class="fragment" data-fragment-index="2">The <span class="info">spread</span> of the sampling distribution is the <span class="danger">standard error</span> of the estimate.</p>
+
+<p class="fragment small em" data-fragment-index="3">More on this next lecture!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We are going to discuss the standard error of the statistic in more detail later.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- But You Have No Friends -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>But You Have No Friends...</h2>
+
+<p class="fragment" data-fragment-index="0">Willing to perform your experiment</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="framed border-success fragment" data-fragment-index="1">You have to pick yourself up by the bootstraps!</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 540 413" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/salaries_bootstrap_median_sampling.svg#axes_1"></use>
+
+<use xlink:href="lib/img/salaries_bootstrap_median_sampling.svg#axes_2" class="fragment" data-fragment-index="4"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="1">Python Code:</p>
+
+<div class="full-width fragment smallest" data-fragment-index="1">
+
+<pre class="language-python"><code data-trim>
+
+def bootstrapper(dataset, B=10000, statistic=np.median):
+
+&#9;boot_stats = np.zeros(B)
+
+&#9;for i in range(B):
+
+&#9;&#9;boot_data = np.random.choice(dataset, size=70, replace=True)
+
+&#9;&#9;boot_stats[i] = statistic(boot_data)
+
+&#9;return boot_stats
+
+# Use the function to create a resampling distribution (theta hat)
+
+bootstraps = bootstrapper(dataset, B=10000, statistic=np.median)
+
+</code></pre>
+
+</div>
+
+<p class="fragment small left-justify" data-fragment-index="2">
+
+To mimic the replication of the experiment, we <span class="em success">resample</span> our sample <span class="em">with replacement</span>.
+
+</p>
+
+<p class="fragment small left-justify" data-fragment-index="3">
+
+For each <span class="success">resample</span>, we calculate the statistic (e.g., median).
+
+</p>
+
+<p class="fragment small left-justify" data-fragment-index="4">
+
+We repeat this process <span class="success">10,000 times</span> to create a <span class="em">re</span>sampling distribution.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>See how our resampling distribution is not quite centered on the true median? This difference is called "bias".</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Sampling Distribution -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Sampling Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted" style="grid-column:1/3;">
+
+A sampling distribution is the <span class="danger">distribution of sample statistics</span> computed for
+
+<span class="u-danger">randomly selected samples</span> from the same underlying population.
+
+</p>
+
+<div class="box-width">
+
+<img width="100%" src="lib/img/population-sampling-distribution-parameters.svg">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>CLT: For most of the parameters we consider, if samples are randomly selected and the sample size is large
+
+enough, the sampling distribution will be generally symmetric and bell-shaped and centered at the value of the
+
+population parameter.</p>
+
+<p>
+
+Let's look at an example.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Sample Size Effect On Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Considering Sample Size</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="align-content: center;height:100%;">
+
+<p>
+
+<span class="u">Sample Size Matters!</span> <br>
+
+Increasing <span class="danger">sample size reduces the variability of sample statistics</span>, making them more accurate (narrower sampling distribution).
+
+</p>
+
+<p class="framed border-danger">
+
+<i class="fas fa-arrow-circle-right"></i> Larger sample sizes lead to reduced uncertainty and narrower confidence intervals.
+
+</p>
+
+</div>
+
+<div class="full-width">
+
+<img src="lib/img/sampling-distribution-size-matters.svg" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>If the sampling distribution in narrower, what also happens to the standard Error? 95% Confidence Interval?</p>
+
+<p>Think about SE and CI calculations. sigma smaller or n larger (both too), then 1.96*se also smaller.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- TV Example -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Estimating The Population Parameters</h2>
+
+<h3>Time Spent Watching TV</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:1fr auto;gap:5px;">
+
+<div style="font-size:80%;">
+
+<p class="framed border-info">
+
+We are in charge of running a new health campaign that targets the students of a school
+
+with <span class="info">500 students</span>.
+
+We want to know if using TV ads would be an effective to get students aware of our campaign.
+
+</p>
+
+<p class="sided border-warning">
+
+One <span class="pop">metric</span> that may be useful is the total time a
+
+student spends watching TV per quarter.
+
+</p>
+
+<p>
+
+If we could collect data on all the students, then the data would look like this:
+
+</p>
+
+</div>
+
+
+
+<svg width="100%" viewBox="0 0 1008 288">
+
+<use xlink:href="lib/img/recap-population-visualization.svg#axes_1"></use>
+
+<use xlink:href="lib/img/recap-population-visualization.svg#axes_2"></use>
+
+<use xlink:href="lib/img/recap-population-visualization.svg#axes_3"></use>
+
+</svg>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In the real world, we wouldn't know the population, but for the sake of the example,
+
+here it is.
+
+</p>
+
+<p>
+
+We have been given a requirement by the ad agency that for our approach to be
+
+effective, students must watch at least 6-7 hours per week.
+
+</p>
+
+<p>
+
+In a quarter system, we would have 10 weeks. If we knew this population, we
+
+would be green-lighting that ad campaign immediately.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Estimating The Population Parameters</h2>
+
+<p class="pop">The Sampling Distribution</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:1fr auto;gap:5px;">
+
+<div class="small">
+
+<p>
+
+We only have a limited budget, enough to take a <span class="warning">sample size of 6</span>, <span class="em">"What is the value of
+
+$\mu$?"</span>
+
+</p>
+
+<p class="fragment" data-fragment-index=1>
+
+<i class="arrowr danger"></i> We <span class="danger">randomly select</span>
+
+6 students ($n=6$) as a <span class="danger">representative sample</span>,
+
+calculate $\bar{x}$ and see <span class="warning">$\bar{x}\approx\mu$</span>.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.15fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="small left-justify">
+
+<p class="fragment" data-fragment-index=2>
+
+If we take another random sample, $\bar{x}$ would be a bit different
+
+(but still <span class="warning">$\bar{x}\approx\mu$</span>).
+
+</p>
+
+<p class="fragment" data-fragment-index=3>
+
+Lots of possible different samples from the
+
+population, lots of slightly different
+
+values for the statistics of interest ($\bar{x}\approx\mu$).
+
+<br>
+
+<i class="arrowr danger"></i> All of these possible statistics of
+
+interest define the
+
+<span class="fragment highlight-current-warning" data-fragment-index=3>
+
+<span class="fragment highlight-current-danger" data-fragment-index=4>
+
+<span class="fragment highlight-current-black underline-current-black" data-fragment-index=5>sampling
+
+distribution of
+
+the statistic</span></span></span>.
+
+</p>
+
+<p class="fragment framed" data-fragment-index=6 style="font-size:125%;">
+
+Each <span class="pop">statistic of interest</span> has its own sampling distribution, the
+
+sampling distribution of the mean won't be the same as the one for the median, etc..
+
+</p>
+
+</div>
+
+<svg width="100%" viewBox="10 0 415 288">
+
+<use xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_1"></use>
+
+<use xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_2"></use>
+
+<use class="fragment current-visible" data-fragment-index=1
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_7"></use>
+
+<use class="fragment current-visible" data-fragment-index=2
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_8"></use>
+
+<use class="fragment" data-fragment-index=3
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=4
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index=5
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_5"></use>
+
+<use class="fragment" data-fragment-index=6
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_6"></use>
+
+<!-- <use class="fragment" data-fragment-index=7
+
+xlink:href="lib/img/recap-population-statistic-sampling-distribution.svg#axes_9"></use> -->
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Last fragment. Note the hierarchy of the labels and names:
+
+greek letters, like mu and sigma, for the population PARAMETERS,
+
+lower case letters with bar or sometimes tilde or hat for sample of size N statistic,
+
+and finally, "error" standard for normal distributions or confidence interval for
+
+the sampling distribution.
+
+</p>
+
+<p>
+
+So, sigma -> population spread, s -> sample spread, se or ci -> sampling distribution spread
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Key Takeaways -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Key Takeaways</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="grid-template-columns: 2.5fr 7.5fr;grid-auto-rows: auto;row-gap: 1vmin;column-gap: 0;">
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Expected Value</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>The <span class="info">mean outcome of a random variable</span> over a large number of experiments or trials</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Central Limit Theorem</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>
+
+States that the
+
+<span class="info">distribution of sample means</span>
+
+approximates a normal distribution
+
+as the sample size becomes large
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Random Variable</p>
+
+</div>
+
+<div class="small border-bottom" style="height:100%;align-items:center;">
+
+<p>
+
+A function that <span class="info">assigns a real number to each outcome</span> in the probability space
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Sampling Distribution</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>The distribution of a <span class="info">statistic</span> (e.g., mean, median) over many randomly drawn samples from the same underlying population, used to estimate the <span class="warning">population parameter</span>.</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Sampling Distribution Estimate</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>A Monte Carlo simulation of the sampling distribution of a statistic.</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Assessing Normality</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>Utilize quantiles, probability points, and scatter plots to visualize the relationship between data and standard normal distributions.</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Normal Distribution</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>A type of continuous probability distribution for a real-valued random variable, characterized by a symmetric, bell-shaped curve.</p>
+
+</div>
+
+
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p><i class="fa-solid fa-file-contract"></i> Standard Error</p>
+
+</div>
+
+<div class="small border-bottom" style="height: 100%; align-items: center">
+
+<p>The spread, or <span class="danger">standard deviation</span>, of the sampling distribution.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 03
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

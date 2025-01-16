@@ -281,20 +281,17 @@
 .box-width {
   width: 80% !important; }
 
-.center-justify, .center-justify * {
-  text-align: center !important; }
+.left-justify, .left-justify p, .left-justify div {
+  text-align: left; }
 
-.left-justify, .left-justify * {
-  text-align: left !important; }
+.right-justify, .right-justify p, .right-justify div {
+  text-align: right; }
 
-.right-justify, .right-justify * {
-  text-align: right !important; }
-
-.just-justify, .just-justify * {
-  text-align: justify !important;
-  text-justify: inter-word !important;
-  padding-right: 5px !important;
-  padding-left: 5px !important; }
+.just-justify, .just-justify p, .just-justify div {
+  text-align: justify;
+  text-justify: inter-word;
+  padding-right: 5px;
+  padding-left: 5px; }
 
 .no-hang > * {
   margin-top: 0 !important;
