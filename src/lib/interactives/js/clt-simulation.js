@@ -33,15 +33,27 @@ const blobHeight = 50;
 let selectedDistribution = 'Uniform';
 let previousDistribution = 'Uniform';
 
+// Add after other global variables
+let showTheoretical = false;
+let theoreticalLine;
+
+// Add after other global variables at the top of the file
+let x = d3.scaleLinear().domain([0, 1]).range([0, svg.width]);
+let y = d3.scaleLinear().range([svg.height, 0]);
+const minNumBins = 41; // Minimum number of bins for the histogram
+
+// Add to global variables
+let selectedTheoretical = 'gaussian';
+
 // Function to adjust animation speeds relative to globalSpeed
 function getSpeedMultiplier() {
   return globalSpeed;
 }
 
 // Histogram setup with X and Y labels
-let numBins = 41; // Fixed number of bins for the histogram
-x = d3.scaleLinear().domain([0, 1]).range([0, svg.width]);
-y = d3.scaleLinear().range([svg.height, 0]);
+// let numBins = 41; // Fixed number of bins for the histogram
+// x = d3.scaleLinear().domain([0, 1]).range([0, svg.width]);
+// y = d3.scaleLinear().range([svg.height, 0]);
 
 const xAxis = svg.g.append("g")
   .attr("transform", `translate(0,${svg.height})`)
@@ -210,17 +222,17 @@ function drawBlobShape(blobShape) {
 // Define the PDFs for the different distributions
 function pdfNormal(x) {
   const mean = 0.5;
-  const variance = 0.05;
-  return (1 / Math.sqrt(2 * Math.PI * variance)) * Math.exp(-Math.pow(x - mean, 2) / (2 * variance));
+  const std = 0.15;
+  return (1 / (std * Math.sqrt(2 * Math.PI))) * Math.exp(-Math.pow(x - mean, 2) / (2 * std * std));
 }
 
-function pdfLeftSkewed(x) {
+function pdfRightSkewed(x) {
   const alpha = 2;
   const beta = 5;
   return Math.pow(x, alpha - 1) * Math.pow(1 - x, beta - 1);
 }
 
-function pdfRightSkewed(x) {
+function pdfLeftSkewed(x) {
   const alpha = 5;
   const beta = 2;
   return Math.pow(x, alpha - 1) * Math.pow(1 - x, beta - 1);
@@ -232,21 +244,22 @@ function generateRandomUniform() {
 }
 
 function generateRandomNormal() {
-  let u = 0,
-    v = 0;
-  while (u === 0) u = Math.random(); // Avoid zero
+  let u = 0, v = 0;
+  while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
-  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v) * 0.1 + 0.5; // Normal around 0.5 with small variance
+  
+  // Fixed std regardless of sample size
+  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v) * 0.15 + 0.5;
 }
 
-function generateRandomLeftSkewed() {
+function generateRandomRightSkewed() {
   // Use a Beta distribution to generate left-skewed data (alpha < beta)
   const alpha = 2;
   const beta = 5;
   return jStat.beta.sample(alpha, beta); // Using a library like jStat for Beta distribution
 }
 
-function generateRandomRightSkewed() {
+function generateRandomLeftSkewed() {
   // Use a Beta distribution to generate right-skewed data (alpha > beta)
   const alpha = 5;
   const beta = 2;
@@ -255,6 +268,7 @@ function generateRandomRightSkewed() {
 
 // Draw the population blob based on the currently selected distribution
 function drawPopulationBlob() {
+  
   const ctx = canvas.ctx;
   const width = canvas.width;
   const height = canvas.height;
@@ -349,7 +363,14 @@ function runSimulation(b = 1) {
     });
 }
 
-// Combined animation function
+// Add helper function to constrain visualization values, but only if outside bounds
+function constrainToCanvas(value, min = 0, max = 1) {
+  if (value < min) return min;
+  if (value > max) return max;
+  return value;
+}
+
+// Modify animateSamples to properly handle out-of-bounds points
 function animateSamples(samplePoints, stats, signal) {
   return new Promise((resolve, reject) => {
     if (signal.aborted) {
@@ -359,8 +380,8 @@ function animateSamples(samplePoints, stats, signal) {
 
     const startTime = performance.now();
     const meanPositions = stats.map(stat => ({
-      x: (x(stat.statistic) / svg.width) * canvas.width,
-      y: canvas.height + 20 // Final position below canvas
+      x: (x(constrainToCanvas(stat.statistic)) / svg.width) * canvas.width,
+      y: canvas.height + 20
     }));
     
     function animate(currentTime) {
@@ -385,18 +406,17 @@ function animateSamples(samplePoints, stats, signal) {
         const meanY = meanPositions[groupIndex].y;
 
         points.forEach(point => {
-          // Calculate current position
-          let currentX, currentY;
-          let progress_cutoff = 0.6
-
-          if (progress < progress_cutoff) { 
-            currentY = -20 + (point.targetY + 20) * (progress / progress_cutoff);
-            currentX = point.x + (meanX - point.x) * (progress / progress_cutoff);
-          } else { 
-            const dropProgress = (progress - progress_cutoff) / (1 - progress_cutoff);
-            currentX = meanX;
-            currentY = point.targetY + (meanY - point.targetY) * dropProgress;
-          }
+          // Only constrain points that are outside the canvas bounds
+          const constrainedX = constrainToCanvas(point.value);
+          const xPos = (x(constrainedX) / svg.width) * canvas.width;
+          
+          const currentX = progress < 0.5 
+            ? xPos
+            : xPos + (meanX - xPos) * ((progress - 0.5) * 2);
+          
+          const currentY = progress < 0.5
+            ? -20 + (point.targetY + 20) * (progress * 2)
+            : point.targetY + (meanY - point.targetY) * ((progress - 0.5) * 2);
 
           // Draw point
           ctx.beginPath();
@@ -417,21 +437,83 @@ function animateSamples(samplePoints, stats, signal) {
   });
 }
 
-// Batch update histogram with animation
-function updateHistogramBatch(statistics) {
-  // Add all statistics to bins
-  statistics.forEach(stat => bins.push(stat));
+// Add function to calculate theoretical distributions
+function calculateTheoretical(x, mean, std, type) {
+  if (type === 'gaussian') {
+    // Calculate theoretical height based on histogram bin counts
+    const zScore = (x - mean) / std;
+    const height = (1 / (std * Math.sqrt(2 * Math.PI))) * 
+                  Math.exp(-0.5 * zScore * zScore);
+    
+    // Scale to match histogram counts
+    const totalSamples = bins.length;
+    const binWidth = 1 / calculateNumBins(bins.length);
+    return height * totalSamples * binWidth;
+  } else { // student-t
+    const df = 5;
+    const t = (x - mean) / std;
+    
+    // Scale t distribution similarly
+    const height = jStat.studentt.pdf(t, df) / std;
+    const totalSamples = bins.length;
+    const binWidth = 1 / calculateNumBins(bins.length);
+    return height * totalSamples * binWidth;
+  }
+}
 
-  // Calculate new histogram data
-  const binData = d3.histogram()
-    .domain(x.domain())
-    .thresholds(numBins)(bins);
+// Add function to calculate optimal number of bins
+function calculateNumBins(sampleCount) {
+  if (sampleCount < 2) return minNumBins;
+  
+  // Sort the data for quantile calculations
+  const sortedData = [...bins].sort((a, b) => a - b);
+  
+  // Calculate IQR
+  const q1 = d3.quantile(sortedData, 0.25);
+  const q3 = d3.quantile(sortedData, 0.75);
+  const iqr = q3 - q1;
+  
+  // Freedman-Diaconis rule for bin width: 2 * IQR * n^(-1/3)
+  const binWidth = 2 * iqr * Math.pow(sampleCount, -1/3);
+  
+  // Calculate number of bins for the full [0,1] range
+  const suggestedBins = Math.ceil(1 / binWidth);
+  
+  // Return max of minimum bins and suggested bins
+  return Math.max(minNumBins, suggestedBins);
+}
+
+// Modify updateHistogramBatch to constrain only out-of-bounds values
+function updateHistogramBatch(statistics) {
+  // Constrain only out-of-bounds statistics for histogram display
+  const constrainedStats = statistics.map(stat => constrainToCanvas(stat));
+  
+  // Add constrained statistics to bins
+  constrainedStats.forEach(stat => bins.push(stat));
+
+  // Calculate number of bins based on sample size
+  const numBins = calculateNumBins(bins.length);
+  
+  // Update color scale for new number of bins
+  const binColorScale = d3.scaleSequential()
+    .domain([0, 1])
+    .interpolator(t => d3.interpolateBlues(0.3 + t * 0.7));
+  
+  // Create uniform thresholds from 0 to 1
+  const thresholds = Array.from({length: numBins + 1}, (_, i) => i / numBins);
+  
+  // Calculate new histogram data with dynamic bins
+  const histogram = d3.histogram()
+    .domain([0, 1])  // Explicitly set domain to [0,1]
+    .thresholds(thresholds);
+    
+  const binData = histogram(bins);
 
   // Update y scale
   const maxBinCount = d3.max(binData, d => d.length);
   y.domain([0, maxBinCount]);
 
-  // Animate histogram bars
+  // Animate histogram bars with updated colors
   const bars = svg.g.selectAll(".bar")
     .data(binData);
 
@@ -442,16 +524,18 @@ function updateHistogramBatch(statistics) {
       .attr("width", d => x(d.x1) - x(d.x0))
       .attr("y", svg.height)
       .attr("height", 0)
-      .attr("fill", d => colorScale(d.x0))
+      .attr("fill", d => binColorScale((d.x0 + d.x1) / 2)) // Use midpoint for color
       .call(enter => enter.transition()
         .duration(ANIMATION_SETTINGS.histogramDuration)
         .attr("y", d => y(d.length))
         .attr("height", d => svg.height - y(d.length))),
     update => update.call(update => update.transition()
       .duration(ANIMATION_SETTINGS.histogramDuration)
+      .attr("x", d => x(d.x0))
+      .attr("width", d => x(d.x1) - x(d.x0))
       .attr("y", d => y(d.length))
       .attr("height", d => svg.height - y(d.length))
-      .attr("fill", d => colorScale(d.x0))),
+      .attr("fill", d => binColorScale((d.x0 + d.x1) / 2))),
     exit => exit.remove()
   );
 
@@ -459,40 +543,153 @@ function updateHistogramBatch(statistics) {
   yAxis.transition()
     .duration(ANIMATION_SETTINGS.histogramDuration)
     .call(d3.axisLeft(y));
+
+  // Update theoretical curve
+  updateTheoreticalCurve();
 }
+
+// Update calculateTheoreticalCurve to fit the histogram data
+function calculateTheoreticalCurve() {
+  const points = 200;
+  const data = [];
+  
+  if (bins.length >= 2) {
+    // Calculate mean and std from the actual sampling distribution
+    const binValues = bins.filter(x => !isNaN(x) && x !== null);
+    
+    if (binValues.length < 2) return [];
+    
+    // Calculate mean and std from the sampling distribution
+    const mean = d3.mean(binValues);
+    const std = Math.sqrt(d3.variance(binValues));
+    
+    if (isNaN(mean) || isNaN(std)) return [];
+    
+    // Use the actual std from the sampling distribution
+    // Only set minimum to prevent division by zero
+    const effectiveStd = std < 0.00001 ? 0.00001 : std;
+    
+    // Generate points using selected theoretical distribution
+    for (let i = 0; i < points; i++) {
+      const xVal = i / (points - 1);
+      const yVal = calculateTheoretical(xVal, mean, effectiveStd, selectedTheoretical);
+      
+      if (!isNaN(yVal) && isFinite(yVal)) {
+        data.push({x: xVal, y: yVal});
+      }
+    }
+    
+    if (data.length > 0) {
+      return data;
+    }
+  }
+  
+  return [];
+}
+
+function updateTheoreticalCurve() {
+  const theoreticalCheckbox = document.getElementById("theoretical");
+  const theoreticalSelect = document.getElementById("theoreticalDist");
+  
+  if (bins.length < 2) {
+    theoreticalCheckbox.disabled = true;
+    theoreticalSelect.disabled = true;
+    theoreticalCheckbox.checked = false;
+    showTheoretical = false;
+    if (theoreticalLine) {
+      theoreticalLine.attr("opacity", 0);
+    }
+    return;
+  }
+  
+  const curveData = calculateTheoreticalCurve();
+  
+  theoreticalCheckbox.disabled = curveData.length === 0;
+  theoreticalSelect.disabled = curveData.length === 0;
+  
+  if (curveData.length === 0) {
+    theoreticalCheckbox.checked = false;
+    showTheoretical = false;
+    if (theoreticalLine) {
+      theoreticalLine.attr("opacity", 0);
+    }
+    return;
+  } else {
+    theoreticalCheckbox.disabled = false;
+    theoreticalSelect.disabled = false;
+  }
+
+  if (!theoreticalLine) {
+    theoreticalLine = svg.g.append("path")
+      .attr("class", "theoretical-line")
+      .attr("opacity", 0);
+  }
+
+  theoreticalLine
+    .raise()
+    .transition()
+    .duration(ANIMATION_SETTINGS.histogramDuration)
+    .attr("d", d3.line()
+      .x(d => x(d.x))
+      .y(d => y(d.y))
+      .curve(d3.curveBasis)(curveData))
+    .attr("opacity", showTheoretical ? 0.8 : 0);
+}
+
+function toggleTheoretical(bool=null) {
+  if (bins.length < 2) {
+    return;
+  }
+  if (bool === null) {
+    showTheoretical = !showTheoretical;
+  } else {
+    showTheoretical = bool;
+  }
+  
+  // Update the checkbox input element
+  const theoreticalCheckbox = document.getElementById("theoretical");
+  theoreticalCheckbox.checked = showTheoretical;
+  
+  if (showTheoretical) {
+    selectedTheoretical = document.getElementById("theoreticalDist").value;
+    updateTheoreticalCurve();
+  }
+}
+
+// Add event listener for theoretical distribution change
+document.getElementById("theoreticalDist").addEventListener("change", function(e) {
+  selectedTheoretical = e.target.value;
+  if (showTheoretical) {
+    updateTheoreticalCurve();
+  }
+});
 
 // Helper function to calculate the statistic based on statType
 function calculateStatistic(samples) {
-  // Ensure that we're only working with numeric values
   const values = samples.map(sample => typeof sample === 'object' ? sample.value : sample);
 
   let statistic;
   switch (statType) {
     case 'mean':
-      // console.log(`Calculating mean for ${values.length} values`);
       statistic = d3.mean(values);
       break;
     case 'median':
-      // console.log(`Calculating median for ${values.length} values`);
       statistic = d3.median(values);
       break;
     case 'q1q3':
-      // console.log(`Calculating q1q3 for ${values.length} values`);
       const q1 = d3.quantile(values, 0.25);
       const q3 = d3.quantile(values, 0.75);
       statistic = (q1 + q3) / 2;
       break;
     case 'range':
-      // console.log(`Calculating range for ${values.length} values`);
       const min = d3.min(values);
       const max = d3.max(values);
       statistic = (min + max) / 2;
       break;
     default:
-      console.log("Stat type not selected?")
-      statistic = d3.mean(values); // Default to mean if no statType is selected
+      statistic = d3.mean(values);
   }
-  return statistic;
+  return statistic; // Return unconstrained statistic
 }
 
 // Reset visualization
@@ -503,19 +700,6 @@ function resetVisualization() {
   // Reset histogram bars to 0 height
   const bars = svg.g.selectAll(".bar").data([]);
 
-  // bars.enter().append("rect")
-  // .attr("class", "bar")
-  // .attr("x", d => x(d.x0))
-  // .attr("width", d => x(d.x1) - x(d.x0))
-  // .attr("y", svg.height)
-  // .attr("height", 0)
-  // .merge(bars)
-  // .transition()
-  // .duration(500)
-  // .attr("y", svg.height)
-  // .attr("height", 0);
-
-  // bars.exit().remove();
   bars.join(
     enter => {
       enter.append("rect")
@@ -541,6 +725,16 @@ function resetVisualization() {
       }).remove();
     }
   );
+
+  // Reset theoretical curve and checkbox
+  const theoreticalCheckbox = document.getElementById("theoretical");
+  theoreticalCheckbox.checked = false;
+  theoreticalCheckbox.disabled = true;
+  showTheoretical = false;
+  
+  if (theoreticalLine) {
+    theoreticalLine.attr("opacity", 0);
+  }
 }
 
 // Helper function to change the sample size input and trigger its change listener

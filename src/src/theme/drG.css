@@ -945,6 +945,20 @@ hr {
     padding-left: 0.2em;
     -webkit-font-smoothing: antialiased; }
 
+.reveal section .exclaim {
+  background-color: #cccccc;
+  font-style: italic; }
+  .reveal section .exclaim:after {
+    position: relative;
+    top: 0.15em;
+    display: inline-block;
+    content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="gray" d="M176 432c0 44.112-35.888 80-80 80s-80-35.888-80-80 35.888-80 80-80 80 35.888 80 80zM25.26 25.199l13.6 272C39.499 309.972 50.041 320 62.83 320h66.34c12.789 0 23.331-10.028 23.97-22.801l13.6-272C167.425 11.49 156.496 0 142.77 0H49.23C35.504 0 24.575 11.49 25.26 25.199z"/></svg>');
+    height: 0.9em;
+    width: 0.9em;
+    color: gray;
+    padding-left: 0.2em;
+    -webkit-font-smoothing: antialiased; }
+
 .reveal section .s-quote {
   font-style: italic; }
   .reveal section .s-quote:before {
@@ -1002,7 +1016,7 @@ i.arrowr::before {
   -webkit-font-smoothing: antialiased;
   font-size: 75%; }
 
-i.arrorl::before {
+i.arrowl::before {
   content: "←";
   font-family: "Noto Color Emoji", "Segoe UI Emoji", sans-serif !important;
   speak: none;
@@ -1678,11 +1692,11 @@ li.emoji-arrowr {
     font-style: normal;
     font-size: 80%; }
 
-li.emoji-arrorl {
+li.emoji-arrowl {
   list-style-type: none;
   position: relative;
   padding-left: 1.5em; }
-  li.emoji-arrorl::before {
+  li.emoji-arrowl::before {
     content: "←";
     position: absolute;
     left: 0;
