@@ -13,7 +13,7 @@
     <link href="./src/css/revealpack.css" rel="stylesheet"/>
     <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <!-- highlight.js theme -->
-    <link href="./src/theme/felipec.css" id="highlight-theme" rel="stylesheet"/>
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
     <!-- Custom CSS -->
     <!-- Custom Scripts -->
     <!-- Print PDF script -->
@@ -2221,62 +2221,6 @@ This is why we need to be careful with our models, and why we need to be careful
 </aside>
 
 <!-- </section> -->
-
-
-
-<!-- P-Values -->
-
-<!-- <section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>What is a p-value?</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
-
-<p>Scientists are obsessed with p-values, but...</p>
-
-<div style="grid-row:2/3;grid-column:1/2;justify-items:center;">
-
-<video data-autoplay src="lib/video/all.mp4" controls class="box-width"></video>
-
-</div>
-
-<div
-
-class="fragment rotation-325 huge bg-danger-light framed border-danger border-2x"
-
-style="font-family: 'Playfair Display', serif;grid-row:2/3;grid-column:1/2;width:fit-content;justify-self:center;align-self:center;">
-
-No one has a clue!
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>Here's a quote from the interviewer:</p>
-
-<p>To be clear, everyone I spoke with at METRICS could tell me the technical definition of a p-value - the probability of getting results at least as extreme as the ones you observed, given that the null hypothesis is correct - but almost no one could translate that into something easy to understand.</p>
-
-<p>Try to distill the p-value down to an intuitive concept and it loses all its nuances and complexity, said science journalist Regina Nuzzo, a statistics professor at Gallaudet University. "Then people get it wrong, and this is why statisticians are upset and scientists are confused." </p>
-
-<p>You can get it right, or you can make it intuitive, but it's all but impossible to do both.</p>
-
-</aside>
-
-</section> -->
         </section>
         <section data-background-image="lib/img/micesci_4.png" id="section-title-4">
           <div class="grid-wrapper">
@@ -3976,13 +3920,20 @@ skipHtmlTags: [
 },
 chtml: {
 scale: 0.8,
-linebreaks: {
-automatic: true,
-},
+minScale: 0.4,
 },
 Safe: {
 sizeMin: 0.4,
 sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
 },
 },
 notes: {

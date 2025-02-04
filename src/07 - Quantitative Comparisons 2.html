@@ -1,0 +1,2743 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Quantitative Comparisons 2
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/mastering-exp-methods.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Quantitative Comparisons 2
+              </h2>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 07
+              </p>
+            </div>
+          </div>
+        </section>
+        <section data-background-image="lib/img/bg-mice-gauss.webp" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Recap
+                </h2>
+                <h3>
+                  One- And Two-Box Models
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparing Two Groups</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto;gap:5px;">
+
+<p class="small">
+
+Last time, we compared two groups by simulating a null hypothesis that either the two groups came from the <span class="danger">same population</span>, or that they came from <span class="success">different populations</span>.
+
+</p>
+
+<div class="fragment">
+
+<p class="bg-warning-alpha-02">
+
+If two samples are from the same population, what is the
+
+<span class="danger">chance</span> of finding
+
+<span class="danger">at least this difference</span>?
+
+</p>
+
+<p class="bg-info-alpha-02">
+
+If two samples are from different populations, what is the
+
+<span class="danger">chance</span> of finding
+
+<span class="danger">at least this difference in their centers</span>?
+
+</p>
+
+<p class="right-justify smaller fragment">
+
+<i class="arrowr pop"></i> The chance here is quantified by a <span class="pop">p-value</span>
+
+</p>
+
+</div>
+
+<p class="muted u big fragment">
+
+Null Hypothesis
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment small no-hang">
+
+<h4>Same Population</h4>
+
+<p class="smaller">
+
+The Null Hypothesis carries the <span class="danger">assumption of equality</span>, i.e., <br />
+
+<span class="danger"> two groups come from the same underlying population
+
+<span class="em strong">$\rho$</em></span></span>.
+
+</p>
+
+<p class="fragment">
+
+\(H_0\): hypothesis | assumptions, $H_0 : \tilde{x}_A = \tilde{x}_B \, | \, \rho_A(x) = \rho_B(x)$
+
+</p>
+
+<p class="smallest right-justify fragment">
+
+<i class="arrowr muted"></i> implied for all the true statistics:
+
+($\bar{x}_A = \bar{x}_B$, $\mathrm{m}_A=\mathrm{m}_B$, etc..)
+
+</p>
+
+</div>
+
+<div class="fragment small no-hang">
+
+<h4>Different Population</h4>
+
+<p>
+
+The Null Hypothesis carries no assumptions of the underlying populations, allowing for two independent <span class="danger">underlying populations</span>.
+
+</p>
+
+<p class="fragment">
+
+\(H_0\): hypothesis | assumptions, $H_0 : \tilde{x}_A = \tilde{x}_B \, | \, \rho_A(x) \neq \rho_B(x)$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Recall that we stated xbar_1 - xbar_2 = delta0, where delta0 was the difference in the parameters (mu).</p>
+
+<p></p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>One Underlying Population</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:85vh;max-height:85vh;">
+
+<vizzy data-src="lib/interactives/t-distribution-simulation.html" style="height:100%;">
+
+[
+
+{
+
+activate: () => window.gatherGroups(),
+
+reverse: () => {
+
+window.splitGroups();
+
+},
+
+index: 0,
+
+},
+
+{
+
+activate: () => window.bootstrap(1),
+
+index: 1,
+
+},
+
+{
+
+activate: () => window.bootstrap(1999),
+
+index: 2,
+
+}
+
+]
+
+</vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Unequal Variance -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparing Two Groups</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="bordered border-black smaller">
+
+When we compare the <span class="danger">centers</span> of two samples, knowing
+
+full well that they <span class="info">come from different populations</span>
+
+</p>
+
+<p class="warning em fragment" data-fragment-index="1">
+
+By "different populations", we mean the variance, or other
+
+distributional parameter is unequal.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<p class="fragment" data-fragment-index="2">
+
+<i class="arrowr"></i> If two groups have <span class="em">unequal variances</span>,
+
+it would not be reasonable to test if they came from the same
+
+<span class="danger">underlying distribution</span>.
+
+</p>
+
+<p class="fragment warning" data-fragment-index="3">Why?</p>
+
+<p class="fragment" data-fragment-index="4">They exists on two different scales!</p>
+
+<p class="fragment" data-fragment-index="5">The formulation for this Null Hypothesis is:</p>
+
+<p class="fragment" data-fragment-index="6">$$\mathrm{H}_0: \bar{x}_A = \bar{x}_B\, |\, p_A(x) \neq p_B(x)$$</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/ex-populations-unequal-variance-shape.svg" style="margin:auto;width:85%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- Unequal Variance 2 -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Effects Of Catalyst On Product Yield</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Two catalysts are being analyzed to determine
+
+how they affect the mean yield of a chemical
+
+process. Specifically, catalyst 1 is currently used;
+
+but catalyst 2 is acceptable. Because catalyst 2 is
+
+cheaper, it should be adopted, <span class="em pop">if it does not
+
+change the process yield.</span>
+
+</p>
+
+<div class="full-width">
+
+<table style="border-collapse: collapse; border: none;" class="fragment" data-fragment-index="1">
+
+<thead>
+
+<tr class="small strong">
+
+<th style="border-bottom: double;">Catalyst</th>
+
+<th style="border-bottom: double;">Mean (mol)</th>
+
+<th style="border-bottom: double;">95% CI (mol)</th>
+
+<th style="border-bottom: double;">Count</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Catalyst 1</td>
+
+<td style="border-bottom: 1px solid black;">89.91</td>
+
+<td style="border-bottom: 1px solid black;">(89.12, 90.81)</td>
+
+<td style="border-bottom: 1px solid black;">8</td>
+
+</tr>
+
+<tr>
+
+<td>Catalyst 2</td>
+
+<td>92.86</td>
+
+<td>(90.75, 95.87)</td>
+
+<td>8</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="fragment" data-fragment-index="2">
+
+<i class="arrowr" style="font-size:150%"></i> <span class="success">Visualize the data!</span>
+
+<br />Clearly, we have a difference in spread.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/catalyst_yield_data.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+</div>
+
+<div>
+
+<p class="question bg-info-white fragment" data-fragment-index="3">Are the mean product yields different</p>
+
+<p class="fragment em" data-fragment-index="4">Use the two-box approach (Welch's t-like test)!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- Null Sampling Distribution: Two Box -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>No Common Population</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:85vh;max-height:85vh;">
+
+<vizzy data-src="lib/interactives/t-simulation-welch.html" style="height:100%;">
+
+[
+
+{
+
+activate: () => {
+
+window.set_A(8, 89.91, 1.712);
+
+window.set_B(8, 92.86, 14.965, true);
+
+setTimeout(() => {
+
+window.toggleEffects();
+
+}, 1000);
+
+},
+
+reverse: () => {
+
+window.resetAll();
+
+window.toggleEffects(false);
+
+},
+
+index: 1,
+
+},
+
+{
+
+activate: () => window.bootstrap(1),
+
+reverse: () => window.resetAll(),
+
+index: 2,
+
+},
+
+{
+
+activate: () => window.bootstrap(1999),
+
+reverse: () => window.resetAll(),
+
+index: 3,
+
+}
+
+]
+
+</vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Catalyst Yield results -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Effects Of Catalyst On Product Yield</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Using the two-box approach, we can simulate the null hypothesis that the two centers are the same.
+
+We calculate the p-value by observing the values at least as extreme as the observed difference.
+
+</p>
+
+<div class="full-width">
+
+<table style="border-collapse: collapse; border: none;" class="fragment" data-fragment-index="1">
+
+<thead>
+
+<tr class="small strong">
+
+<th style="border-bottom: double;">Method</th>
+
+<th style="border-bottom: double;">Statistic</th>
+
+<th style="border-bottom: double;">Calculation</th>
+
+<th style="border-bottom: double;">p-value</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Bootstrap</td>
+
+<td style="border-bottom: 1px solid black;">$\Delta \bar{x}$</td>
+
+<td style="border-bottom: 1px solid black;">2.946</td>
+
+<td style="border-bottom: 1px solid black;">0.0259</td>
+
+</tr>
+
+<tr class="fragment" data-fragment-index="5">
+
+<td>Formula</td>
+
+<td><span class="em">t</span>-Welch</td>
+
+<td>2.0408</td>
+
+<td>0.0732</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="fragment" data-fragment-index="2">
+
+<i class="arrowr" style="font-size:150%"></i> We can visualize our null hypothesis and an $\alpha$ threshold of 0.05.
+
+</p>
+
+</div>
+
+<div>
+
+<svg id="catalyst_yield_null_effects" style="width:100%;" viewBox="0 0 648 432">
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_2"></use>
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_4" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_5" class="fragment" data-fragment-index="4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+<div>
+
+<p class="question bg-info-white fragment" data-fragment-index="3">Are the mean product yields different</p>
+
+<p class="fragment em" data-fragment-index="4">In our simulation they appear to be different.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In the context of the experiment, what does this mean?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Interpreting the p-value -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpreting the p-value</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:10px;">
+
+<!-- Simplified explanation of p-value meaning -->
+
+<p class="fragment fade-up" data-fragment-index="1">
+
+Assuming equal mean product yields in the long term,
+
+the observed difference$\phantom{}^1$ of <span class="danger">2.946 mol</span>
+
+would occur roughly <span class="danger">2.59% of the time</span> with random assignments.
+
+</p>
+
+<p class="small fragment fade-up" data-fragment-index="2">
+
+At an $\alpha=0.05$,<span class="danger">significant evidence</span> exists to suggest a long-term difference in product yields between the two catalysts.
+
+</p>
+
+<!-- Question about the null hypothesis -->
+
+<div class="sided border-pop fragment" data-fragment-index="3" style="padding: 10px;">
+
+<p class="u em fragment fade-right small" data-fragment-index="3">
+
+Recall, the requirement was that the catalyst should not change the product yield. Is this proof that the catalyst affects the product yield?
+
+</p>
+
+<p class="fragment fade-right" data-fragment-index="4">
+
+Without a reasonable explanation for why $\alpha$ should be 0.05, we might have started with a different $\alpha$ value, say 0.01.
+
+</p>
+
+<p class="fragment fade-right" data-fragment-index="5">
+
+A small but real long-term difference may still exist.
+
+</p>
+
+<p class="fragment fade-right" data-fragment-index="6">
+
+Just interpreting the p-value is not enough! We need to understand the uncertainty in our observed difference.
+
+</p>
+
+</div>
+
+<p class="fragment smallest em info right-justify" data-fragment-index="1">
+
+$\phantom{}^1$ A difference at least as extreme as our observed 2.946 mol.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The observed difference "At Least As Extreme" as ours.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg-mice-examine-dark-06.webp" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Effect Size
+                </h2>
+                <h3>
+                  For Two
+                </h3>
+                <h3>
+                  Samples
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What Is Effect Size -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What Is Effect Size</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-self:center;justify-items:center;">
+
+<img src="lib/img/effect_size_nakagawa_cuthill.png" alt="Effect Size Nakagawa Cuthill" style="width:50%;">
+
+</div>
+
+<div class="quoted smallest">
+
+<p>
+
+Null hypothesis significance testing (NHST) is the dominant statistical approach in biology, although it has many,
+
+frequently unappreciated, problems. Most importantly, NHST does not provide us with two crucial pieces of
+
+information: (1) the magnitude of an effect of interest, and (2) the precision of the estimate of the magnitude of
+
+that effect. ... Combined use of an effect size and its CIs enables one to assess the relationships within data more effectively
+
+than the use of p values, regardless of statistical significance.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Effect Size -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Effect Size</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify smallest">
+
+<p>
+
+<span class="info">Effect Size</span> is a measure of the magnitude of the <span class="success">Statistic of Interest</span> between two groups.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+The new idea here is to put a confidence interval on the $\Delta$. Similar to the confidence interval on the statistic of interest, we can put a confidence interval on the effect size, e.g., BC<span class="em">a</span>.
+
+</p>
+
+<div class="info">
+
+<ul>
+
+<li class="fragment" data-fragment-index="2">There is no "Null" hypothesis. You can think of it like the two-box scenario, without recentering.</li>
+
+<li class="fragment" data-fragment-index="3">Resample new <span class="s-quote">statistics</span> from each group separately.</li>
+
+<li class="fragment" data-fragment-index="4">Calculate the <span class="success">Statistic of Interest</span> (difference, raito, etc.) from the resampled statistics.</li>
+
+<li class="fragment" data-fragment-index="5">Repeat the process <span class="info">10,000</span> times.</li>
+
+<li class="fragment" data-fragment-index="6">Calculate the <span class="success">Confidence Interval</span> on the statistic of interest.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<img src="lib/img/box_model_diff.svg" alt="Box Model for Difference" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We will refer to "Statistic of Interest" as "Effect Size" from here on.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution: Two Box -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Bootstrap Effect Size ($\hat{\Delta}$)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:85vh;max-height:85vh;">
+
+<vizzy data-src="lib/interactives/t-simulation-welch.html" style="height:100%;">
+
+[
+
+{
+
+activate: () => {
+
+window.set_A(8, 89.91, 1.712);
+
+window.set_B(8, 92.86, 14.965, true);
+
+window.resetAll();
+
+},
+
+reverse: () => window.resetAll(),
+
+index: 1,
+
+},
+
+{
+
+activate: () => window.bootstrap(1),
+
+reverse: () => window.resetAll(),
+
+index: 2,
+
+},
+
+{
+
+activate: () => window.bootstrap(9999),
+
+reverse: () => window.resetAll(),
+
+index: 3,
+
+}
+
+]
+
+</vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Catalyst Yield results -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Effects Of Catalyst On Product Yield</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Reviewing the results from our catalyst yield experiment, we can then evaluate the effect size to make a better informed decision about whether to switch to the new catalyst.
+
+</p>
+
+<div class="full-width">
+
+<table style="border-collapse: collapse; border: none;">
+
+<thead>
+
+<tr class="small strong">
+
+<th style="border-bottom: double;">Method</th>
+
+<th style="border-bottom: double;">Statistic</th>
+
+<th style="border-bottom: double;">Calculation</th>
+
+<th style="border-bottom: double;">p-value</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Bootstrap</td>
+
+<td style="border-bottom: 1px solid black;">$\Delta \bar{x}$</td>
+
+<td style="border-bottom: 1px solid black;">2.946</td>
+
+<td style="border-bottom: 1px solid black;">0.0259</td>
+
+</tr>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Formula</td>
+
+<td style="border-bottom: 1px solid black;"><span class="em">t</span>-Welch</td>
+
+<td style="border-bottom: 1px solid black;">2.0408</td>
+
+<td style="border-bottom: 1px solid black;">0.0732</td>
+
+</tr>
+
+<tr class="fragment" data-fragment-index="1">
+
+<td style="border-bottom: 1px solid black;" class="small">Effect Size</td>
+
+<td style="border-bottom: 1px solid black;">$\Delta \bar{x}$</td>
+
+<td style="border-bottom: 1px solid black;" class="small">$(0.643,\, 5.964)$</td>
+
+<td style="border-bottom: 1px solid black;">-</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="fragment smaller" data-fragment-index="2">
+
+<i class="arrowr" style="font-size:150%"></i> We can visualize our effect size distribution, centered on the observed effect size.
+
+</p>
+
+</div>
+
+<div>
+
+<svg id="catalyst_yield_null_effects" style="width:100%;" viewBox="0 0 648 432">
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_1"></use>
+
+<!-- <use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_3" class="fragment" data-fragment-index="2"></use> -->
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_4" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/catalyst_yield_null_effects.svg#axes_5" class="fragment" data-fragment-index="3"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+<div>
+
+<p class="question bg-info-white fragment" data-fragment-index="3">Assessing our confidence interval</p>
+
+<p class="fragment em" data-fragment-index="4">Is 0.646 <span class="info">impactfully</span> different from 0?</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Since our confidence interval does not include 0, we might consider there to be a possible effect. However, the lower 2.5% is not that difference from 0, should we be be certain? Probably not.</p>
+
+<p>What is the magnitude and direction of the effect? We could say that the effect is better yield, under our testing conditions, and cheaper, what would you suggest to your PI?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Bootstrap Algorithm -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Bootstrap Algorithm</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="smaller">
+
+<pre class="language-python"><code data-trim>import numpy as np
+
+
+
+# Initialize
+
+nBootstraps = 10000
+
+descriptor = np.median
+
+bootstrapDifferences = np.zeros(nBootstraps)
+
+
+
+# Get Lengths
+
+nA = len(boxA)
+
+nB = len(boxB)
+
+
+
+# Bootstrap Loop
+
+for i in range(nBootstraps):
+
+&nbsp;&nbsp;&nbsp;&nbsp;resampledBoxA = np.random.choice(datasetA, size=nA, replace=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;resampledBoxB = np.random.choice(datasetB, size=nB, replace=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;bootstrapDifferences[i] = descriptor(resampledBoxA) - descriptor(resampledBoxB)
+
+
+
+# Use percentile method to determine Critical Interval alpha=0.05
+
+confidenceLimits = (0.025, 0.975)
+
+CI95 = np.percentile(bootstrapDifferences, [cl * 100 for cl in confidenceLimits])</code></pre>
+
+<p class="fragment" data-fragment-index="1">
+
+Note: The <span class="s-quote">percentile method</span> is shown, but we could use the BCa, or Pivotal method just as well.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/box_model_diff.svg" alt="Box Model for Difference" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Cohen's d -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Cohen's $\delta$</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display:grid; grid-template-columns:repeat(2, 1fr); grid-auto-rows:auto; gap:1vmin;">
+
+<!-- Cohen's d Definition -->
+
+<div>
+
+<h3>Cohen's d for Gaussian Distributed Data</h3>
+
+<p>
+
+In addition to quoting the mean difference and confidence interval, Cohen's \( d \) is a commonly used effect size for mean differences:
+
+</p>
+
+<p>
+
+\( d = \frac{\mu_A - \mu_B}{\sigma} \)
+
+</p>
+
+<p>
+
+This is closely related to Student's \( t \)-statistic but without dependence on sample size \( n \):
+
+</p>
+
+<p>
+
+\( t = \sqrt{n} \cdot d \)
+
+</p>
+
+<p>
+
+By dividing by the spread \( \sigma \), we obtain a standardized measure. The change in mean is measured in terms of how many standard deviations \( \sigma \).
+
+</p>
+
+</div>
+
+
+
+<!-- Cohen's d Interpretation -->
+
+<div>
+
+<h3>Interpretation</h3>
+
+<p>
+
+Since Cohen's \( d \) is standardized, Cohen suggested rough guidelines for interpretation:
+
+</p>
+
+<ul>
+
+<li>Small effect: \( d < 0.3 \)</li>
+
+<li>Medium effect: \( d \approx 0.5 \)</li>
+
+<li>Large effect: \( d > 0.8 \)</li>
+
+</ul>
+
+<p>
+
+This measure is particularly relevant in Gaussian statistics because it normalizes the mean difference by the population variability.
+
+</p>
+
+</div>
+
+
+
+<!-- Cohen's d for Unequal Variance -->
+
+<div>
+
+<h3>Cohen's d for Unequal Variance</h3>
+
+<p>
+
+Just as Welch extended Student's \( t \)-test to account for groups with different variances, a similar approach is used here.
+
+</p>
+
+<p>
+
+The standard deviation used is a "pooled" standard deviation:
+
+</p>
+
+<p>
+
+\( \sigma_p = \sqrt{\frac{(n_A - 1) \sigma_A^2 + (n_B - 1) \sigma_B^2}{n_A + n_B - 2}} \)
+
+</p>
+
+<p>
+
+This accounts for differing variances in the two groups while maintaining a standardized effect size calculation.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Cohen's d was introduced by Jacob Cohen in 1969 as a way to quantify the size of an effect in a standardized manner. It has since become a widely used measure in the field of psychology and other social sciences for interpreting the practical significance of research findings. Cohen's work emphasized the importance of not just determining statistical significance, but also understanding the magnitude of the observed effects.</p>
+
+</aside>
+
+
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/statistics_comp_3.png" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Dependent Samples
+                </h2>
+                <h3>
+                  Categorical Correlation
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>
+
+Recall, up to now, we've discussed how measurements in 2 samples are response variables
+
+for a categorical explanatory variable.
+
+</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Paired Samples Definition -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Paired Samples</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:5px;">
+
+<p class="quoted">
+
+Paired samples (or <span class="danger">dependent samples</span>) occur when
+
+2 or more data points are collected from the same observational unit.
+
+</p>
+
+<div>
+
+<p>
+
+<i class="star" style="font-size:70%;"></i>
+
+<span class="u em">Relationship Conditions For Paired Data</span>
+
+<i class="star" style="font-size:70%;"></i>
+
+</p>
+
+<ul style="font-size:80%;">
+
+<li>There is one pair of response values for each observational unit</li>
+
+<li>There is a built-in comparison, each data point in one sample is
+
+<span class="danger">linked</span> to another data point in the other
+
+samples. E.g., Measuring machine performance every month.</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<p>
+
+<i class="star" style="font-size:70%;"></i>
+
+<span class="u em">Origin Of The Pairing</span>
+
+<i class="star" style="font-size:70%;"></i>
+
+</p>
+
+<ul style="font-size:80%;">
+
+<li>Matching similar individuals to create groups of two:
+
+<span class="pop">paired design using matching</span>.
+
+</li>
+
+<li>
+
+Measuring the same individual (observational unit) in each condition:
+
+<span class="pop">paired design using repeated measures</span>.
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="fragment grid-generic framed" style="grid-template-columns:0.8fr 9.2fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<i class="fas fa-lightbulb fa-2x"></i>
+
+</div>
+
+<div>
+
+<span>
+
+When a paired design is possible, you typically get
+
+<span class="orange">more informative results</span> because
+
+units within a pair tend to be similar to each other, so
+
+differences within such each pair on the response variable tend to
+
+be <span class="orange">due mainly to the explanatory variable</span>.
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Kinds of paired samples -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Paired Samples</h2>
+
+<h3>Types and Conditions</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:5px;justify-items:start;">
+
+<p class="fragment" style="text-align:left;"><i class="fa-solid fa-flask-vial info"></i>
+
+<span class="danger">Pre-test/post-test</span> samples in which a factor is measured before and after an intervention.
+
+</p>
+
+<p class="fragment" style="text-align:left;"><i class="fa-solid fa-flask-vial info"></i>
+
+<span class="danger">Cross-over trials</span> in which individuals are randomized to two treatments and then the same individuals are crossed-over to the alternative treatment.
+
+</p>
+
+<p class="fragment" style="text-align:left;"><i class="fa-solid fa-flask-vial info"></i>
+
+<span class="danger">Matched samples</span>, in which subjects are matched on inherent characteristics (age, mfr. lot#, etc.).
+
+</p>
+
+<p class="fragment" style="text-align:left;"><i class="fa-solid fa-flask-vial info"></i>
+
+<span class="danger">Duplicate measurements</span> on the same subject.
+
+</p>
+
+<p class="fragment" style="text-align:left;"><i class="fa-solid fa-flask-vial info"></i>
+
+Any circumstance in which each data point in one sample is <span class="danger">uniquely matched to a data point in the second sample</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- Independent vs Paired -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Independent vs. Paired Design</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;row-gap:1vmin;width:80%;">
+
+<p class="smaller em">
+
+Can you study with music blaring? Does the presence of lyrics hurt students' ability to focus on their work?
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:auto 1fr;grid-template-rows:1fr 1fr;column-gap:5vmin;">
+
+<div class="success u" style="grid-column:1/2;grid-row:1/2;text-align:right;justify-items:start;">
+
+<span>Response variable:</span>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:1/2;text-align:left;justify-items:start;">
+
+<span>Memorization game score.</span>
+
+</div>
+
+<div class="success u" style="grid-column:1/2;grid-row:2/3;text-align:right;">
+
+<span>Explanatory variable:</span>
+
+</div>
+
+<div style="grid-column:2/3;grid-row:2/3;text-align:left;justify-items:start;">
+
+<span>Music with or without lyrics.</span>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:2fr 8fr;grid-auto-rows:auto;column-gap:5vmin;align-items:center;">
+
+<p class="framed border-warning bg-warning-light">
+
+Independent study design
+
+</p>
+
+<div class="left framed border-dotted border-2x border-warning" style="font-size:80%;">
+
+<p>Randomly assign students to two separate groups:</p>
+
+<ul>
+
+<li>One group that will listen music with lyrics</li>
+
+<li>One group that will listen music without lyrics</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:2fr 8fr;grid-template-rows:1fr;column-gap:5vmin;align-items:center;">
+
+<p class="framed border-info bg-info-light small center">
+
+Paired study design
+
+</p>
+
+<div style="display:grid;align-items:center;font-size:80%;">
+
+<p class="framed border-dotted border-2x border-info">
+
+Paired design using <span class="info u-info">repeated measures</span>.
+
+<br>
+
+Each student will play the memorization game twice:
+
+<br>
+
+- once listening to music with lyrics
+
+<br>
+
+- once listening to music without lyrics
+
+</p>
+
+<p class="smallest framed border-dotted border-2x border-info">
+
+Paired design using <span class="info u-info">matching</span>.
+
+<br>
+
+Another way to create pairs could use a pretest to rank students according to how many words they could memorize and create pairs of students with similar abilities.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<style>
+
+#bearing-table table {
+
+font-size: 80%;
+
+}
+
+
+
+#bearing-table th {
+
+background-color: lightgray;
+
+}
+
+
+
+#bearing-table table,
+
+#bearing-table th,
+
+#bearing-table td {
+
+padding: 2px;
+
+border: 1px solid black;
+
+border-collapse: collapse;
+
+text-align: center;
+
+}
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Paired Samples</h2>
+
+<h3>Lubricant Selection</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<!-- left -->
+
+<p style="text-align:justify;text-justify:inter-word;">
+
+Imagine a company, MechDrive Inc., that specializes in manufacturing ball
+
+bearings. The company has recently developed a new lubricant formula that
+
+they believe reduces the friction in the bearings, leading to better
+
+efficiency. To test the effectiveness of this new lubricant, they conduct
+
+an experiment on <span class="pop">12 randomly chosen bearings</span>.
+
+Each bearing is tested under identical conditions to measure its rotational
+
+friction both <span class="fragment highlight-orange" data-fragment-index="1">before</span> and
+
+<span class="fragment highlight-info" data-fragment-index="2">after</span> the application of the new lubricant.
+
+</p>
+
+<p class="framed bg-success-light fragment">
+
+We wish to determine whether there is any difference (on average) between
+
+the two formulas. <span class="danger">Use $\alpha=0.05$.</span>
+
+</p>
+
+</div>
+
+<div style="font-size:65%">
+
+<!-- right -->
+
+<table id="bearing-table">
+
+<thead>
+
+<tr>
+
+<th>Bearing ID</th>
+
+<th>Friction Before (N)</th>
+
+<th>Friction After (N)</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>1</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.30</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.13</td>
+
+</tr>
+
+<tr>
+
+<td>2</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.64</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.33</td>
+
+</tr>
+
+<tr>
+
+<td>3</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.60</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.68</td>
+
+</tr>
+
+<tr>
+
+<td>4</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">6.22</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.50</td>
+
+</tr>
+
+<tr>
+
+<td>5</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.14</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.32</td>
+
+</tr>
+
+<tr>
+
+<td>6</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.24</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.17</td>
+
+</tr>
+
+<tr>
+
+<td>7</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.71</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.28</td>
+
+</tr>
+
+<tr>
+
+<td>8</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.78</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.75</td>
+
+</tr>
+
+<tr>
+
+<td>9</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">6.07</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.96</td>
+
+</tr>
+
+<tr>
+
+<td>10</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.57</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.23</td>
+
+</tr>
+
+<tr>
+
+<td>11</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.76</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.55</td>
+
+</tr>
+
+<tr>
+
+<td>12</td>
+
+<td class="fragment highlight-bg-orange-light" data-fragment-index="1">5.99</td>
+
+<td class="fragment highlight-bg-info-light" data-fragment-index="2">5.69</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- Lubricant Selection -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Lubricant Selection</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;column-gap:5vmin;row-gap:2vmin;">
+
+<div>
+
+<!-- left -->
+
+<p style="text-align:justify;text-justify:inter-word;">
+
+Twelve bearings were tested under identical conditions, with the old formula
+
+and the new formula. The maximum rotational friction was measured for each
+
+condition.
+
+</p>
+
+<p style="text-align:justify;text-justify:inter-word;">The order of the lubricant application (old or new) was randomized.</p>
+
+<p style="text-align:justify;text-justify:inter-word;" class="sided border-info">If the new formula has no impact on friction, then we expect $\Delta_0 = 0$.</p>
+
+<p class="sided border-orange" style="font-size:150%;text-align:left;">
+
+$H_0: \mu_{\mathrm{new}} - \mu_{\mathrm{old}} = \Delta_0$
+
+</p>
+
+<p class="sided border-pop" style="font-size:150%;text-align:left;">
+
+$H_a: \mu_{\mathrm{new}} - \mu_{\mathrm{old}} < \Delta_0 |\\ H_a: \mu_{\mathrm{new}} - \mu_{\mathrm{old}} \neq \Delta_0$ </p> </div> <div>
+
+<!-- right -->
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/bearing-friction.svg#axes_1"></use>
+
+<use xlink:href="lib/img/bearing-friction.svg#axes_2"></use>
+
+</svg>
+
+<table id="bearing-table" class="full-width">
+
+<tbody>
+
+<tr>
+
+<td></td>
+
+<td class="border-right">Old</td>
+
+<td>New</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Mean</td>
+
+<td class="border-right">5.67</td>
+
+<td>5.47</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Difference</td>
+
+<td colspan=2 class="danger">-0.20</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Independent analysis -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Lubricant Selection</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;column-gap:5vmin;row-gap:2vmin;">
+
+<div style="display:grid;justify-items:start;grid-auto-rows:auto;row-gap:1vmin;text-align:left;align-items:center;">
+
+<!-- left -->
+
+<p>
+
+A Two-Box Bootstrap approach yields:
+
+</p>
+
+<p class="sided border-danger">
+
+$p=0.1119$
+
+</p>
+
+<p class="fragment sided border-danger no-margin-top" data-fragment-index="1">
+
+Using this naive method, <span class="danger">we do not find any
+
+association</span> between formulation and friction reduction.
+
+</p>
+
+<p class="fragment sided border-orage no-margin-top" data-fragment-index="2">
+
+<span class="em">What went wrong in our analysis?</span>
+
+</p>
+
+<p class="fragment border-pop framed down-2" data-fragment-index="3">
+
+<i class="fa fa-arrow-circle-right pop"></i>
+
+We failed to take into account the
+
+<span class="pop">paired structure</span> of the data.
+
+</p>
+
+<p class="framed border-success fragment" data-fragment-index="5">
+
+Notice most machines had a decrease in Friction with the <span class="info">new formula</span>?
+
+</p>
+
+</div>
+
+<div>
+
+<!-- right -->
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/bearing-friction.svg#axes_1"></use>
+
+<use xlink:href="lib/img/bearing-friction.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index="4" xlink:href="lib/img/bearing-friction.svg#axes_3"></use>
+
+</svg>
+
+<table id="bearing-table" class="full-width">
+
+<tbody>
+
+<tr>
+
+<td></td>
+
+<td class="border-right">Old</td>
+
+<td>New</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Mean</td>
+
+<td class="border-right">5.67</td>
+
+<td>5.47</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Difference</td>
+
+<td colspan=2 class="danger">-0.20</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<!-- Paired t-test -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Paired-Sample Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;row-gap:2vmin;">
+
+<p style="text-align:justify;text-justify:inter-word;">
+
+The key to analyzing paired data is to work with the <span class="danger">difference within each pair of data values</span> rather than between the two original samples. <br>
+
+<i class="fa fa-arrow-circle-right pop"></i>
+
+This helps us to <span class="pop">eliminate the variability across different units</span>
+
+and instead focus on what we really care about: <span class="success">the difference
+
+between the maximum frictional forces across formulas</span>.
+
+</p>
+
+<div>
+
+<table id="bearing-table full-width" class="fragment" data-fragment-index=1 style="font-size:80%;">
+
+<thead>
+
+<tr>
+
+<td class="border-right">Bearing</td>
+
+<td>1</td>
+
+<td>2</td>
+
+<td>3</td>
+
+<td>4</td>
+
+<td>5</td>
+
+<td>6</td>
+
+<td>7</td>
+
+<td>8</td>
+
+<td>9</td>
+
+<td>10</td>
+
+<td>11</td>
+
+<td class="border-right">12</td>
+
+<td class="info border-black">$\bar{x}$</td>
+
+<td class="pop border-black">$s$</td>
+
+</tr>
+
+</thead>
+
+</tbody>
+
+<tr>
+
+<td class="border-right">Old Formula</td>
+
+<td>5.30</td>
+
+<td>5.64</td>
+
+<td>5.60</td>
+
+<td>6.22</td>
+
+<td>5.14</td>
+
+<td>5.24</td>
+
+<td>5.71</td>
+
+<td>5.78</td>
+
+<td>6.07</td>
+
+<td>5.57</td>
+
+<td>5.76</td>
+
+<td class="border-right">5.99</td>
+
+<td class="info border-black">5.668</td>
+
+<td class="pop border-black">0.317</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right small">New Formula</td>
+
+<td>5.13</td>
+
+<td>5.33</td>
+
+<td>5.68</td>
+
+<td>5.50</td>
+
+<td>5.32</td>
+
+<td>5.17</td>
+
+<td>5.28</td>
+
+<td>5.75</td>
+
+<td>5.96</td>
+
+<td>5.23</td>
+
+<td>5.55</td>
+
+<td class="border-right">5.69</td>
+
+<td class="info border-black">5.466</td>
+
+<td class="pop border-black">0.252</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-info-white" data-fragment-index="2">
+
+<td class="border-right small">Difference</td>
+
+<td>-0.17</td>
+
+<td>-0.31</td>
+
+<td>0.08</td>
+
+<td>-0.72</td>
+
+<td>0.18</td>
+
+<td>-0.07</td>
+
+<td>-0.43</td>
+
+<td>-0.03</td>
+
+<td>-0.11</td>
+
+<td>-0.34</td>
+
+<td>-0.21</td>
+
+<td class="border-right">-0.30</td>
+
+<td class="white border-black">-0.202</td>
+
+<td class="white border-black">0.231</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+
+</div>
+
+<p class="fragment"  data-fragment-index=3>
+
+<span class="u em">Note:</span> the mean of the sample of differences is equal
+
+to the difference of the sample means:
+
+$\bar{x}_\textrm{Difference} = \bar{x}_\textrm{new}-\bar{x}_\textrm{old}$
+
+</p>
+
+<p class="fragment small info"  data-fragment-index=4>
+
+We bootstrap the <span class="success">sign</span> of the differences!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Paired t-test -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Lubricant Selection</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;column-gap:5vmin;row-gap:2vmin;">
+
+<div style="display:grid;justify-items:start;grid-auto-rows:1fr;row-gap:1vmin;text-align:left;">
+
+<!-- left -->
+
+<div class="sided border-info bg-info-alpha-05" style="text-align:left;">
+
+<p>Null Hypothesis: The mean difference, $\mu_D$, is $0\therefore$ $$H_0:\mu_D=0.$$</p>
+
+<p class="fragment">Alternative Hypothesis: $$H_a: \mu_D\neq0.$$<span class="fragment danger">Two-tailed test!</span></p>
+
+<p class="fragment">Calculate the effect size: $-0.202\, (-0.337,\, -0.075)$</p>
+
+<p class="fragment">Randomly assign signs to the differences, and compute the p-value: $p=0.0123$</p>
+
+</div>
+
+</div>
+
+<div>
+
+<!-- right -->
+
+<img src="lib/img/bearing_effect_size_means_histogram.svg" alt="">
+
+<img src="lib/img/bearing_null_histogram.svg" alt="">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What does this mean?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Python Code -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Python Code</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<pre class="language-python"><code data-trim>import numpy as np
+
+
+
+nBootstraps = 1000  # Example value, replace with actual
+
+dat_diff = np.array([5.30, 5.64, 5.60, 6.22, 5.14, 5.24, 5.71, 5.78, 6.07, 5.57, 5.76, 5.99])  # Example data, replace with actual
+
+
+
+bootNHST = np.zeros(nBootstraps)
+
+for b in range(nBootstraps):
+
+&nbsp;&nbsp;&nbsp;&nbsp;sampledSigns = np.random.choice([-1, 1], size=len(dat_diff), replace=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;bootDifference = sampledSigns * dat_diff
+
+&nbsp;&nbsp;&nbsp;&nbsp;bootNHST[b] = np.mean(bootDifference)</code></pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 07
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

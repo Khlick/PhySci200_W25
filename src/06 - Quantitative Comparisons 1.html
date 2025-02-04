@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Quantitative Comparisons 1
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/mastering-exp-methods.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Quantitative Comparisons 1
+              </h2>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 06
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="grid-template-columns: 1fr; grid-auto-rows: 1fr; row-gap: 5vmin; align-content:center;"
+
+>
+
+<div></div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p>
+
+<i class="target"></i> Review Hypothesis Testing and Confidence Intervals
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p>
+
+<i class="target"></i> Extend testing methods to compare two proportions (categorical data)
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p>
+
+<i class="target"></i> Apply bootstrap and parametric tests to compare independent quantitative samples
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p>
+
+<i class="target"></i> Quantify effect sizes using confidence intervals
+
+</p>
+
+</div>
+
+<div></div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Today we'll review hypothesis testing and confidence intervals for single proportions, using coin flips as an example.</p>
+
+<p>Then we'll extend these methods to compare two groups, like comparing proportions between treatment and control.</p>
+
+<p>We'll learn how to use both bootstrap and parametric approaches for comparing quantitative data between independent samples.</p>
+
+<p>Throughout, we'll focus on quantifying effect sizes and their uncertainty using confidence intervals.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg-mice-nhst-wide_2.webp" data-background-size="cover" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Hypothesis Testing
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>So far, we've </p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Describing The Statistic</h2>
+
+<p><span class="strong">Any</span> statistical test/procedure <span class="danger">relies on the sampling distribution!</span></p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-column-gap:2vmin;">
+
+<!-- Confidence Intervals -->
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;grid-row-gap:5px;text-align:justify;text-justify:inter-word;height:100%;">
+
+<h3 class="black">Confidence Interval</h3>
+
+<div class="bg-info-light framed">
+
+<p>
+
+A range of values that is likely to contain the
+
+<span class="warning">true value of the population parameter</span>,
+
+based on a sample, is identified through statistical confidence,
+
+via the <span class="danger strong">sampling
+
+distribution of the sample statistic</span>.
+
+</p>
+
+</div>
+
+<p class="question small">
+
+If I had access to other samples collected under the same conditions,
+
+how much would the central $N\%$ vary
+
+</p>
+
+</div>
+
+<!-- NHST -->
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;grid-row-gap:5px;text-align:justify;text-justify:inter-word;height:100%;">
+
+<h3 class="black">Null Hypothesis Testing</h3>
+
+<div class="bg-warning-light framed">
+
+<p>
+
+Determine if the observed statistic ($\hat{p},\, \bar{x}$) originates
+
+from a population centered at a specific parameter
+
+value $[\pi,\, \mu]$ by analyzing the
+
+<span class="danger strong">assumed sampling
+
+distribution of the null parameter</span>
+
+as it relates to the statistic of interest.
+
+</p>
+
+</div>
+
+<p class="question">
+
+What is the probability my observed statistic came from this
+
+theoretical distribution
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Recall that we've discussed 2 ways to garner "evidence" against the observation happening by random chance.</p>
+
+<p>I mentioned before, we have multiple ways of estimating a population parameter.</p>
+
+<p>In some cases, it will be clear what the population is, and others, not so much.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Deriving a Statistical Model for Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Deriving a Statistical Model</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display: grid; grid-template-columns: 1fr; grid-auto-rows: auto; gap: 2vmin;">
+
+
+
+<!-- Explanation Text -->
+
+<div class="small">
+
+<p>To test a hypothesis, we need to establish a statistical model that compares our sample data against a <strong>null model</strong>, which assumes no effect or difference exists. The null model typically assumes the data follows a known distribution under $H_0$, such as the Normal ($Z$), t, or $\chi^2$ distributions, for example.</p>
+
+</div>
+
+
+
+<!-- Key Steps -->
+
+<div class="smaller fragment no-hang" data-fragment-index="1">
+
+<ul>
+
+<li class="fragment" data-fragment-index="1">We calculate the test statistic based on sample data (<span class="em small">We'll call it $\delta$ for now</span>).</li>
+
+<li class="fragment fade-left" data-fragment-index="2">We assume the sample follows a specific distribution under $H_0$.</li>
+
+<li class="fragment fade-left" data-fragment-index="3">We calculate the likelihood of observing the sample under the null distribution. <span class="danger">p-value!</span></li>
+
+<li class="fragment fade-left" data-fragment-index="4">If this likelihood is sufficiently low (below a threshold defined by $\alpha$), we reject $H_0$.</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- Bottom Panel: Distribution Plots -->
+
+<div class="fragment" data-fragment-index="2">
+
+<img src="lib/img/statistical-distributions.svg" alt="Probability Distributions for Hypothesis Testing" class="wide-graphic">
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In this slide, explain how we mathematically derive the hypothesis test model by selecting an appropriate distribution. The wide graphic at the bottom shows the most common continuous distributions used for hypothesis testing.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Tailedness in Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Tailedness Of P-Values</h2>
+
+<p class="small em">Determining effects in one direction (<i role="emoji" data-emoji="&#x1F9A8;"></i>) or both (<i role="emoji" data-emoji="&#x1F9A8;"></i><i role="emoji" data-emoji="&#x1F9A8;"></i>)!</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display: grid; grid-template-columns: 1.2fr 1fr; grid-auto-rows: auto; gap: 2vmin;">
+
+<div class="small">
+
+<!-- One-Tailed Test -->
+
+<div class="small framed border-danger no-hang fragment" data-fragment-index="1">
+
+<h4>One-Tailed Test</h4>
+
+<p>Used when we're interested if the <span class="pop">test statistic ($\delta$)</span> is significantly greater than or less than the Null Hypothesis ($H_0$).</p>
+
+<p>It specifies the direction of the effect:
+
+<ul>
+
+<li><strong>Right-tailed</strong> test: $\delta \gg H_0$.</li>
+
+<li><strong>Left-tailed</strong> test: $\delta \ll H_0$.</li>
+
+</ul>
+
+</p>
+
+</div>
+
+
+
+<!-- Two-Tailed Test -->
+
+<div class="small framed border-info fragment" data-fragment-index="2">
+
+<h4>Two-Tailed Test</h4>
+
+<p>Used when we're interested in whether the <span class="pop">test statistic ($\delta$)</span> is different from $H_0$, <span class="em">without specifying the direction</span> of the difference.</p>
+
+<p>Us it to test for <span class="em">any</span> significant difference.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- Diagram -->
+
+<div class="img full-width">
+
+<svg viewBox="0 0 432 312" class="full-width">
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_1"></use>
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_2" class="fragment current-visible" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Explain when each test is appropriate. Use the diagram to clarify the visual difference between one- and two-tailed tests.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Investigating Association -->
+
+
+
+<!-- <section> -->
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Investigating Association</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;row-gap:5px;">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1.5fr;grid-template-rows:1fr;gap:20px;">
+
+<div>
+
+<p class="smaller">
+
+<i class="arrowr"></i> effect of an explanatory variable on a response variable <br>
+
+<ul>
+
+<li>2 samples</li>
+
+<li>2 variables <span class="muted">(Explanatory/Response)</span></li>
+
+</ul>
+
+<p class="smaller em fragment" data-fragment-index="2">
+
+<i class="arrowr danger"></i> This is a comparison of <span class="danger">two groups</span> (or more).
+
+</p>
+
+</p>
+
+</div>
+
+<div class="full-width">
+
+<img src="lib/img/studying-association.svg" style="height:400px;">
+
+</div>
+
+</div>
+
+<div class="grid-generic framed left-justify fragment" data-fragment-index="1" style="grid-template-columns:1.5fr 8.5fr;grid-template-rows:1fr;gap:5px;align-items:center;">
+
+<p class="u muted em">Question:</p>
+
+<p class="em small">
+
+Does a change in the value of the <span class="warning">explanatory variable</span>
+
+affect the value of the <span class="success">response variable</span>?
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="3">
+
+<p>
+
+<span class="u">Statistic of interest:</span> <span class="em">How do we characterize the comparison of our samples?</span>
+
+</p>
+
+<ul class="fragment" data-fragment-index="4">
+
+<li>Difference in the response variable (e.g.: $\hat{p}_1 - \hat{p}_2$ or $\bar{x}_1 - \bar{x}_2$)</li>
+
+<li>Ratio of the response variable (e.g.: $\frac{\hat{p}_1}{\hat{p}_2}$ or $\frac{\bar{x}_1}{\bar{x}_2}$)?</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Sample from the same population, apply conditions (controls), measure output.
+
+Did the explanatory (condition) explain the results (response)?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Statistic Of Interest -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistic Of Interest</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="em smaller left-justify">
+
+In statistics and mathematics, it is often useful to define functions that operate on two variables in various ways. A general approach is to express a function $f$ that takes two inputs, $X$ and $Y$, and applies a specified operator to these inputs. This operator, denoted by $\circ$, fundamentally changes the way $X$ and $Y$ are processed within the function.
+
+</p>
+
+<p class="fragment smaller left-justify border-left-4x border-info" data-fragment-index="1">
+
+That is, generally we can say: <br />$\delta\left( X,Y\right) = f(X,Y;\circ)$,
+
+where $X\, \&\, Y$ are independent random variables and $f\left(X,Y;\circ\right)$ means:
+
+"apply the function $f$ to $X\,\&\,Y$ using $\circ$ as the operator."
+
+</p>
+
+<p class="fragment em smaller info framed border-info" data-fragment-index="2">
+
+Note: If $f$ is the mean and $\circ$ is $-$, then <br>$f(X,Y;-) = \overline{Y} - \overline{X}$.
+
+</p>
+
+</div>
+
+<div class="smaller fragment" data-fragment-index="3">
+
+<table class="gpt-table-styled no-hang">
+
+<thead>
+
+<tr>
+
+<th>Comparison Type</th>
+
+<th>Notation</th>
+
+<th>Interpretation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Difference</td>
+
+<td>$ f(X, Y; -) = f(Y) - f(X) $</td>
+
+<td>Compares $f(Y)$ and $f(X)$ by subtraction.</td>
+
+</tr>
+
+<tr>
+
+<td>Ratio</td>
+
+<td>$ f(X, Y; /) = \frac{f(Y)}{f(X)} $</td>
+
+<td>Compares $f(Y)$ and $f(X)$ as a ratio.</td>
+
+</tr>
+
+<tr>
+
+<td>Sum</td>
+
+<td>$ f(X, Y; +) = f(Y) + f(X) $</td>
+
+<td>Adds $f(Y)$ and $f(X)$.</td>
+
+</tr>
+
+<tr>
+
+<td>Product</td>
+
+<td>$ f(X, Y; \cdot) = f(Y) \cdot f(X) $</td>
+
+<td>Multiplies $f(Y)$ and $f(X)$.</td>
+
+</tr>
+
+<tr>
+
+<td>Correlation</td>
+
+<td>$ f(X, Y; \text{corr}) = \rho_{f(X)f(Y)} $</td>
+
+<td>Measures the linear relationship between $f(X)$ and $f(Y)$.</td>
+
+</tr>
+
+<tr>
+
+<td>Regression</td>
+
+<td>$ f(X, Y; \text{reg}) = \beta_1 $</td>
+
+<td>Represents the slope of $f(Y)$ on $f(X)$ in a linear regression model.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We can call the application of f on X and Y the statistic, such that if f is the mean, then f(X,Y;circ) = barY - barX!</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Steps To A Statistical Analysis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Steps To A Statistical Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;column-gap:1hmin;">
+
+<div> <!-- LEFT -->
+
+<ul>
+
+<li class="fragment" data-fragment-index="1">Collect Sample(s)</li>
+
+<li class="fragment" data-fragment-index="2">Visualize Samples(s)<span class="fragment" data-fragment-index="3">, inspect for normality</span></li>
+
+<li class="fragment" data-fragment-index="3">Inspect for Outliers</li>
+
+<li class="fragment" data-fragment-index="4">Summarize Samples, determine which descriptive statistic to use</li>
+
+<li class="fragment" data-fragment-index="5">Calculate uncertainty for each sample</li>
+
+<li class="fragment" data-fragment-index="6">Determine statistic of interest</li>
+
+<li class="fragment" data-fragment-index="7">State the null hypothesis, consider alternative</li>
+
+<li class="fragment" data-fragment-index="8">Test statistic against the Null, calculate the p-value (significance)</li>
+
+<li class="fragment" data-fragment-index="9">Determine Effect Size (impact)</li>
+
+</ul>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="small fragment bordered rounded broder-info" data-fragment-index="1">
+
+<i class="lightbulb"></i> Determine the metric, ensure high-quality data.
+
+</p>
+
+</div>
+
+<div class="grid-generic fragment no-hang" data-fragment-index="2" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:5px;width:90%">
+
+<img class="fragment" data-fragment-index="2" src="lib/img/two-group-simple-density.svg" width="100%">
+
+<img class="fragment" data-fragment-index="3" src="lib/img/qqplot.svg" width="100%">
+
+</div>
+
+<div class="no-hang">
+
+<p class="fragment" data-fragment-index="4" style="font-size:90%;">
+
+$\bar{x}$, $\tilde{x}$, $\mathcal{N}(\bar{x},s)$, ...
+
+<span class="fragment" data-fragment-index="5">, $SE$, $s^2$, 95%CI, ...</span>
+
+</p>
+
+<p class="fragment" data-fragment-index="6">$\delta$, $t$, $z$, $\Delta\bar{x}$, $\mathbb{F}$, $\chi^2$,...</p>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="7">$H_0$, $H_a$, $\bar{X}_0$, $\pi_0$, ...</p>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="9">$\delta$, $\rho$, $R^2$, $\chi^2$, ...</p>
+
+</div>
+
+</div>
+
+<div style="grid-column: 1/3;" class="small framed border-danger fragment" data-fragment-index="10">
+
+<p>
+
+We've learned about the standard normal (Z) distribution, let's learn about another common distribution...
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg-mice-gauss.webp" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  One Underlying Population
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- UCLA Dataset -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>UCLA Salaries</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 520 413" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/salaries_clt_median_sampling.svg#axes_1"></use>
+
+<use xlink:href="lib/img/salaries_clt_median_sampling.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+</svg>
+
+</div>
+
+<div class="small left-justify">
+
+<p>Recall, with 10,000 medians from 10,000 identical, random samples, you can estimate the <span class="em">true median</span> salary.</p>
+
+<p class="fragment" data-fragment-index="1">With <span class="em">one sample</span>, we were interested in the <span class="pink">true median</span> salary.</p>
+
+<p class="fragment" data-fragment-index="2">With <span class="em">two samples</span>, we are interested in the <span class="danger">difference</span> between the two medians.</p>
+
+<p class="fragment" data-fragment-index="4">With the assumption that the two samples are independent, and from the same <span class="info">underlying distribution</span> (one population), we can estimate the difference in medians using a <span class="strong">t-like distribution</span>.</p>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="50%" viewBox="0 0 605 425" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_1" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_2" class="fragment" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_4" class="fragment" data-fragment-index="3"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What is the t-distribution?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 1: William Gosset & "Student" -->
+
+<section data-background-color="rgb(0,0,0)" data-background-image="lib/img/gosset_journey_2.png" data-background-size="cover" data-background-opacity="0.4">
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2 class="white">William Sealy Gosset</h2>
+
+</div>
+
+<div class="content" data-background-image="lib/img/gosset_journey_2.png" data-background-size="cover">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.8fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width"></div>
+
+<div>  <!-- Fragment 1: Introduction to William Gosset -->
+
+<p class="fragment fade-in left-justify white bigger">An influential statistician, William Sealy Gosset worked at the Guinness brewery in Dublin, Ireland. He developed the t-distribution under the pseudonym "Student."</p>
+
+
+
+<!-- Fragment 2: Explanation of his contributions -->
+
+<p class="fragment fade-in left-justify white bigger">Gosset's work was pivotal for small sample statistics, leading to the development of the Student's t-test, a fundamental tool in statistical hypothesis testing.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+William Gosset's contribution to statistics while working in a practical field highlights the importance of real-world data analysis.
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 2: The Student's t-test and its Formulation -->
+
+<section data-background-image="lib/img/gosset_journey_1.png" data-background-size="cover" data-background-color="rgb(0,0,0)" data-background-opacity="0.4">
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2 class="white">Student's t-test</h2>
+
+<!-- Fragment 1: Introduction to the t-test -->
+
+<p class="fragment fade-in white">The Student's t-test, created by Gosset, is used to determine if there is a significant difference between the means of two groups, which may be related in certain features.</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic white" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment full-width">
+
+<p>
+
+<i class="exclamation"></i> Let's assume the <span class="em">unknown</span> variance in our samples is "equal".
+
+</p>
+
+<p class="fragment fade-in">
+
+$$t=\frac{(\overline{X_1}-\overline{X_2})\class{danger}{-(\mu_1-\mu_2)}}{\sqrt{S_p^2\left( \frac{1}{n_1}-\frac{1}{n_2}\right)}}$$
+
+</p>
+
+</div>
+
+<div class="fragment full-width">
+
+<p class="small">
+
+We compare our $t$ to the T-distribution, defined with a
+
+<span class="pop">Degrees Of Freedom</span> parameter: $\nu=n_1+n_2-2$.
+
+</p>
+
+</div>
+
+<div class="fragment small">
+
+<p>
+
+<i class="pin"></i> Because $S_p$ is the pooled estimate of the "equal variance",
+
+you'll see it called the "pooled t-test".
+
+</p>
+
+<p>
+
+$$S_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Pause on the formula, ask about the pooled variance divided by n. Contemplate, the standard error</p>
+
+<p>The red text represents what we call the null parameter, more on the next slide.</p>
+
+<p>The formula represents the t-value calculation, a crucial component in hypothesis testing.</p>
+
+<p>
+
+What does this formula state? There are two parts:
+
+</p>
+
+<ol>
+
+<li>The difference in means between two variables (Xs) varies from the difference in means between the underlying population distribution means (mus) on the t-scale</li>
+
+<li>The sampling distribution of the t-scale has a spread of the squared root of 2 times the shared variance and is dependent on the sample size (nu)</li>
+
+</ol>
+
+</aside>
+
+</section>
+
+
+
+<!-- Theory Student's t -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Theory: Two-sample Student's $t$-test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic no-pad" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic no-pad" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:5px;justify-items:center;">
+
+<div>
+
+<p>
+
+Comparing two groups:
+
+<ul class="small">
+
+<li>H$_0$ : $\bar{x}_1 = \bar{x}_2$ (<span class="em">Null parameter:</span> $\mu_1=\mu_2 = 0$)</li>
+
+<li>SOI: $\class{small}{mean\left(\bar{x}_1,\bar{x}_2;-\right) = \bar{x}_1 - \bar{x}_2}$</li>
+
+</ul>
+
+</p>
+
+<p>
+
+<i class="lightbulb muted"></i> <span class="em u muted">Key idea:</span>
+
+The strategy to assess significance with a theoretical approach is to
+
+<span class="danger">study the sampling distribution of the <span class="strong">S</span>tatistic
+
+<span class="strong">O</span>f <span class="strong">I</span>nterest</span>.
+
+</p>
+
+</div>
+
+<div>
+
+<img style="margin:0" width=90% src="lib/img/normal-distribution-standardized-distances.svg">
+
+</div>
+
+</div>
+
+<p class="small fragment left-justify" data-fragment-index="1">
+
+Once again, this relies heavily on the <span class="u-danger">Central Limit Theorem</span>. <br>
+
+The statistic we will obtain (the <span class="strong em">t statistic</span>)
+
+will characterize how far away from the center of the sampling distribution is
+
+our initial observed statistic in term of standard deviation (<span class="em">SE</span>,
+
+since it's a sampling distribution).
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Theory 2 Student's t -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Theory: Two-sample Student's $t$-test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:1fr;gap:5px;">
+
+<p class="framed border-danger" style="margin:0;width:100%;font-size:80%;">
+
+If two samples are coming from the same underlying
+
+<span class="danger">normal population</span>, we can estimate the standard
+
+deviation of this pooled population with
+
+$s^2_\mathrm{pooled} = \frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}$ and the
+
+standard error (standard deviation of the sampling distribution) of the
+
+difference between means of two samples from this distribution with
+
+$SE = \sqrt{\frac{s_\mathrm{pooled}}{n_1}+\frac{s_\mathrm{pooled}}{n_2}}$,
+
+where $s_1$ and $s_2$ are the standard deviations in the two samples
+
+and $n_1$ and $n_2$ are the sizes of the two samples.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:5px;align-items:center;">
+
+<div style="width:100%;">
+
+<span>
+
+<span class="u em">Note:</span> When we use the samples standard deviations
+
+in estimating SE (we don't know the standard deviation $s$ of the
+
+underlying populations), we need to switch to a
+
+<span class="em strong">t-distribution</span> rather than the standard
+
+normal when computing a p-value.
+
+</span>
+
+</div>
+
+<div style="width:100%;">
+
+<img width=100% src="lib/img/distribution-t-vs-z.svg">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- UCLA Salaries Dataset -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>UCLA Salaries Dataset</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:1fr;gap:5px;align-items:center;justify-items:center;justify-content: center;">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 605 425" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_1" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_3" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_data.svg#axes_4" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="-20 0 505 425" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/ucla_salaries_2sample_null.svg#axes_1" class="fragment" data-fragment-index="11"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_null.svg#axes_2" class="fragment" data-fragment-index="12"></use>
+
+<use xlink:href="lib/img/ucla_salaries_2sample_null.svg#axes_3" class="fragment" data-fragment-index="14"></use>
+
+</svg>
+
+</div>
+
+<div class="smaller left-justify">
+
+<p class="fragment" data-fragment-index="1">Your sample: $\tilde{x}_{\text{you}} = \$83.4K\, (\$64.7K, \$93.1K)$</p>
+
+<p class="fragment" data-fragment-index="2">Friend's sample: $\tilde{x}_{\text{friend}} = \$68.9K(\$61.1K, \$83.3K)$</p>
+
+<p class="fragment question" data-fragment-index="3">Are these medians considered different?</p>
+
+<p class="fragment" data-fragment-index="4">The difference is $\Delta\tilde{x} = \tilde{x}_{\text{friend}}-\tilde{x}_{\text{you}}= \$-14.5K$, <span class="warning fragment" data-fragment-index="5">Is this big?</span></p>
+
+<p class="fragment" data-fragment-index="6">
+
+The <span class="s-quote">null hypothesis</span> we want to test is that the medians are equal, assuming that we sampled A and B from the same <span class="danger">underlying population</span>,
+
+</p>
+
+<p class="fragment" data-fragment-index="8">
+
+Formally, \(H_0\): hypothesis | assumptions, $H_0 : \tilde{x}_A = \tilde{x}_B \, | \, \rho_A(x) = \rho_B(x)$
+
+</p>
+
+<p class="fragment" data-fragment-index="9">
+
+We can simulate this by:
+
+</p>
+
+<ul class="fragment small info" data-fragment-index="10">
+
+<li>Join the samples from A and B into a single dataset AB, the <span class="s-quote">best guess</span> at the true underlying population \( \rho(x) \).</li>
+
+<li>Loop 10,000 times:
+
+<ul>
+
+<li>Resample 2 new datasets of original lengths, \(x^A\) and \(x^B\), from the joint population AB</li>
+
+<li>Compute the medians of the resampled datasets, \(\tilde{x}^A\) and \(\tilde{x}^B\)</li>
+
+<li>Compute the difference in medians between resampled datasets, \(\Delta' = \tilde{x}^A - \tilde{x}^B\)</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index="12">View $\Delta\tilde{x}$ and $|\Delta\tilde{x}|$</p>
+
+<p class="fragment" data-fragment-index="13">Sum the frequencies of the more <span class="excited-text">extreme</span> values: $p=0.2034$</p>
+
+<p class="fragment" data-fragment-index="14">This distribution may follow Student's t-distribution!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Rho is the underlying population distribution parameters.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Null Sampling Distribution</h2>
+
+<p>One Underlying Population</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<vizzy data-src="lib/interactives/t-distribution-simulation.html" style="height:75vh;"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Null Sampling Distribution</h2>
+
+<p>One Underlying Population</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<h4>Python Code</h4>
+
+<pre class="language-python">
+
+<code data-trim>import numpy as np
+
+
+
+# Set the number of bootstraps
+
+n_bootstraps = 10000
+
+
+
+# Combine the datasets
+
+data_joined = np.concatenate((datasetA, datasetB))
+
+
+
+# Initialize an array to store the differences
+
+differences = np.empty(n_bootstraps)
+
+
+
+# Perform bootstrapping
+
+for i in range(n_bootstraps):
+
+&nbsp;&nbsp;&nbsp;&nbsp;boot_data_A = np.random.choice(data_joined, size=len(datasetA), replace=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;boot_data_B = np.random.choice(data_joined, size=len(datasetB), replace=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;boot_median_A = np.median(boot_data_A)
+
+&nbsp;&nbsp;&nbsp;&nbsp;boot_median_B = np.median(boot_data_B)
+
+&nbsp;&nbsp;&nbsp;&nbsp;differences[i] = boot_median_A - boot_median_B</code>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg-mice-examine-dark-07.webp" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Distribution Free
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Mouse Weight Study -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Mouse Weight Study: RYGB vs SHAM</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:1fr;gap:5px;align-items:center;justify-items:center;justify-content: center;">
+
+<img src="lib/img/poop_groups.svg" style="width:60%;">
+
+<img src="lib/img/poop_null.svg" class="fragment" data-fragment-index="11" style="width:60%;">
+
+</div>
+
+<div class="smaller left-justify">
+
+<p>In a study comparing fat pad weights between mice that underwent RYGB surgery versus SHAM surgery:</p>
+
+<p class="fragment" data-fragment-index="1">RYGB-R group: $\tilde{x}_{\text{RYGB}} = 0.55\text{g}\, (0.55\text{g}, 0.55\text{g})$</p>
+
+<p class="fragment" data-fragment-index="2">SHAM-R group: $\tilde{x}_{\text{SHAM}} = 1.60\text{g}\, (1.60\text{g}, 1.60\text{g})$</p>
+
+<p class="fragment question" data-fragment-index="3">Is there a significant difference in fat pad weight between groups?</p>
+
+<p class="fragment" data-fragment-index="4">The effect size is $\Delta\tilde{x} = \tilde{x}_{\text{SHAM}}-\tilde{x}_{\text{RYGB}}= 1.05\text{g}$, <span class="warning fragment" data-fragment-index="5">Is this meaningful?</span></p>
+
+<p class="fragment" data-fragment-index="6">
+
+The <span class="s-quote">null hypothesis</span> we want to test is that the medians are equal, assuming two independent <span class="danger">underlying populations</span>,
+
+</p>
+
+<p class="fragment" data-fragment-index="8">
+
+Formally, \(H_0\): hypothesis | assumptions, $H_0 : \tilde{x}_{\text{RYGB}} = \tilde{x}_{\text{SHAM}} \, | \, \rho_{\text{RYGB}}(x) \neq \rho_{\text{SHAM}}(x)$
+
+</p>
+
+<p class="fragment" data-fragment-index="9">
+
+We can test "Are the medians different?" by:
+
+</p>
+
+<ul class="fragment small info" data-fragment-index="10">
+
+<li><span class="s-quote">Recenter</span> each group to create a <span class="s-quote">best guess</span> at the null hypothesis of no difference.</li>
+
+<li>Bootstrap each de-centerd group separately to maintain independence</li>
+
+<li>Loop 10,000 times:
+
+<ul>
+
+<li>Resample with replacement from each group, maintaining original sample sizes</li>
+
+<li>Compute statistic of interest for each bootstrap sample</li>
+
+<li>Calculate the difference between the two bootstrap samples</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index="13">Calculate two-tailed p-value from more <span class="excited-text">extreme</span> values: $p=0.02589$</p>
+
+<p class="fragment" data-fragment-index="14">The effect appears statistically significant!</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Actual (g) difference: 1.050 (0.030, 1.730), p=0.02589</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Null Sampling Distribution</h2>
+
+<p>One Underlying Population</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<vizzy data-src="lib/interactives/t-simulation-welch.html" style="height:75vh;"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Slide also demonstrates effects</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Sampling Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header no-hang">
+
+<h2>Null Sampling Distribution</h2>
+
+<p>Two Underlying Populations</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<h4>Python Code</h4>
+
+<pre class="language-python">
+
+<code data-trim>import numpy as np
+
+
+
+# Calculate actual difference
+
+actual = centroid(b) - centroid(a)
+
+
+
+# Recenter both samples (null hypothesis of no difference)
+
+a = a - centroid(a)
+
+b = b - centroid(b)
+
+
+
+# Initialize bootstrap array
+
+bootstraps = np.zeros(B)
+
+
+
+# Perform bootstrap resampling
+
+for i in range(B):
+
+boot_a = np.random.choice(a, size=len(a), replace=True)
+
+boot_b = np.random.choice(b, size=len(b), replace=True)
+
+bootstraps[i] = centroid(boot_b) - centroid(boot_a)</code>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>centroid is your own function, say the median or mean</p>
+
+<p>explain effects size, lead for later</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Distribution Free? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Distribution Free?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div style="font-size:80%;align-items:start;justify-items:start;">
+
+<p class="left-justify smaller">
+
+The formula approach to <span class="s-quote">Are the centers different?</span> exists. Recall:
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+$$t = \frac{\Delta\bar{X}}{\mathrm{StandardError}(\Delta\bar{X})}$$
+
+</div>
+
+<div class="grid-generic left-justify small" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p class="fragment" data-fragment-index="1">
+
+<i class="fa-solid fa-arrow-left info"></i> Statistic of interest (e.g. $mean(X_1,X_2;-)$)
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+<i class="fa-solid fa-arrow-left success"></i> Sampling Distribution of the SOI
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="left-justify" style="grid-column:1/3;">
+
+When $\mathrm{Var}(X_1)\neq\mathrm{Var}(X_2)$, we can use the
+
+<span class="fragment highlight-info em" data-fragment-index="3">unequal variance</span> assumption.
+
+<span class="fragment replace-in" data-fragment-index="4">Known as <span class="info">Welch's t-test</span>.</span>
+
+</p>
+
+<div>
+
+<p class="fragment" data-fragment-index="5">
+
+$$t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}},$$
+
+where $s^2$ is the <span class="em">sample variance</span>.
+
+</p>
+
+</div>
+
+<div>
+
+<p class="left-justify fragment" data-fragment-index="6">
+
+With $\nu$ degrees of freedom:
+
+$$\nu = \frac{\left(\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}\right)^2}{\frac{(s^2_1/n_1)^2}{n_1-1} + \frac{(s^2_2/n_2)^2}{n_2-1}}$$
+
+</p>
+
+<p class="fragment em info" data-fragment-index="7">
+
+This is the Welch-Satterthwaite equation!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div style="align-items:start;justify-items:start;align-text:left;font-size:80%">
+
+<p class="u fragment" style="text-align:center;">Steps To Report Results Of $t$-test</p>
+
+<ol>
+
+<li class="fragment">Calculate central tendency and 95% CI for each sample: <span class="em">Report $\overline{X}\,(95\%\, \mathrm{CI})$</span></li>
+
+<li class="fragment">State the Null Hypothesis, and consider alternatives for tailness: $H_0:\Delta\overline{X}=0$, $H_a:$<i class="fas fa-question danger"></i></li>
+
+<li class="fragment">Calculate the observed difference: <span class="em">$\Delta\overline{X}$</span></li>
+
+<li class="fragment">Calculate the Sum of the Weighted Variances: $\mathrm{SE}(\Delta\overline{X})=\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}$</li>
+
+<li class="fragment">Estimate the Degrees of Freedom</li>
+
+<li class="fragment">Calculate the Effect Size 95% Confidence Interval</li>
+
+<li class="fragment">Calculate the standardized distance between the samples: $t$</li>
+
+<li class="fragment">Determine p-value and establish a critical region on the $t$-distribution</li>
+
+<li class="fragment">Assess statistical significance</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<aside class="notes">
+
+<p>First fragment is "unequal variance" highlight.</p>
+
+<p>Second frag is Welch's t, "because it's a t-test, we need a nu (degrees of freedom) parameter.</p>
+
+<p>
+
+Note that the pooled variance is gone? We have a more complicated dof calculation that is a function of the sample variances.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 06
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

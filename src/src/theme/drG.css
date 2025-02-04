@@ -307,6 +307,9 @@
 html.print-pdf .reveal img {
   max-height: 80% !important; }
 
+html.print-pdf .reveal content {
+  max-height: 900px !important; }
+
 .reveal section .section-title-content .headlines h2, .reveal section .section-title-content .headlines h3, .reveal section .section-title-content .headlines h4 {
   text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.4); }
 
@@ -539,9 +542,6 @@ root {
   margin: 0 !important;
   padding: 0 !important; }
 
-.hljs-ln {
-  border-collapse: collapse; }
-
 .hljs-ln td {
   padding: 0; }
 
@@ -740,8 +740,9 @@ root {
     align-items: center;
     height: calc(var(--slide-height) * 0.15 * var(--slide-scale));
     width: 100%; }
-    .reveal .slides .title-slide .headline h2 {
-      font-weight: bold; }
+    .reveal .slides .title-slide .headline h2, .reveal .slides .title-slide .headline h3 {
+      font-weight: bold;
+      padding: 0 2vw 0 0; }
   .reveal .slides .title-slide .sub-header {
     grid-row: 2 / 4;
     grid-column: 4 / 6;
@@ -749,7 +750,7 @@ root {
     align-self: end; }
     .reveal .slides .title-slide .sub-header p.by {
       margin: 0;
-      padding: 0;
+      padding: 0 2vw 0 0;
       font-family: 'Playfair Display', serif;
       font-weight: normal;
       color: #333;
@@ -761,7 +762,7 @@ root {
     z-index: 3; }
     .reveal .slides .title-slide .byline p.byinfo {
       margin: 0;
-      padding: 0;
+      padding: 0 2vw 0 0;
       font-family: 'PT Sans', sans-serif;
       font-style: italic;
       color: #666;
@@ -856,7 +857,7 @@ hr {
   margin-bottom: 0 !important; }
 
 .reveal section pre {
-  overflow: visible;
+  overflow: hidden;
   max-height: 100%;
   width: 100%;
   word-wrap: normal;
@@ -865,7 +866,7 @@ hr {
 
 .reveal section pre code {
   display: block;
-  overflow: visible;
+  overflow: hidden;
   max-height: 100%;
   width: 100%; }
 
@@ -873,17 +874,6 @@ hr {
   max-width: 100%;
   height: auto;
   width: auto; }
-
-.reveal section .framed,
-.reveal section .boxed {
-  border: 2px solid black;
-  padding-left: 10px;
-  padding-right: 10px; }
-
-.reveal section .framed {
-  border-radius: 15px;
-  padding: 0;
-  margin: 0; }
 
 .reveal section .padded,
 .reveal section .sided,
@@ -7593,6 +7583,22 @@ span[role=img][aria-label]:hover::after {
   .reveal .slides section .fragment.replace-in-out.current-fragment {
     opacity: 1;
     display: inline; }
+
+.reveal .slides section .fragment.framed-in {
+  padding-left: 10px;
+  padding-right: 10px; }
+  .reveal .slides section .fragment.framed-in.visible {
+    border: 2px solid black;
+    border-radius: 15px; }
+
+.reveal .slides section .fragment.framed-out {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px; }
+  .reveal .slides section .fragment.framed-out.current-fragment {
+    border: none;
+    border-radius: 0; }
 
 .reveal .slides section .muted {
   color: #7878a0 !important; }
@@ -16350,16 +16356,27 @@ span[role=img][aria-label]:hover::after {
 /*********************************************
 * BORDERS
 *********************************************/
-section .rounded {
+.reveal section .rounded {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 15px; }
 
-section .bordered {
+.reveal section .bordered {
   border: 2px solid; }
 
-section .circled {
+.reveal section .circled {
   border-radius: 50%; }
+
+.reveal section .framed,
+.reveal section .boxed {
+  border: 2px solid black;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.reveal section .framed {
+  border-radius: 15px;
+  padding: 0;
+  margin: 0; }
 
 .border-top {
   border-top-style: solid !important;

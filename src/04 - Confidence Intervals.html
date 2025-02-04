@@ -13,7 +13,7 @@
     <link href="./src/css/revealpack.css" rel="stylesheet"/>
     <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <!-- highlight.js theme -->
-    <link href="./src/theme/felipec.css" id="highlight-theme" rel="stylesheet"/>
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
     <!-- Custom CSS -->
     <!-- Custom Scripts -->
     <!-- Print PDF script -->
@@ -1700,7 +1700,7 @@ box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
 
 <div class="content">
 
-<div class="grid-generic" style="grid-template-columns:2fr 1fr 0.1fr;grid-auto-rows:auto;gap:5vmin;">
+<div class="grid-generic" style="grid-template-columns:2fr 1.5fr 0.1fr;grid-auto-rows:auto;gap:5vmin;">
 
 <div class="smaller no-hang">
 
@@ -1736,7 +1736,7 @@ box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
 
 </div>
 
-<div class="smallest box-width fragment" data-fragment-index="10" style="margin-right:50px;">
+<div class="smallest full-width fragment" data-fragment-index="10" style="margin-right:50px;">
 
 <p class="fragment big" data-fragment-index="10">The pivotal confidence interval bounds are given by:<br>
 
@@ -1746,9 +1746,11 @@ $\hat{\theta}_{upper} = 2\hat{\theta} - \hat{\theta}^*_{(\alpha)}$<br>
 
 where $\hat{\theta}$ is the point estimate and $\hat{\theta}^*_{(\alpha)}$ is the $\alpha$th percentile of the bootstrap distribution.</p>
 
-<pre class="language-python fragment" data-fragment-index="11"><code data-trim>
+<pre class="language-python fragment" style="width:fit-content;" data-fragment-index="11"><code data-trim>
 
 # Function for pivotal confidence intervals
+
+
 
 def pivotal_ci(data, boot_dist, confidence=0.95, stat = np.mean):
 
@@ -1794,7 +1796,7 @@ def pivotal_ci(data, boot_dist, confidence=0.95, stat = np.mean):
 
 <div class="content">
 
-<div class="grid-generic" style="grid-template-columns:2fr 1fr 0.1fr;grid-auto-rows:auto;gap:5vmin;">
+<div class="grid-generic" style="grid-template-columns:2fr 1.5fr 0.1fr;grid-auto-rows:auto;gap:5vmin;">
 
 <div class="smallest no-hang">
 
@@ -1838,9 +1840,9 @@ with $z_0$ being the bias correction and $a$ the acceleration factor.</p>
 
 </div>
 
-<div class="smallest box-width fragment" data-fragment-index="11" style="margin-right:50px;">
+<div class="smallest fragment" data-fragment-index="11">
 
-<pre class="language-python"><code data-trim>
+<pre class="language-python" style="width:fit-content;"><code data-trim>
 
 import numpy as np
 
@@ -2273,13 +2275,20 @@ skipHtmlTags: [
 },
 chtml: {
 scale: 0.8,
-linebreaks: {
-automatic: true,
-},
+minScale: 0.4,
 },
 Safe: {
 sizeMin: 0.4,
 sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
 },
 },
 notes: {

@@ -13,7 +13,7 @@
     <link href="./src/css/revealpack.css" rel="stylesheet"/>
     <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <!-- highlight.js theme -->
-    <link href="./src/theme/felipec.css" id="highlight-theme" rel="stylesheet"/>
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
     <!-- Custom CSS -->
     <!-- Custom Scripts -->
     <!-- Print PDF script -->
@@ -4344,13 +4344,20 @@ skipHtmlTags: [
 },
 chtml: {
 scale: 0.8,
-linebreaks: {
-automatic: true,
-},
+minScale: 0.4,
 },
 Safe: {
 sizeMin: 0.4,
 sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
 },
 },
 notes: {

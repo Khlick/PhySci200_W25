@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Hypothesis Testing The P-Value
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/statistics_2.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Hypothesis Testing
+              </h2>
+              <h3>
+                The P-Value
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 05
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="grid-template-columns: 1fr; grid-auto-rows: 1fr; row-gap: 5vmin; align-content:center;"
+
+>
+
+<div></div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p>
+
+<i class="target"></i> Introduce the concept of hypothesis testing
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p>
+
+<i class="target"></i> Investigate alternative methods for quantifying Null Probabilities.
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p>
+
+<i class="target"></i> Define and investigate the p-value.
+
+</p>
+
+</div>
+
+<div></div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We'll start by introducing the concept of hypothesis testing.</p>
+
+<p>We'll then investigate alternative methods for quantifying Null Probabilities.</p>
+
+<p>Finally, we'll discuss what the p-value means and how it is used in hypothesis testing.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/bg-mice-nhst-square.webp" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Hypothesis Testing
+                </h2>
+                <h3>
+                  A Statistical Approach To Testing Claims
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Null Hypothesis Testing Introduction -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Introduction to Null Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic no-hang" style="display: grid; grid-template-columns: 1fr; grid-auto-rows: auto; gap: 5vmin;max-height: 100%;">
+
+<!-- Overview -->
+
+<div>
+
+<p class="framed border-pop small bg-info-alpha-01">
+
+Null Hypothesis Testing is a statistical method that enables decision making through data analysis. It begins with the <span class="danger">assumption</span> that <span class="em">no effect, difference, or relationship exists in a population</span>.
+
+</p>
+
+</div>
+
+
+
+<!-- Hypothesis Concept -->
+
+<div class="fragment" data-fragment-index="1">
+
+<p>The <strong>Null Hypothesis</strong> ($H_0$) proposes that there is no significant difference or effect, serving as a default position that a statement or effect is not present.</p>
+
+<p>The <strong>Alternative Hypothesis</strong> ($H_a$ or $H_1$) suggests that there is a significant difference or effect, contradicting the null hypothesis.</p>
+
+</div>
+
+
+
+<!-- Testing Procedure -->
+
+<div class="smaller left-justify fragment" data-fragment-index="2">
+
+<p>
+
+The testing procedure involves:
+
+<ul>
+
+<li>Defining $H_0$ and $H_a$.</li>
+
+<li>Choosing a significance level ($\alpha$), commonly 0.05.</li>
+
+<li>Calculating a test statistic based on sample data.</li>
+
+<li>Comparing the statistic to a critical value or using a <span class="danger">p-value</span> to determine if $H_0$ can be rejected.</li>
+
+</ul>
+
+</p>
+
+</div>
+
+
+
+<!-- Purpose of Null Hypothesis Testing -->
+
+<div class="no-margin fragment" data-fragment-index="3">
+
+<p class="em small">The purpose of null hypothesis testing is to provide a systematic way to test claims or hypotheses about a population parameter, facilitating evidence-based decision making.</p>
+
+</div>
+
+
+
+<!-- spacer -->
+
+<div></div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Let's add a new layer of terminology: Now we have a new, sort of, hypothesis.
+
+We had scientific and statistical, and now let's add a layer onto the statistical
+
+hypothesis:
+
+</p>
+
+<p>
+
+Hypothesis testing in statistics refers to the practice of determining a p-value for an experiment or test.
+
+This p-value represents the probability of observing a statistic at least as extreme as the one we got.
+
+</p>
+
+<p>
+
+<em>
+
+The question you need to ask is: what is the universal set, the probability space,
+
+from which I'm making my probability calculation! This is called the Null
+
+</em>
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Null Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="small full-width framed no-hang border-success left-justify" style="grid-column:1/3;">
+
+<p>
+
+The <span class="danger strong">Null</span> and <span class="info strong">Alternative</span> Hypotheses add specificity to the general idea of a statistical hypothesis.
+
+</p>
+
+<p class="em">
+
+While a general statistical hypothesis makes a statement about the data,
+
+the null and alternative hypotheses refine this into testable statements
+
+that can guide statistical testing:
+
+</p>
+
+</div>
+
+<div class="small custom framed-in border-danger no-hang fragment" data-fragment-index="3" style="height:100%;">
+
+<h4>Null Hypothesis $H_0$</h4>
+
+<p class="left-justify fragment" data-fragment-index="1">
+
+The null hypothesis is a default position that states there is no effect, no difference, or no association in the data concerning what we are testing. It represents the a <span class="em">baseline belief</span> that any observed effect in the data is due to <span class="danger">random chance</span> <span class="em">rather than a true underlying effect</span>. In many cases, the null hypothesis is what we aim to test against.
+
+</p>
+
+<p class="smaller left-justify fragment" data-fragment-index="2">
+
+<span class="em">Example:</span> If we are testing whether a new drug lowers blood pressure more than a placebo, the null hypothesis might be that there is no difference in blood pressure reduction between the drug and the placebo.
+
+</p>
+
+</div>
+
+<div class="small custom framed-in border-info no-hang fragment" data-fragment-index="6" style="height:100%;">
+
+<h4>Alternative Hypothesis $H_1$</h4>
+
+<p class="left-justify fragment" data-fragment-index="4">
+
+The alternative hypothesis is the complement to the null hypothesis and represents what we are trying to provide evidence for. It posits that there is a real effect, difference, or association in the data. The alternative hypothesis is what researchers typically hope to support through their data analysis.
+
+</p>
+
+<p class="smaller left-justify fragment" data-fragment-index="5">
+
+<span class="em">Example:</span> In the same drug study, the alternative hypothesis would be that the new drug lowers blood pressure more than the placebo.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>General: Is there a difference in blood pressure between the drug and placebo groups</p>
+
+<p>Null: All possible differences between drug and placebo groups are distributed around 0, with parameters that depend on the distribution type.</p>
+
+<p>Alternate: All possible differences between drug and placebo groups are distributed around some true effect-size that are extreme enough to consider plausibly non-zero, or non-null.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- About Testing Procedures -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>About Testing Hypotheses</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small left-justify">
+
+<p>In some way, we have already been testing hypotheses: <span class="fragment em info" data-fragment-index="1">Does my confidence interval include the true parameter?</span></p>
+
+<p class="fragment" data-fragment-index="2">Take the tympanic membrane stress example, we have a sample with <span class="fragment highlight-bg-black-white" data-fragment-index="3">$\bar{x}=55$ MPa</span>, and we want to know how likely it is to be from a <span class="s-quote">normal</span> population with <span class="fragment highlight-warning" data-fragment-index="3">$\mu=45$ MPa</span>.</p>
+
+<p class="fragment" data-fragment-index="4">More precisely, we want to know if $\class{pop}{\bar{x}}\sim\class{warning}{\mathcal{N}(\mu,\sigma)}$.</p>
+
+<p class="fragment" data-fragment-index="5">The question is: are the sampling distribution of the sample mean ($\bar{x}^{\star}$) and the population sampling distribution ($\mathcal{N}(\mu,\frac{\sigma}{\sqrt{n}})$) the same?</p>
+
+<p class="fragment" data-fragment-index="6">How would we test this <span class="info">statistical hypothesis</span>?</p>
+
+</div>
+
+<div style="width:100%;height:100%;align-content:center;justify-content:center;display:flex;flex-direction:column;">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="50%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 432 280" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/TM_stress_prob_dots.svg#axes_1" class="fragment" data-fragment-index="1" />
+
+<use xlink:href="lib/img/TM_stress_prob_dots.svg#axes_2" class="fragment" data-fragment-index="2" />
+
+<use xlink:href="lib/img/TM_stress_prob_dots.svg#axes_3" class="fragment" data-fragment-index="4" />
+
+<use xlink:href="lib/img/TM_stress_prob_dots.svg#axes_4" class="fragment" data-fragment-index="3" />
+
+</svg>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="50%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 432 280" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/TM_stress_prob_sampling.svg#axes_1" class="fragment" data-fragment-index="1" />
+
+<use xlink:href="lib/img/TM_stress_prob_sampling.svg#axes_2" class="fragment" data-fragment-index="2" />
+
+<use xlink:href="lib/img/TM_stress_prob_sampling.svg#axes_3" class="fragment" data-fragment-index="4" />
+
+<use xlink:href="lib/img/TM_stress_prob_sampling.svg#axes_4" class="fragment" data-fragment-index="3" />
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>BarX is the sampling distribution of the sample mean. We want to know if it is the same as the population sampling distribution.</p>
+
+<p>We are given the tm is normally distributed, so we are working on that assumption.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Deriving a Statistical Model for Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Deriving a Statistical Model for Hypothesis Testing (Single Sample)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display: grid; grid-template-columns: 1fr; grid-auto-rows: auto; gap: 2vmin;">
+
+
+
+<!-- Explanation Text -->
+
+<div class="small">
+
+<p>To test a hypothesis for a single sample, we need to establish a statistical model that compares our sample data against a <strong>null model</strong>, which assumes no effect or difference exists. The null model typically assumes the data follows a known distribution under $H_0$, such as the Normal ($Z$), t, or $\chi^2$ distributions.</p>
+
+</div>
+
+
+
+<!-- Key Steps -->
+
+<div class="smaller fragment no-hang" data-fragment-index="1">
+
+<ul>
+
+<li class="fragment" data-fragment-index="1">We calculate the test statistic based on sample data (<span class="em small">We'll call it $\delta$ for now</span>).</li>
+
+<li class="fragment fade-left" data-fragment-index="2">We assume the sample follows a specific distribution under $H_0$.</li>
+
+<li class="fragment fade-left" data-fragment-index="3">We calculate the likelihood of observing the sample under the null distribution. <span class="danger">p-value!</span></li>
+
+<li class="fragment fade-left" data-fragment-index="4">If this likelihood is sufficiently low (below a threshold defined by $\alpha$), we reject $H_0$.</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- Bottom Panel: Distribution Plots -->
+
+<div class="fragment" data-fragment-index="2">
+
+<img src="lib/img/statistical-distributions.svg" alt="Probability Distributions for Hypothesis Testing" class="wide-graphic">
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In this slide, explain how we mathematically derive the hypothesis test model by selecting an appropriate distribution. The wide graphic at the bottom shows the most common continuous distributions used for hypothesis testing.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Standardized Statistic -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Standardized Statistic</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 5vmin;">
+
+
+
+<!-- Text Description -->
+
+<div class="sided border-info left-justify">
+
+<p>The z-score, also known as a standard score, measures the number of standard deviations a data point is from the mean.</p>
+
+</div>
+
+
+
+<!-- Purpose/Overview -->
+
+<div class="fragment">
+
+<p class="em">Z-scores are utilized to identify and describe the position of a data point within a distribution, assess probabilities, and detect outliers.</p>
+
+</div>
+
+
+
+<!-- Normal Distribution Image -->
+
+<div style="width:100%;">
+
+<img src="lib/img/sd-normal.svg" class="unbordered visible" width="100%" style="margin-bottom: 0;">
+
+<p style="font-size: 0.65em; margin-top: 0;" class="em visible" >Normal Distribution</p>
+
+</div>
+
+
+
+<!-- Formula -->
+
+<div>
+
+<p class="framed border-pop small bg-info-alpha-01 fragment">
+
+The <span class="strong">Z Score</span> effectively <span class="em info">standardizes</span> observations, allowing us to make comparisons across different distributions.
+
+</p>
+
+<p class="big fragment">$$z(X) = \frac{x_i - \bar{X}}{s}$$</p>
+
+<p class="small fragment">Where $x_i$ is the data point, $\bar{X}$ is the mean of the sample, and $s$ is the standard deviation.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Z-Test -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Z-test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="no-hang">
+
+<p>When the population parameters ($\mu,\, \sigma$) are known, the z-test is used to determine if there's a significant difference between the sample mean ($\bar{x}$) and the population mean ($\mu$).</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<ul>
+
+<li><strong>$\bar{X}$</strong> is the sample mean.</li>
+
+<li><strong>$\mu$</strong> is the population mean.</li>
+
+<li><strong>$\sigma$</strong> is the population standard deviation.</li>
+
+<li class="strong">$\frac{\sigma}{\sqrt{N}}$ is the standard error ($\text{SE}_{\mu}$) of the population</li>
+
+<li><strong>$N$</strong> is the sample size.</li>
+
+</ul>
+
+</div>
+
+<div class="bigger">$$Z = \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{N}}}$$</div>
+
+</div>
+
+<p class="framed border-pop fragment small left-justify" data-fragment-index="1">
+
+We compare $Z$ to the <span class="danger">critical range</span> of the <span class="warning">population's sampling distribution</span> to decide whether to reject the null hypothesis. <span class="info fragment" data-fragment-index="3">Typically, this is the set at a point $1-\alpha$.</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Let's take a second and think about what this implies or assumes about the underlying distribution.</p>
+
+<p>Z-Test is the test to determine if two means are different, assuming they came from the same underlying distribution. Like comparing Z-Scores</p>
+
+<p>
+
+This says, if both our sample and the population have the same underlying sampling distribution of the mean,
+
+then Z is the standardized difference between our sample mean and the population parameter.
+
+</p>
+
+<p>
+
+<strong>
+
+This allows us to ask the question, what is the probability of finding our
+
+sample mean from the population's sampling distribution.
+
+</strong>
+
+</p>
+
+<p>
+
+Alpha determines the cutoff Z value, beyond which we call more extreme.
+
+If our Z value is that extreme, we say it is "Statistically significantly
+
+different" from the population mean.
+
+</p>
+
+<p>A typical value for alpha is 0.05, which corresponds to the 95% CI of N(0,1).</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Tympanic Membrane Stress -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Tympanic Membrane Stress</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:100%;height:100%;align-content:center;justify-content:center;display:flex;flex-direction:column;">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 432 280" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/TM_stress_z_dist.svg#axes_1" class="fragment" data-fragment-index="1" />
+
+<use xlink:href="lib/img/TM_stress_z_dist.svg#axes_2" class="fragment" data-fragment-index="2" />
+
+<use xlink:href="lib/img/TM_stress_z_dist.svg#axes_3" class="fragment" data-fragment-index="4" />
+
+<use xlink:href="lib/img/TM_stress_z_dist.svg#axes_4" class="fragment" data-fragment-index="3" />
+
+<use xlink:href="lib/img/TM_stress_z_dist.svg#patch_69" class="fragment" data-fragment-index="2" />
+
+</svg>
+
+</div>
+
+<div>
+
+<p>Define our Null Hypothesis: $\class{pop}{\bar{x}}\sim\class{warning}{\mathcal{N}(\mu,\sigma)}\Rightarrow\frac{x_i - \mu}{\frac{\sigma}{\sqrt{N}}}\sim\class{danger}{\mathcal{N}(0,1)}$.</p>
+
+<p class="fragment" data-fragment-index="3">
+
+From our resampling $\mathcal{Z}$ distribution, we can place our 95% BCa confidence interval on the z-score.
+
+</p>
+
+<p class="fragment" data-fragment-index="4">
+
+Formally, our hypothesis is: $H:\mathcal{Z}_0\in\mathcal{Z}^{\star}_{\text{observed}}$, where $\mathcal{Z}_0$ is the <span class="s-quote">null</span> hypothesis that $\mathcal{Z}_0=\mathcal{Z}_{\text{observed}}$.
+
+</p>
+
+<p class="fragment" data-fragment-index="5">
+
+This is the answer to the question: <span class="s-quote">How often does my sampling distribution include no difference in means?</span>
+
+</p>
+
+<p class="fragment danger" data-fragment-index="6">
+
+Unfortunately, this is not how we typically perform hypothesis testing <i class="angry"></i><span class="fragment" data-fragment-index="7"> Instead we use the <span class="em">p-value</span>.</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note, we have made a new statistic: the z-score, and bootstrapped the sampling distribution of the z-score, then compared the 95% confidence interval to the null hypothesis, which we also defined on our own.</p>
+
+<p>QUESTION: What are the underlying assumptions of this test? Normal and standard deviaion of the sample is the same as sigma (population)</p>
+
+<p>But, what is a p-value?</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- P-Values -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is a p-value?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Scientists are obsessed with p-values, but...</p>
+
+<div style="grid-row:2/3;grid-column:1/2;justify-items:center;">
+
+<video data-autoplay src="lib/video/all.mp4" controls class="box-width"></video>
+
+</div>
+
+<div
+
+class="fragment rotation-325 huge bg-danger-light framed border-danger border-2x"
+
+style="font-family: 'Playfair Display', serif;grid-row:2/3;grid-column:1/2;width:fit-content;justify-self:center;align-self:center;">
+
+No one has a clue!
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Here's a quote from the interviewer:</p>
+
+<p>To be clear, everyone I spoke with at METRICS could tell me the technical definition of a p-value - the probability of getting results at least as extreme as the ones you observed, given that the null hypothesis is correct - but almost no one could translate that into something easy to understand.</p>
+
+<p>Try to distill the p-value down to an intuitive concept and it loses all its nuances and complexity, said science journalist Regina Nuzzo, a statistics professor at Gallaudet University. "Then people get it wrong, and this is why statisticians are upset and scientists are confused." </p>
+
+<p>You can get it right, or you can make it intuitive, but it's all but impossible to do both.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- p-value Definition -->
+
+
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is a p-value?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;row-gap:1vmin;">
+
+<p class="quoted">
+
+A p-value is the <span class="danger">probability</span> of obtaining a result
+
+<span class="u-danger">at least as extreme as</span> the one observed,
+
+assuming that the
+
+<span class="u-danger"> null hypothesis is true</span>.
+
+</p>
+
+<p class="fragment down-3">
+
+<i class="fas fa-arrow-circle-right danger"></i> A <span class="u em danger">small p-value casts doubt</span> on the null hypothesis/model
+
+used to perform the calculation (in the blood pressure student, $H_0$ was changes in BP were randomly different from 0).
+
+</p>
+
+<div class="fragment grid-generic" style="grid-template-columns:repeat(5,1fr);grid-template-rows:1fr;column-gap:1vmin;align-items:center;">
+
+<p>
+
+A p-value
+
+</p>
+
+<p>
+
+<span class="success">$\leq{0.10}$</span> <br>
+
+<span class="info">$\leq{0.05}$</span> <br>
+
+<span class="warning">$\leq{0.01}$</span> <br>
+
+<span class="danger">$\leq{0.001}$</span>
+
+</p>
+
+<p>
+
+is generally considered <br>to be
+
+</p>
+
+<p>
+
+<span class="success">some</span> <br>
+
+<span class="info">fairly strong</span> <br>
+
+<span class="warning">very strong</span> <br>
+
+<span class="danger">extremely strong</span>
+
+</p>
+
+<p>
+
+<span class="u">evidence</span> <span class="u-danger">against</span> the null.
+
+</p>
+
+</div>
+
+<p class="framed border-pop fragment">
+
+<i class="arrowr pop"></i> A p-value measures a <span class="u-pop">sample's compatibility with a hypothesis</span>, <span class="pop">not the truth of the hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- NHST One-Sample Overview -->
+
+<section>
+
+<style>
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>NHST: One Sample</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;">
+
+<div>
+
+<p>
+
+In a one-sample (of size N) null hypothesis test, we aim to determine if a sample
+
+could have originated from a <span class="danger">population with a specific
+
+parameter value</span>.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="grid-generic fragment" data-fragment-index="1" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<p class="sided-no-bg border-pop" style="text-align:left;">
+
+For <span class="pop">categorical samples</span>, the comparison is
+
+typically against a <span class="info">null chance model </span> with a known success rate,
+
+e.g., <span class="em">Binomial Distribution</span>.
+
+</p>
+
+<svg width="80%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/recap-nhst-sampling-distribution-one-sample.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div style="text-align:left;" class="fragment" data-fragment-index="2">
+
+<p class="sided-no-bg border-pink">
+
+In <span class="pink u">quantitative samples</span>, a reliable null sampling
+
+distribution requires a specific model or strong assumptions.
+
+</p>
+
+<p class="fragment fade-left" data-fragment-index="3">
+
+<i class="brain"></i>
+
+Consider a machine that generates number series. We want to know if a
+
+specific series could have been produced by this machine.
+
+</p>
+
+<p class="fragment fade-up" data-fragment-index="4">
+
+<i class="lightbulb"></i> We generate a sampling distribution of the
+
+sample mean ($\hat{x}$) from the machine and evaluate the likelihood
+
+that our original $\bar{x}$ belongs to this distribution.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>If you have a single sample, you will be given the "population" parameters to test against.</p>
+
+<p>Actually, you're usually given something that represents 'historical' data.</p>
+
+<p>Sometimes you will not be given all the population data, let's look on the next slide.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Tailedness in Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Tailedness in Hypothesis Testing</h2>
+
+<p class="small em">Determining effects in one direction (<i role="emoji" data-emoji="&#x1F9A8;"></i>) or both (<i role="emoji" data-emoji="&#x1F9A8;"></i><i role="emoji" data-emoji="&#x1F9A8;"></i>)!</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="display: grid; grid-template-columns: 1.2fr 1fr; grid-auto-rows: auto; gap: 2vmin;">
+
+<div class="small">
+
+<!-- One-Tailed Test -->
+
+<div class="small framed border-danger no-hang fragment" data-fragment-index="1">
+
+<h4>One-Tailed Test</h4>
+
+<p>Used when we're interested if the <span class="pop">test statistic ($\delta$)</span> is significantly greater than or less than the Null Hypothesis ($H_0$).</p>
+
+<p>It specifies the direction of the effect:
+
+<ul>
+
+<li><strong>Right-tailed</strong> test: $\delta \gg H_0$.</li>
+
+<li><strong>Left-tailed</strong> test: $\delta \ll H_0$.</li>
+
+</ul>
+
+</p>
+
+</div>
+
+
+
+<!-- Two-Tailed Test -->
+
+<div class="small framed border-info fragment" data-fragment-index="2">
+
+<h4>Two-Tailed Test</h4>
+
+<p>Used when we're interested in whether the <span class="pop">test statistic ($\delta$)</span> is different from $H_0$, <span class="em">without specifying the direction</span> of the difference.</p>
+
+<p>Us it to test for <span class="em">any</span> significant difference.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- Diagram -->
+
+<div class="img full-width">
+
+<svg viewBox="0 0 432 312" class="full-width">
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_1"></use>
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_2" class="fragment current-visible" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/tailedness-diagram.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Explain when each test is appropriate. Use the diagram to clarify the visual difference between one- and two-tailed tests.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- When to Choose One-Tailed vs Two-Tailed -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Tailed vs Two-Tailed Tests</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns: 1fr; grid-auto-rows: auto; gap: 2vmin;">
+
+
+
+<!-- General Rule -->
+
+<div class="small">
+
+<p>The choice between a one-tailed and two-tailed test depends on the research question and how specifically we want to test the direction of the effect.</p>
+
+</div>
+
+
+
+<!-- Example 1: One-Tailed -->
+
+<div class="small fragment" data-fragment-index="1">
+
+<h4>Example 1: <span class="fragment danger" data-fragment-index="2">One</span>-Tailed</h4>
+
+<p>If we are testing whether a new drug is better than an existing treatment and we are <strong>only interested</strong> in knowing if it is better (not worse or the same), we would use which tailed test?</p>
+
+</div>
+
+
+
+<!-- Example 2: Two-Tailed -->
+
+<div class="small fragment" data-fragment-index="3">
+
+<h4>Example 2: <span class="fragment info" data-fragment-index="4">Two</span>-Tailed</h4>
+
+<p>If we are testing whether a new material has a different strength than a standard material, but we are <strong>interested in any difference</strong> (either stronger or weaker), we would use which tailed test?</p>
+
+</div>
+
+
+
+<!-- Example 3: One-Tailed -->
+
+<div class="small fragment" data-fragment-index="5">
+
+<h4>Example 3: <span class="fragment danger" data-fragment-index="6">One</span>-Tailed</h4>
+
+<p>In an industrial quality control scenario, where we need to check if a machine's output is <strong>below a certain defect threshold</strong>, we would use which tailed test to check if the defect rate is less than a critical level?</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Highlight the general rule and when to apply one-tailed vs two-tailed testing. Use each example to illustrate real-world cases that show the importance of specifying the direction of testing.</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Describing The Statistic</h2>
+
+<p><span class="strong">Any</span> statistical test/procedure <span class="danger">relies on the sampling distribution!</span></p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;grid-column-gap:2vmin;">
+
+<!-- Confidence Intervals -->
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;grid-row-gap:5px;text-align:justify;text-justify:inter-word;height:100%;">
+
+<h3 class="black">Confidence Interval</h3>
+
+<div class="bg-info-light framed">
+
+<p>
+
+A range of values that is likely to contain the
+
+<span class="warning">true value of the population parameter</span>,
+
+based on a sample, is identified through statistical confidence,
+
+via the <span class="danger strong">sampling
+
+distribution of the sample statistic</span>.
+
+</p>
+
+</div>
+
+<p class="question small">
+
+If I had access to other samples collected under the same conditions,
+
+how much would the central $N\%$ vary
+
+</p>
+
+</div>
+
+<!-- NHST -->
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;grid-row-gap:5px;text-align:justify;text-justify:inter-word;height:100%;">
+
+<h3 class="black">Null Hypothesis Testing</h3>
+
+<div class="bg-warning-light framed">
+
+<p>
+
+Determine if the observed statistic ($\hat{p},\, \bar{x}$) originates
+
+from a population centered at a specific parameter
+
+value $[\pi,\, \mu]$ by analyzing the
+
+<span class="danger strong">assumed sampling
+
+distribution of the null parameter</span>
+
+as it relates to the statistic of interest.
+
+</p>
+
+</div>
+
+<p class="question">
+
+What is the probability my observed statistic came from this
+
+theoretical distribution
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Recall that we've discussed 2 ways to garner "evidence" against the observation happening by random chance.</p>
+
+<p>I mentioned before, we have multiple ways of estimating a population parameter.</p>
+
+<p>In some cases, it will be clear what the population is, and others, not so much.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Discrete Example: Coin Flips -->
+
+
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Null Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Lead into "At Least 19 Heads" -->
+
+<div class="framed small" style="height:100%;">
+
+<p class="em left-justify no-margin">
+
+<span class="u">Scenario</span>: a coin is flipped <span class="info">28</span> times, resulting
+
+in <span class="danger">19</span> heads.
+
+</p>
+
+<p class="question">
+
+If the coin is "fair", how likely is this
+
+</p>
+
+<p class="left-justify">Using the binomial distribution formula:</p>
+
+<p>$P(X = 19) = \binom{28}{19} (0.5)^{19} (0.5)^{9}=\class{info}{0.0257}$</p>
+
+<p class="question fragment" data-fragment-index="1">Is this evidence of an "unfair" coin</p>
+
+<p class="left-justify fragment" data-fragment-index="2">
+
+Assess how <span class="excited-text">extreme</span> our result is:
+
+</p>
+
+<div class="smallest no-hang">
+
+<span class="fragment" data-fragment-index="2">$$P(X\geq 19) =P(X=19) + P(X=20) + \ldots + P(X=28)$$</span>
+
+<span class="fragment" data-fragment-index="2">$$= \sum_{x=19}^{28} \binom{28}{x} p^x (1-p)^{28-x}$$</span>
+
+<span class="fragment" data-fragment-index="12">$$= \class{danger}{0.044}$$</span>
+
+</div>
+
+</div>
+
+<div data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">Model</p>
+
+<p class="smallest no-hang"><span class="u">Binomial Probability Distribution:</span>$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$ for $k={1,\ldots,28}$:</p>
+
+</div>
+
+<!-- <img src="lib/img/binomial-coinflip.svg" alt="coinflip" style="width:100%;margin-left:auto;margin-right:auto;"> -->
+
+<svg width="100%" viewBox="-5 0 460 320" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#PolyCollection_1"class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#matplotlib.axis_1"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#matplotlib.axis_2"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_2"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_3"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_4" class="fragment" data-fragment-index="2" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_5" class="fragment" data-fragment-index="3" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_6" class="fragment" data-fragment-index="4" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_7" class="fragment" data-fragment-index="5" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_8" class="fragment" data-fragment-index="6" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_9" class="fragment" data-fragment-index="7" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_10" class="fragment" data-fragment-index="8" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_11" class="fragment" data-fragment-index="9" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_12" class="fragment" data-fragment-index="10" data-autoslide="500"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<div style="font-size:90%;">
+
+<p>You run the experiment, the question you ask is: "if the coin were perfectly fair, how likely is this outcome?"</p>
+
+<p>To get at the strength of our evidence, we ask the question: how "extreme" is my result? Extreme means unlikely.</p>
+
+<p>Show equation, talk over the summation. "So our evidence suggests that getting a value at least as extreme as ours happens about 4.4% of the time."</p>
+
+<p>Is that a meaningful result? As Frequentists, what would we really want to do? Replicate the results many times.</p>
+
+<p>What is our assumption we are testing? Our model says p(h)=p(t)=0.5 so it's a model of the fair coin probability flipped 28 times. Is 28</p>
+
+</div>
+
+</aside>
+
+</section>
+
+
+
+<!-- Discrete Example: Bootstrapping -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Null Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Lead into "At Least 19 Heads" -->
+
+<div class="framed smaller" style="height:100%;">
+
+<p class="em left-justify no-margin">
+
+<span class="u">Scenario</span>: a coin is flipped <span class="info">28</span> times, resulting
+
+in <span class="danger">19</span> heads.
+
+</p>
+
+<div class="smaller" style="margin-right:10px;">
+
+<pre class="language-python"><code data-trim>
+
+n_bootstrap = 10000
+
+null_bootstrap_proportions = np.zeros(n_bootstrap)
+
+# Simulate bootstrap resampling under null hypothesis
+
+for i in range(n_bootstrap):
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Resample assuming fair coin (p=0.5)
+
+&nbsp;&nbsp;&nbsp;&nbsp;sample = np.random.binomial(n=1, p=0.5, size=n_flips)
+
+&nbsp;&nbsp;&nbsp;&nbsp;null_bootstrap_proportions[i] = np.mean(sample)
+
+# Calculate p-value (two-tailed)
+
+p_value = np.mean(null_bootstrap_proportions >= p_observed)</code></pre>
+
+</div>
+
+<p class="question">
+
+If the coin is "fair", how likely is this
+
+</p>
+
+</div>
+
+<div data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">Model</p>
+
+<p class="smallest no-hang"><span class="u">Binomial Probability Distribution:</span>$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$ for $k={1,\ldots,28}$:</p>
+
+</div>
+
+<img src="lib/img/coin_19_28_null_simulation.svg" alt="coinflip" style="width:100%;margin-left:auto;margin-right:auto;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Discrete Example: Coin Flips -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Confidence Interval "Testing"</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.3fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Lead into "At Least 19 Heads" -->
+
+<div class="framed smallest" style="height:100%;">
+
+<!-- Binomial Analysis Here -->
+
+<p>Estimate the 95% confidence interval for 19 Heads in 28 coin flips.</p>
+
+<p class="fragment small no-hang" data-fragment-index="0">$$\hat{p} = \frac{x}{n} = \frac{19}{28}\,\&\, SE = \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}$$</p>
+
+<p class="small fragment" data-fragment-index="0">Where $\hat{p}$ is the sample <span class="info">expected</span> proportion, $x$ is the number of successes (heads), and $n$ is the total number of trials (coin flips).</p>
+
+<p class="fragment" data-fragment-index="1">For a 95% confidence interval, we can bootstrap the sampling distribution and find the values that contain the middle 95% of resampled proportions:</p>
+
+<p class="fragment smaller no-hang" data-fragment-index="2">
+
+Observed proportion of heads: $0.679$<br>
+
+95% Confidence Interval: $(0.500, 0.857)$<br>
+
+95% CI in terms of number of heads: $(14.0, 24.0)$
+
+</p>
+
+<p class="fragment danger" data-fragment-index="3">This means we are 95% confident that the true proportion of heads in the population from which this sample was drawn falls within this interval.</p>
+
+</div>
+
+<div data-id="danim" style="align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<div class="small">
+
+<p class="smallest no-margin"><span class="u">Chance-model: Binomial Distribution</span>$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$ for $k={1,\ldots,28}$:</p>
+
+</div>
+
+<svg width="100%" viewBox="-5 0 460 320" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_1"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_3" class="fragment fade-out" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_3" class="fragment" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_4" class="fragment" data-fragment-index="0"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment framed border-warning" data-fragment-index="4" style="grid-column:1/3;">
+
+<p class="smallest">
+
+If we <span class="em danger">assume</span> $E[H]=\hat{\pi}=0.5$, then $n\hat{\pi}=14$ is our expected count if the <span class="em info">chance-model</span> is true, <span class="info">does our 95% confidence interval include the by-chance value?</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The bootstrapping procedure is the same as the mouse litters code.</p>
+
+<p>Thinking about values that lie within intervals, this is the statistical evidence. Anyone remember: "If the glove don't fit, you must acquit" OJSimpson's lawyers.</p>
+
+<ul>
+
+<li>The sample proportion of heads is: \( \hat{p} = \frac{19}{28} \approx 0.679 \).</li>
+
+<li>Calculate the Standard Error (SE): \( SE = \sqrt{\frac{\hat{p} (1 - \hat{p})}{n}} = \sqrt{\frac{\frac{19}{28} \left(1 - \frac{19}{28}\right)}{28}} \approx 0.092 \).</li>
+
+<li>Calculate the 95% confidence interval for the proportion: \( CI = \hat{p} \pm z \cdot SE = 0.679 \pm 1.96 \cdot 0.092 \approx 0.679 \pm 0.181 \).</li>
+
+<li>Convert the proportion interval to the count of heads:
+
+<ul>
+
+<li><strong>Lower bound:</strong> \( (0.679 - 0.181) \times 28 \approx 0.498 \times 28 \approx 14 \).</li>
+
+<li><strong>Upper bound:</strong> \( (0.679 + 0.181) \times 28 \approx 0.860 \times 28 \approx 24 \).</li>
+
+</ul>
+
+</li>
+
+<li>Thus, the confidence interval for the number of heads is approximately: \( 19 \pm 5 \text{ heads} \) (from 14 to 24 heads).</li>
+
+</ul>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- T-Maze Example: Bootstrapping -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Null Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Setup -->
+
+<div class="framed smallest" style="height:100%;">
+
+<p class="em left-justify no-margin">
+
+<span class="u">Scenario</span>: In a T-maze experiment, an APOE knockout mouse shows an alternation rate of <span class="danger">0.25</span> over <span class="info">10</span> trials.
+
+</p>
+
+<div class="smaller">
+
+<pre class="language-python"><code data-trim>
+
+n_bootstrap = 10000
+
+null_bootstrap_rates = np.zeros(n_bootstrap)
+
+# Simulate bootstrap resampling under null hypothesis
+
+for i in range(n_bootstrap):
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Resample assuming random choice (p=0.5)
+
+&nbsp;&nbsp;&nbsp;&nbsp;choices = np.random.binomial(n=1, p=0.5, size=n_trials-1)
+
+&nbsp;&nbsp;&nbsp;&nbsp;null_bootstrap_rates[i] = np.mean(choices)
+
+# Calculate p-value (one-tailed)
+
+p_value = np.mean(null_bootstrap_rates <= d_actual)</code></pre>
+
+</div>
+
+<p class="question">
+
+If the mouse is choosing randomly, how likely is this low alternation rate?
+
+</p>
+
+<p class="left-justify">Under random choice, expected alternation rate is 0.5</p>
+
+<p class="left-justify">
+
+Assess how <span class="excited-text">extreme</span> our result is:
+
+</p>
+
+<div class="smallest no-hang">
+
+<span>$$P(X\leq 0.25) = \sum_{x=0}^{0.25} P(X=x)$$</span>
+
+<span>$$= \class{danger}{0.0317}$$</span>
+
+</div>
+
+</div>
+
+<div class="no-hang" data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: T-Maze Diagram -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">T-Maze Task</p>
+
+<p class="smallest no-hang">Testing spatial memory in APOE knockout vs wild-type mice</p>
+
+</div>
+
+<img src="lib/img/tmaze.svg" alt="tmaze" style="width:20%;margin-left:auto;margin-right:auto;">
+
+<img src="lib/img/TMaze_null_sim.svg" alt="tmaze" style="width:60%;margin-left:auto;margin-right:auto;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 06
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
