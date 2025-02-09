@@ -1,0 +1,3793 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      ANOVA Part 2 One Way And Repeated Measures
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/bg-mice-nhst-wide_5.webp" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Anova Part 2
+              </h2>
+              <h3>
+                One Way
+              </h3>
+              <h3>
+                And Repeated Measures
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 09
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="grid-template-columns: 1fr; grid-auto-rows: 1fr; row-gap: 5vmin; align-content:center;"
+
+>
+
+<div></div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p>
+
+<i class="target"></i> Recap on the F-statistic and its components
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p>
+
+<i class="target"></i> F-statistic for the one-way ANOVA
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p>
+
+<i class="target"></i> Effect size for the one-way ANOVA
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p>
+
+<i class="target"></i> Introduction to <span class="em">post hoc</span> testing
+
+</p>
+
+</div>
+
+<div></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/statistics_comp_3.png" data-background-size="cover" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  The F-Statistic
+                </h2>
+                <h3>
+                  Partions Of Variance
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Let's look at the F-statistic a little deeper.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- ANOVA -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Analysis Of Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted no-margin-top" style="font-size:80%;">
+
+An <span class="strong">AN</span>alysis <span class="strong">O</span>f
+
+<span class="strong">VA</span>riance (ANOVA) is a comparison between the
+
+<span class="em">variability between groups</span> to the
+
+<span class="em">variability within groups</span>. The statistic of interest
+
+that reflects this comparison between the two types of variability when
+
+performing an ANOVA is the <span class="strong u em">F-statistic</span>.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Total Variability
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Between Groups Variability
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Within Groups Variability
+
+</p>
+
+</div>
+
+</div>
+
+<p style="text-align:left;">
+
+Each of these variabilities relies on the
+
+<span class="u">calculation of the sums of squares</span>
+
+(<span class="strong">$SS$</span>) deviations.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Total Variance $SS_{\mathrm{Total}}$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Between Groups Variance $SS_{\mathrm{Groups}}$ (a.k.a $SS_{\mathrm{Between}}$)
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+"Error" Variance $SS_{\mathrm{Error}}$ (a.k.a. $SS_{\mathrm{Within}}$)
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F - Statistic -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\operatorname{F}$-statistic</h2>
+
+</div>
+
+<div class="content" style="justify-content:start;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+The $F$-statistic is a <span class="strong">ratio</span> of the
+
+<span class="u-danger">variability between groups</span> and the
+
+<span class="u-info">variability withing groups</span>,
+
+but <span class="strong">uses the mean variability</span> instead of the
+
+total variability for each component.
+
+</p>
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean variability between groups}}}{\class{info}{\textrm{Mean variability within groups}}}$
+
+</p>
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean SS}_{Group}}}{\class{info}{\textrm{Mean SS}_{Error}}}=
+
+\frac{\class{danger}{\frac{\textrm{SS}_{Group}}{(k-1)}} }{\class{info}{\frac{\textrm{SS}_{Error}}{(n-k)}}}$
+
+</p>
+
+<p>
+
+<span class="u em">Notes</span>
+
+</p>
+
+<ul class="smaller push-left" >
+
+<li>
+
+$k$: number of groups
+
+</li>
+
+<li>
+
+$n$: number of data points
+
+</li>
+
+<li>
+
+$(k-1)$ and $(n-k)$ are the respective degrees of freedom for the variability between and within groups (degree of freedom for the total variability is $(n-1)$).
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ANOVA Interactive -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Analysis Of Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:5fr 6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div style="align-content:center;display:grid;height:100%">
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean SS}_{Group}}}{\class{info}{\textrm{Mean SS}_{Error}}}$
+
+</p>
+
+</div>
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$$
+
+</p>
+
+</div>
+
+</div>
+
+<vizzy data-src="lib/interactives/anova-variability.html" style="height:65vh;display:grid;align-items: start;justify-items: center;grid-template-columns: 1fr 2.3fr 1fr;" data-style="grid-column: 2/3;">
+
+[
+
+{
+
+index: 1,
+
+activate: () => window.updateGraph(26.6, 0.94),
+
+reverse: () => window.updateGraph(37.43, 1.25)
+
+},
+
+{
+
+index: 2,
+
+activate: () => window.updateGraph(18.6, 1.51),
+
+reverse: () => window.updateGraph(54, 1.4)
+
+},
+
+{
+
+index: 3,
+
+activate: () => window.updateGraph(60.6, 0.14),
+
+reverse: () => window.updateGraph(18.6, 1.51)
+
+}
+
+]
+
+</vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Degrees Of Freedom -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Degrees Of Freedom</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="strong em">Degrees of Freedom refers to the number of independent quantities that can vary in some
+
+analysis.</p>
+
+<p class="fragment" data-fragment-index="1">
+
+For an analysis of the <span class="info">mean</span>, each value in the dataset contributes to the
+
+calculation and so the weight of each value is <span class="info">equal</span>, i.e., $p(X) = \frac{1}{n}$.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+For the analysis of the <span class="warning">variance</span>, the mean is used in the calculation, $s^2 =
+
+\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \class{danger}{\bar{x}})^2$, thus it imposes a <span
+
+class="em">constraint</span> on the number of independent values, so we must <span
+
+class="pop">penalize</span> our estimate of the population variance by 1.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Frankly, these mathematicians needed some way to better account for sequential processing of the same data.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Unbiased Estimation of Population Variance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Unbiased Estimation of Population Variance</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny left-justify no-hang">
+
+<p>
+
+Consider a random sample \( X_1, X_2, \ldots, X_n \) drawn from a population with mean \( \mu \) and
+
+variance
+
+\( \sigma^2 \). The sample mean \( \bar{X} \) is calculated as:
+
+</p>
+
+<p>\[
+
+\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i
+
+\]
+
+</p>
+
+<p>The <em>uncorrected sample variance</em> (biased estimator) is:</p>
+
+<p>\[
+
+s_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2
+
+\]
+
+</p>
+
+<p>To determine if this is an unbiased estimator of the population variance \( \sigma^2 \), we compute its
+
+expected value \( E[s_n^2] \):</p>
+
+<p>\[
+
+E[s_n^2] = E\left[ \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2 \right]
+
+\]</p>
+
+<p>Expanding \( (X_i - \bar{X})^2 \):</p>
+
+<p>\[
+
+(X_i - \bar{X})^2 = (X_i - \mu - (\bar{X} - \mu))^2 = (X_i - \mu)^2 - 2(X_i - \mu)(\bar{X} - \mu) + (\bar{X}
+
+-
+
+\mu)^2
+
+\]</p>
+
+</div>
+
+<div class="tiny left-justify no-hang">
+
+<p>Summing over all observations:</p>
+
+<p>\[
+
+\sum_{i=1}^n (X_i - \bar{X})^2 = \sum_{i=1}^n [(X_i - \mu)^2 - 2(X_i - \mu)(\bar{X} - \mu) + (\bar{X} -
+
+\mu)^2]
+
+\]</p>
+
+<p>Simplifying:</p>
+
+<p>\[
+
+\sum_{i=1}^n (X_i - \bar{X})^2 = \sum_{i=1}^n (X_i - \mu)^2 - 2(\bar{X} - \mu) \sum_{i=1}^n (X_i - \mu) +
+
+n(\bar{X} - \mu)^2
+
+\]</p>
+
+<p>Since \( \sum_{i=1}^n (X_i - \mu) = n(\bar{X} - \mu) \):</p>
+
+<p>\[
+
+\sum_{i=1}^n (X_i - \bar{X})^2 = \sum_{i=1}^n (X_i - \mu)^2 - 2n(\bar{X} - \mu)^2 + n(\bar{X} - \mu)^2
+
+\]</p>
+
+<p>\[
+
+\sum_{i=1}^n (X_i - \bar{X})^2 = \sum_{i=1}^n (X_i - \mu)^2 - n(\bar{X} - \mu)^2
+
+\]</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Unbiased Estimation of Population Variance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Unbiased Estimation of Population Variance</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny left-justify no-hang">
+
+<p>Taking the expected value:</p>
+
+<p>\[
+
+E\left[ \sum_{i=1}^n (X_i - \bar{X})^2 \right] = E\left[ \sum_{i=1}^n (X_i - \mu)^2 \right] - n E[(\bar{X} -
+
+\mu)^2]
+
+\]</p>
+
+<p>Since \( E[(X_i - \mu)^2] = \sigma^2 \) and \( E[(\bar{X} - \mu)^2] = \frac{\sigma^2}{n} \):</p>
+
+<p>\[
+
+E\left[ \sum_{i=1}^n (X_i - \bar{X})^2 \right] = n\sigma^2 - n \frac{\sigma^2}{n} = n\sigma^2 - \sigma^2 =
+
+(n
+
+- 1)\sigma^2
+
+\]</p>
+
+</div>
+
+<div class="tiny left-justify no-hang">
+
+<p>Therefore:</p>
+
+<p>\[
+
+E[s_n^2] = E\left[ \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2 \right] = \frac{1}{n} (n - 1)\sigma^2 = \left(
+
+\frac{n - 1}{n} \right) \sigma^2
+
+\]</p>
+
+<p>This shows that \( s_n^2 \) is a biased estimator of \( \sigma^2 \), underestimating the population
+
+variance
+
+by a factor of \( \frac{n - 1}{n} \).</p>
+
+<p>To obtain an unbiased estimator, we divide by \( n - 1 \) instead of \( n \):</p>
+
+<p>\[
+
+s^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
+
+\]</p>
+
+<p>Calculating the expected value:</p>
+
+<p>\[
+
+E[s^2] = E\left[ \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2 \right] = \frac{1}{n - 1} E\left[
+
+\sum_{i=1}^n
+
+(X_i - \bar{X})^2 \right]
+
+\]</p>
+
+<p>\[
+
+E[s^2] = \frac{1}{n - 1} (n - 1)\sigma^2 = \sigma^2
+
+\]</p>
+
+</div>
+
+<div class="smallest framed border-info left-justify no-hang" style="grid-column:1/3;">
+
+<p>Thus, \( s^2 \) is an unbiased estimator of the population variance \( \sigma^2 \).</p>
+
+<p>This correction accounts for the fact that the sample mean \( \bar{X} \) is an estimate of \( \mu \), and
+
+using \( n - 1 \) instead of \( n \) compensates for the bias introduced by this estimation.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- What are we doing here? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What are we doing here?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p>
+
+In the time before computers, mathematicians needed a way to adjust for making multiple calculations on the same data, and thus adjust for bias.
+
+</p>
+
+<p class="sided border-info">
+
+Degrees of freedom play a role in shaping the <span class="em info">sampling distribution</span> of the statistic to account for biases introduced in the analysis process.
+
+</p>
+
+<p>
+
+For ANOVA, Degrees of Freedom are used to adjust the variances of the groups, the variances of the sample means about the grand mean, and the variances of the residuals.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Some of these guys, maybe, had something a little "extra" in their ink wells.</p>
+
+<p>Let's look at an example.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/hungry-ants.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Anova
+                </h2>
+                <h3>
+                  And The Hungry Ants
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240,240,240,0.7) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.7) !important;
+
+}
+
+</style>
+
+
+
+<aside class="notes">
+
+<p>
+
+As young students in Australia, Dominic Kelly and his friends enjoyed watching
+
+ants gather on pieces of sandwiches. Later, as a university student, Dominic
+
+decided to study this with a more formal experiment. He chose three types of
+
+sandwich fillings to compare.
+
+</p>
+
+</aside>
+
+
+
+</section>
+
+
+
+<!-- SETUP -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Ant Sandwich Preference</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>
+
+University student Dominic Kelly chose to study ant dietary preference as a
+
+final term paper for his statistics course.
+
+</p>
+
+<p class="fragment">
+
+He recalled being a kid and noticing ants would always find their way to
+
+his friend's sandwich, but only sometimes found their way to his own.
+
+He decided to throw in a common australian sandwich as well.
+
+</p>
+
+<p class="fragment">
+
+He chose sandwiches with fillings:
+
+<ul class="fragment">
+
+<li>Vegemite</li>
+
+<li>Peanut Butter</li>
+
+<li>Ham and Pickles</li>
+
+</ul>
+
+</p>
+
+</div>
+
+<div class="full-width">
+
+<img src="lib/img/ants-sandwich.png" width=100%>
+
+</div>
+
+<div class="fragment "style="grid-column:1/3;justify-items:right;display:grid">
+
+<p class="muted" style="text-align:right; font-size:60%">
+
+Mackisack, M., <span class="em">"Favourite Experiments: An Addendum to
+
+What Is the Use of Experiments Conducted by Statistics Students?"</span>
+
+Journal of Statistics Education, 1994 <br>
+
+<a href="https://ww2.amstat.org/publications/jse/v2n1/mackisack.supp.html">http://www.amstat.org/publications /jse/v2n1/mackisack.supp.html</a>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Data Table -->
+
+<section>
+
+<style>
+
+#ant-table, #ant-table table, #ant-table td, #ant-table th {
+
+font-size: 85%;
+
+text-align: center;
+
+}
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Ant Sandwich Preference</h2>
+
+</div>
+
+<div class="content">
+
+<p>
+
+To conduct the experiment Dominic:
+
+</p>
+
+<ol class="box-width" style="font-size:80%;">
+
+<li>
+
+<span class="strong">Randomly chose a sandwich type</span>, leaving a piece on the ground near an ant hill.
+
+</li>
+
+<li>
+
+After 5 minutes he placed a jar over the sandwich and <span class="strong">counted the number of ants</span>.
+
+</li>
+
+</ol>
+
+<p>
+
+He <span class="danger">repeated the process</span>, allowing time for ants to return to the hill after each trial, until he had <span class="strong">eight samples for each</span> of the three sandwich fillings.
+
+</p>
+
+<table id="ant-table" class="box-width">
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="bg-muted-light black border-nobottom border-right border-left border-top" colspan="8">Number of ants visiting sandwiches</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="bg-muted-light black border-left">#1</td>
+
+<td class="bg-muted-light black">#2</td>
+
+<td class="bg-muted-light black">#3</td>
+
+<td class="bg-muted-light black">#4</td>
+
+<td class="bg-muted-light black">#5</td>
+
+<td class="bg-muted-light black">#6</td>
+
+<td class="bg-muted-light black">#7</td>
+
+<td class="bg-muted-light black border-right">#8</td>
+
+<td>$\bar{x}$</td>
+
+<td>$s^2$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light border-left border-right">Vegemite</td>
+
+<td>18</td>
+
+<td>29</td>
+
+<td>42</td>
+
+<td>42</td>
+
+<td>31</td>
+
+<td>21</td>
+
+<td>38</td>
+
+<td class="border-right">25</td>
+
+<td class="warning-dark border-nobottom">30.75</td>
+
+<td class="warning-dark border-nobottom">85.64</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light border-left border-right">Peanut Butter</td>
+
+<td>43</td>
+
+<td>59</td>
+
+<td>22</td>
+
+<td>25</td>
+
+<td>36</td>
+
+<td>47</td>
+
+<td>19</td>
+
+<td class="border-right">21</td>
+
+<td class="info border-nobottom">34.0</td>
+
+<td class="info border-nobottom">214.00</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light border-left border-right">Ham & Pickles</td>
+
+<td>44</td>
+
+<td>34</td>
+
+<td>36</td>
+
+<td>49</td>
+
+<td>54</td>
+
+<td>65</td>
+
+<td>59</td>
+
+<td class="border-right">53</td>
+
+<td class="danger">49.25</td>
+
+<td class="danger">116.50</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Visualize the data -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Ant Sandwich Preference</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:1vmin;">
+
+<div style="justify-self: end; justify-content:end;">
+
+<p class="question">
+
+Do ants have a preferential sandwich filling
+
+</p>
+
+<div>
+
+<i class="fas fa-question fa-3x warning"></i><img src="lib/img/ants-sandwich-preferred.png" width=50%><i class="fas fa-question fa-3x warning"></i>
+
+</div>
+
+</div>
+
+<div style="justify-self: start; justify-content:start;width: 100%;height:100%;">
+
+<div style="width: 100%;height:100%;">
+
+<svg width="100%" style="width:100%;height:100%;" viewBox="0 0 432 268">
+
+<use xlink:href="lib/img/ants-sandwich-dotplot.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p class="fragment" data-fragment-index="1">
+
+What is our <span class="danger">Null</span> Hypothesis?
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+And the <span class="pop">Alternate</span> Hypothesis?
+
+</p>
+
+</div>
+
+<div style="text-align: left;margin-left:20%;align-content:center;">
+
+<p class="sided-no-bg border-muted fragment" data-fragment-index="2">
+
+$H_0$: $\mu_\class{warning}{1}=\mu_\class{info}{2}=\mu_\class{danger}{3}$
+
+</p>
+
+<p class="sided-no-bg border-pop fragment" data-fragment-index="4">
+
+$H_a$: At least one $\mu_i\neq\mu_j$
+
+</p>
+
+</div>
+
+<p class="fragment" data-fragment-index="5" style="grid-column: 1/3;">
+
+With the F-distribution, the <span class="em">sidedness</span> is always $F < f, \therefore 1$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Given we have 3 groups, we can just test each mean difference, right? WRONG!</p>
+
+<p>Supply trick question regarding sidedness.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- ANOVA Analysis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;align-items:center;">
+
+<!-- row 1 -->
+
+<div>
+
+<p class="smallest" style="text-align:left;">
+
+$\textrm{Grand mean}= (18 + 29 + ... + 59 + 53)/24 = \class{strong}{38}$
+
+</p>
+
+</div>
+
+<div>
+
+<table id="ant-table">
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="bg-muted-light black border-nobottom border-right border-left border-top" colspan="8">Number of ants visiting sandwiches</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="bg-muted-light black border-left">#1</td>
+
+<td class="bg-muted-light black">#2</td>
+
+<td class="bg-muted-light black">#3</td>
+
+<td class="bg-muted-light black">#4</td>
+
+<td class="bg-muted-light black">#5</td>
+
+<td class="bg-muted-light black">#6</td>
+
+<td class="bg-muted-light black">#7</td>
+
+<td class="bg-muted-light black border-right">#8</td>
+
+<td>$\bar{x}$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light border-left border-right">Vegemite</td>
+
+<td class="bg-warning-light black">18</td>
+
+<td class="bg-warning-light black">29</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">31</td>
+
+<td class="bg-warning-light black">21</td>
+
+<td class="bg-warning-light black">38</td>
+
+<td class="bg-warning-light black border-right">25</td>
+
+<td class="warning-dark border-nobottom">30.8</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light border-left border-right">Peanut Butter</td>
+
+<td class="bg-info-light black">43</td>
+
+<td class="bg-info-light black">59</td>
+
+<td class="bg-info-light black">22</td>
+
+<td class="bg-info-light black">25</td>
+
+<td class="bg-info-light black">36</td>
+
+<td class="bg-info-light black">47</td>
+
+<td class="bg-info-light black">19</td>
+
+<td class="bg-info-light black border-right">21</td>
+
+<td class="info border-nobottom">34.0</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light border-left border-right">Ham & Pickles</td>
+
+<td class="bg-danger-light black">44</td>
+
+<td class="bg-danger-light black">34</td>
+
+<td class="bg-danger-light black">36</td>
+
+<td class="bg-danger-light black">49</td>
+
+<td class="bg-danger-light black">54</td>
+
+<td class="bg-danger-light black">65</td>
+
+<td class="bg-danger-light black">59</td>
+
+<td class="bg-danger-light black border-right">53</td>
+
+<td class="danger">49.3</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<!-- row 2 -->
+
+<div>
+
+<p class="smaller" style="text-align:left;">
+
+<span class = "u em danger">Variability between groups:</span>
+
+Sum of squares of the distance from each group means to the Grand mean.
+
+</p>
+
+</div>
+
+<div class="grid-generic smallest" style="grid-template-columns:auto 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<p>$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$</p>
+
+<p class="small">
+
+$8\times (30.8-38)^2 + 8\times (34-38)^2$ <br>
+
+$+ 8\times (49.3-38)^2 = \class{danger}{1561}$
+
+</p>
+
+</div>
+
+<!-- row 3 -->
+
+<div>
+
+<p class="smaller" style="text-align:left;">
+
+<span class = "u em info">Variability within groups:</span>
+
+Sum of squares of the distance from each data point to their sample mean.
+
+</p>
+
+</div>
+
+<div class="grid-generic smallest" style="grid-template-columns:auto 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<p>$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$</p>
+
+<p class="small">
+
+$(18-30.8)^2 + (29-30.8)^2 + ... + (25-30.8)^2$ <br>
+
+$+ (43-34)^2 + (59-34)^2 + ... + (21-34)^2$ <br>
+
+$+ (44-49.3)^2 + (34-49.3)^2 + ... + (53-49.3)^2$ <br>
+
+$= \class{info}{2913}$
+
+</p>
+
+</div>
+
+<!-- row 4 -->
+
+<div>
+
+<p class="smaller" style="text-align:left;">
+
+<span class = "u em warning">Total variability:</span>
+
+Sum of squares of the distance from each data point to the Grand mean.
+
+<span class="fragment" data-fragment-index="1">$\class{danger}{1561} + \class{info}{2913} = \class{warning}{4474}$</span>
+
+</p>
+
+</div>
+
+<div class="grid-generic smallest" style="grid-template-columns:auto 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<p>$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$</p>
+
+<p class="small">
+
+$(18-38)^2 + (29-38)^2 + ... + (25-38)^2$ <br>
+
+$+ (43-38)^2 + (59-38)^2 + ... + (21-38)^2$ <br>
+
+$+ (44-38)^2 + (34-38)^2 + ... + (53-38)^2$ <br>
+
+$= \class{warning}{4474}$
+
+</p>
+
+</div>
+
+<!-- row 5 -->
+
+<div class="fragment" data-fragment-index="2">
+
+<p class="smaller" style="text-align:left;">
+
+<span class = "u em strong">$f$-statistic:</span>
+
+Standardize by $\nu_{between}=k-1=2$ and $\nu_{within}=n-k=21$.
+
+</p>
+
+</div>
+
+<div class="grid-generic smallest fragment" data-fragment-index="2" style="grid-template-columns:auto 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<p>$f=\frac{\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2/\nu_b}{\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2/\nu_w}$</p>
+
+<p class="small">
+
+$$\begin{align}
+
+f&=\frac{1561}{2}/\frac{2913}{21}\\
+
+&=\frac{780.50}{138.71}
+
+&=5.626
+
+\end{align}$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>For ANOVA, we compute the sum of squares.</p>
+
+<p>
+
+At this point, we would look up our f-statistic on the one-tail F-table.
+
+But I want you to think about  what a null distribution is and what the F-statistic
+
+represents.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Simulation of the F-statistic -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What is the Null Distribution?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;text-align:justify;">
+
+<p class="small">
+
+The $F$-statistic is <span class="u danger">just another statistic</span>. There exists
+
+a distribution that describes the probability of finding a particular $f$ value.
+
+</p>
+
+<p class="small fragment" data-fragment-index="0">
+
+The Null Hypothesis states, "All group means are the same, and thus should come from one underlying $F$-distribution".
+
+We can simulate this by simply randomly assigning data different memberships, like shuffling the table:
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1" style="display:flex;align-content:center;justify-content:center;">
+
+<p>
+
+$F_\mathrm{original}=5.63$
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<table class="tiny">
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="bg-muted-light black border-nobottom border-right border-left border-top" colspan="8">Number of ants visiting sandwiches</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="bg-muted-light black border-left">#1</td>
+
+<td class="bg-muted-light black">#2</td>
+
+<td class="bg-muted-light black">#3</td>
+
+<td class="bg-muted-light black">#4</td>
+
+<td class="bg-muted-light black">#5</td>
+
+<td class="bg-muted-light black">#6</td>
+
+<td class="bg-muted-light black">#7</td>
+
+<td class="bg-muted-light black border-right">#8</td>
+
+<td>$\bar{x}$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light border-left border-right">Vegemite</td>
+
+<td class="bg-warning-light black">18</td>
+
+<td class="bg-warning-light black">29</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">31</td>
+
+<td class="bg-warning-light black">21</td>
+
+<td class="bg-warning-light black">38</td>
+
+<td class="bg-warning-light black border-right">25</td>
+
+<td class="warning-dark border-nobottom">30.8</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light border-left border-right">Peanut Butter</td>
+
+<td class="bg-info-light black">43</td>
+
+<td class="bg-info-light black">59</td>
+
+<td class="bg-info-light black">22</td>
+
+<td class="bg-info-light black">25</td>
+
+<td class="bg-info-light black">36</td>
+
+<td class="bg-info-light black">47</td>
+
+<td class="bg-info-light black">19</td>
+
+<td class="bg-info-light black border-right">21</td>
+
+<td class="info border-nobottom">34.0</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light border-left border-right">Ham & Pickles</td>
+
+<td class="bg-danger-light black">44</td>
+
+<td class="bg-danger-light black">34</td>
+
+<td class="bg-danger-light black">36</td>
+
+<td class="bg-danger-light black">49</td>
+
+<td class="bg-danger-light black">54</td>
+
+<td class="bg-danger-light black">65</td>
+
+<td class="bg-danger-light black">59</td>
+
+<td class="bg-danger-light black border-right">53</td>
+
+<td class="danger">49.3</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="col-50 fragment" data-fragment-index="2">
+
+<table class="center tiny">
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="bg-muted-light black border-nobottom border-right border-left border-top" colspan="8">Number of ants visiting sandwiches</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="bg-muted-light black border-left">#1</td>
+
+<td class="bg-muted-light black">#2</td>
+
+<td class="bg-muted-light black">#3</td>
+
+<td class="bg-muted-light black">#4</td>
+
+<td class="bg-muted-light black">#5</td>
+
+<td class="bg-muted-light black">#6</td>
+
+<td class="bg-muted-light black">#7</td>
+
+<td class="bg-muted-light black border-right">#8</td>
+
+<td>$\bar{x}$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light border-left border-right">Vegemite</td>
+
+<td class="bg-info-light black">47</td>
+
+<td class="bg-danger-light black">49</td>
+
+<td class="bg-info-light black">22</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">31</td>
+
+<td class="bg-danger-light black">65</td>
+
+<td class="bg-warning-light black">38</td>
+
+<td class="bg-info-light black border-right">25</td>
+
+<td class="success border-nobottom">39.9</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light border-left border-right">Peanut Butter</td>
+
+<td class="bg-danger-light black">53</td>
+
+<td class="bg-danger-light black">34</td>
+
+<td class="bg-info-light black">43</td>
+
+<td class="bg-warning-light black">21</td>
+
+<td class="bg-info-light black">21</td>
+
+<td class="bg-info-light black">59</td>
+
+<td class="bg-danger-light black">54</td>
+
+<td class="bg-warning-light black border-right">25</td>
+
+<td class="success border-nobottom">38.8</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light border-left border-right">Ham & Pickles</td>
+
+<td class="bg-warning-light black">18</td>
+
+<td class="bg-info-light black">19</td>
+
+<td class="bg-danger-light black">44</td>
+
+<td class="bg-danger-light black">36</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-warning-light black">29</td>
+
+<td class="bg-info-light black">36</td>
+
+<td class="bg-danger-light black border-right">59</td>
+
+<td class="success">35.4</td>
+
+</tr>
+
+</table>
+
+<p class="smaller">
+
+$F_1=0.21$
+
+</p>
+
+</div>
+
+<div class="col-50 fragment" data-fragment-index="3">
+
+<table class="center tiny">
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="bg-muted-light black border-nobottom border-right border-left border-top" colspan="8">Number of ants visiting sandwiches</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="bg-muted-light black border-left">#1</td>
+
+<td class="bg-muted-light black">#2</td>
+
+<td class="bg-muted-light black">#3</td>
+
+<td class="bg-muted-light black">#4</td>
+
+<td class="bg-muted-light black">#5</td>
+
+<td class="bg-muted-light black">#6</td>
+
+<td class="bg-muted-light black">#7</td>
+
+<td class="bg-muted-light black border-right">#8</td>
+
+<td>$\bar{x}$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light border-left border-right">Vegemite</td>
+
+<td class="bg-danger-light black">44</td>
+
+<td class="bg-warning-light black">29</td>
+
+<td class="bg-danger-light black">36</td>
+
+<td class="bg-info-light black">36</td>
+
+<td class="bg-info-light black">43</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-info-light black">19</td>
+
+<td class="bg-warning-light black border-right">25</td>
+
+<td class="success border-nobottom">34.3</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light border-left border-right">Peanut Butter</td>
+
+<td class="bg-info-light black">59</td>
+
+<td class="bg-info-light black">25</td>
+
+<td class="bg-warning-light black">18</td>
+
+<td class="bg-danger-light black">34</td>
+
+<td class="bg-info-light black">47</td>
+
+<td class="bg-danger-light black">53</td>
+
+<td class="bg-warning-light black">31</td>
+
+<td class="bg-info-light black border-right">21</td>
+
+<td class="success border-nobottom">36.0</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light border-left border-right">Ham & Pickles</td>
+
+<td class="bg-info-light black">22</td>
+
+<td class="bg-warning-light black">21</td>
+
+<td class="bg-danger-light black">49</td>
+
+<td class="bg-danger-light black">65</td>
+
+<td class="bg-warning-light black">42</td>
+
+<td class="bg-danger-light black">59</td>
+
+<td class="bg-danger-light black">54</td>
+
+<td class="bg-warning-light black border-right">38</td>
+
+<td class="success">43.8</td>
+
+</tr>
+
+</table>
+
+<p class="smaller">
+
+$F_2=1.06$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Imagine we repeat this process 10,000 times...</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Null Animation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Null Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.75fr 1.25fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div class="grid-generic full-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;height:100%;">
+
+<h3>Simulation</h3>
+
+<vizzy data-src="lib/interactives/resampling-anova-one-way-quick.html" style="height:70vh;justify-self:center;"></vizzy>
+
+</div>
+
+<div class="grid-generic full-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;height:100%;">
+
+<h3>Theory</h3>
+
+<div style="align-self: center; align-items:center;height:100%;">
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Simulation result -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What Is The Null Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="smaller">
+
+We obtain 10000 $F$-statistics that <span class="info">could have been
+
+observed if there was no association</span> between the sandwich filling and the number of ants attracted to it.
+
+</p>
+
+<p class="framed border-danger fragment" data-fragment-index=1>
+
+Where does the initial $F$-statistic fall within this distribution? What was
+
+the probability of getting such an extreme statistic <span class="danger"> by chance?</span>
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/ants-sandwich-simulation-fstat.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/ants-sandwich-simulation-fstat.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/ants-sandwich-simulation-fstat.svg#axes_3"></use>
+
+</svg>
+
+</div>
+
+<div style="grid-column: 1/3;justify-content:start;">
+
+<p class="fragment" data-fragment-index=3 style="text-align: left;">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+The probability of observing such a difference in the number of
+
+ants attracted by the sandwiches if the filling had no effect would be $\phantom{}\lt2$%.
+
+</p>
+
+<p class="fragment" data-fragment-index=3  style="text-align: left;">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+There is evidence that ants do not prefer sandwich fillings equally.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F-distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\mathbb{F}$-Distribution (Theory)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+The <span class="strong">Null Distribution</span> for the $f$-statistic that is
+
+described by the parameters for<br /><span class="info">within group ($n-k$)</span>
+
+and <span class="danger">between group ($k-1$)</span> <span class="warning">degrees of freedom</span>.
+
+Here again, the p-value obtained is very close to the simulated p-value.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div class="q3-width framed border-danger no-margin-bottom" style="display:grid;align-items:center;justify-items:center;height:90%">
+
+<p class="q3-width">
+
+A p-value is obtained by computing the area
+
+under the curve for $\mathbb{F}\geq f_{observed}$.
+
+</p>
+
+<img src="lib/img/ftable_01.gif" class="no-margin q3-width fragment" style="margin-bottom:20px;overflow:hidden;object-fit:cover;">
+
+</div>
+
+<div class="full-width">
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Thus, we would come to the same conclusions. The f-critical level was: 3.47.</p>
+
+<p>WHAT DOES THIS MEAN?? What do we do now?</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Understanding the SS terms -->
+
+
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpretation the $SS$ Terms</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width smallest" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:2px;">
+
+<!-- top left column -->
+
+<div class="no-top-margin framed border-muted">
+
+<p class="muted strong left-justify">
+
+Statistic:
+
+</p>
+
+<div class="fragment big" data-fragment-index="1">
+
+$$\mathcal{F}=\frac{\class{warning}{SS_{between}}}{\class{info}
+
+{SS_{Within}}}=\frac{\class{warning}{\partial^2(fit,null)}}
+
+{\class{info}{\partial^2(fit,data)}}$$
+
+</div>
+
+</div>
+
+<!-- top right column -->
+
+<div class="no-top-margin framed border-muted">
+
+<p class="muted left-justify fragment" data-fragment-index="5">Effect Size:</p>
+
+<div class="fragment big" data-fragment-index="5">
+
+$$R^2=\eta^2=\frac{\color{orange}{\partial^2(fit,null)}}{\color{seagreen}{\partial^2(data,null)}}$$
+
+</div>
+
+</div>
+
+
+
+<!-- Bottom -->
+
+<div class="no-top-margin fragment" data-fragment-index="1" style="grid-column:1/3;justify-content:center;justify-self:center;">
+
+<svg version="1.1" viewBox="0 0 795 395" height="60vh" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+<style type="text/css">
+
+*{stroke-linecap:butt;stroke-linejoin:round;}
+
+</style>
+
+</defs>
+
+<use xlink:href="lib/img/f-stat-geom.svg#axes_1"></use>
+
+<use xlink:href="lib/img/f-stat-geom.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index="5" xlink:href="lib/img/f-stat-geom.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index="3" xlink:href="lib/img/f-stat-geom.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index="4" xlink:href="lib/img/f-stat-geom.svg#axes_5"></use>
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/f-stat-geom.svg#axes_6"></use>
+
+
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/f-stat-geom.svg#axes_7"></use>
+
+
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/f-stat-geom.svg#axes_8"></use>
+
+
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/f-stat-geom.svg#axes_10"></use>
+
+
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/f-stat-geom.svg#axes_11"></use>
+
+
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/f-stat-geom.svg#axes_12"></use>
+
+
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/f-stat-geom.svg#axes_13"></use>
+
+</svg>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Large F, distance between fit and null (mean and grand mean: group variance) in euclidean space is large.</p>
+
+<p>Small F, distance between the fit and data (mean and points: residuals) is larger that fit-null distance.</p>
+
+<p>
+
+F = SSB/SSW.
+
+
+
+So then, when F is large, then (fit,null) greater than (fit,data) and
+
+when F is small (less than 1) then (fit,null) less than (fit,data).
+
+
+
+And the same case can be said about the reduced, we are just correcting the _data_
+
+term for "mixed" effects.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/probability_abstract.png" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  What Now?
+                </h2>
+                <h3>
+                  <Span Class='em'>post-Hoc</span> Testing
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Comparing multiple means -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparing Multiple Means</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+We have 3 groups.
+
+Why not just carry out a bunch of pair-wise analyses of the difference in mean?
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="framed center" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+
+$H_0:\, \mu_\class{warning}{1}=\mu_\class{info}{2}$
+
+</p>
+
+</div>
+
+<div>
+
+<p class="framed center" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+
+$H_0:\, \mu_\class{warning}{1}=\mu_\class{danger}{3}$
+
+</p>
+
+</div>
+
+<div>
+
+<p class="framed center" style="padding-top: 0.2em; padding-bottom: 0.2em;">
+
+$H_0:\, \mu_\class{info}{2}=\mu_\class{danger}{3}$
+
+</p>
+
+</div>
+
+</div>
+
+<div class="full-width" style="justify-items: center;">
+
+<img src="lib/img/multi-testing-angel-demon.svg" width="50%">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Now, the question is, which filling or fillings are the ants in love with?</p>
+
+<p>We have to consider what the false positive rate means.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Type 1 Error: -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Controlling For Type 1 Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="box-width">
+
+<p>
+
+Each test is carried out at $\alpha=0.05$, so the risk of <span class="danger">making a Type I error</span> (rejecting the null when we should not) is <span class="danger">$5\%$ <span class="u">each time</span></span>.
+
+</p>
+
+<p>
+
+The risk of making a Type I errors increases as we multiply the number of tests on the same data:
+
+</p>
+
+
+
+<ul style="font-size: 90%; margin-bottom:2vmin;">
+
+<li>
+
+At the $5\%$ significance level, the probability of making at least one type I error for <span class="strong">3 tests</span> would be <span class="strong">$14\%$</span>
+
+</li>
+
+<li>
+
+Comparing <span class="strong">4 means</span> (6 tests), this jumps to <span class="strong">$26\%$</span>
+
+</li>
+
+<li>
+
+Comparing <span class="strong">5 means</span> (10 tests), this jumps to <span class="strong">$40\%$</span>
+
+</li>
+
+</ul>
+
+
+
+<p class="framed bg-warning-light black" style="font-size: 80%;">
+
+We need to make multiple comparisons with an <span class="danger">overall</span> Type I error of $\alpha=0.05$ (or whichever level is specified). We need an alternative approach that uses one overall test that compares all means at once.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 1 Error for multiple tests -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Type 1 Errors Accumulate Rapidly</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width smaller" style="text-align:left;">
+
+<p class="mutedBlue">
+
+In a test at $\alpha = 0.05$, there is a 5% chance of getting a
+
+<span class="danger">false positive</span> if the null hypothesis is true.
+
+In 100 tests, each at $\alpha = 0.05$, we "expect 5 false positives" if all
+
+100 null hypotheses are true, but really, the probability of getting
+
+$k$ false-positives is determinable through the binomial distribution,
+
+$p(k\, |\, \alpha)$.
+
+</p>
+
+<p>
+
+We can calculate the probability of getting
+
+<span class="strong">exactly one</span> false positive, but we rarely care if there's only 1.
+
+</p>
+
+<p>
+
+Instead, we care usually if <span class="strong">one or more</span> false positives occur.
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" version="1.1"  viewBox="0 0 730 442" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+<style type="text/css">
+
+*{stroke-linecap:butt;stroke-linejoin:round;}
+
+</style>
+
+</defs>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_2"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_3"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Post-hoc: Looking at the means -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparing Multiple Means</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+If we have <span class="strong">two means to compare</span>, we just need to look at their <span class="strong">difference</span> (or ratio) to measure how far apart they are. Let's see if we can use a similar approach for three means.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 -20 432 164">
+
+<use xlink:href="lib/img/ants-sandwich-mad.svg#layer1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/ants-sandwich-mad.svg#layer2"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/ants-sandwich-mad.svg#layer3"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/ants-sandwich-mad.svg#layer4"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<table id="ant-table">
+
+<tr>
+
+<td></td>
+
+<td>$\bar{x}$</td>
+
+<td>$s$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light">Vegemite</td>
+
+<td class="border-nobottom warning">30.75</td>
+
+<td class="border-nobottom warning">9.25</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light">Peanut Butter</td>
+
+<td class="border-nobottom info">34.0</td>
+
+<td class="border-nobottom info">14.63</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light">Ham & Pickles</td>
+
+<td class="danger">49.25</td>
+
+<td class="danger">10.79</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.5fr;grid-template-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="smaller fragment" data-fragment-index=1>
+
+$d_1=30.75-34.0=\class{success}{-3.25}$
+
+</p>
+
+<p class="smaller fragment" data-fragment-index=2>
+
+$d_2=34.0-49.25=\class{success}{-15.25}$
+
+</p>
+
+<p class="smaller fragment" data-fragment-index=3>
+
+$d_3=49.25-30.75=\class{success}{18.5}$
+
+</p>
+
+</div>
+
+<div>
+
+<p class="fragment rounded bg-success-light black em">
+
+How could we compare these differences to determine which means are having the main effect?
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Post-hoc definition -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2><span class="em">Post-hoc</span> Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-template-rows:auto;gap:1vmin;justify-content:start;">
+
+<p>
+
+If we determine a <span class="success">significant</span> differnce in our ANOVA <span class="em">omnibus</span> test,
+
+we can investigate "<span class="info">which groups are different?</span>"
+
+</p>
+
+<p>Many <span class="em">post hoc</span> (latin for <span class="em">after the fact</span>) exist. Let's look at a few.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- TUKEY Kramer -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Tukey-Kramer</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;" class="smallest">
+
+<p>
+
+The Tukey-Kramer post hoc test compares all possible pairs of group means
+
+to determine if they are significantly different from each other.
+
+This test is particularly useful when group sizes are <span class="em">unequal</span>.
+
+The Tukey-Kramer test is a conservative approach to multiple comparisons,
+
+ensuring that the probability of making at least one type I error
+
+(false positive) is kept at the desired significance level across all
+
+comparisons.
+
+</p>
+
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;">
+
+<p class="smaller">
+
+$$\begin{align}
+
+d_1&= |30.75-34.0|&=\class{danger}{3.25}\\
+
+d_2&= |34.0-49.25|&=\class{success}{15.25}\\
+
+d_3&= |49.25-30.75|&=\class{success}{18.5}
+
+\end{align}$$
+
+</p>
+
+</div>
+
+<div>
+
+<table id="ant-table">
+
+<tr>
+
+<td></td>
+
+<td>$\bar{x}$</td>
+
+<td>$s$</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-warning-light">Vegemite</td>
+
+<td class="border-nobottom warning">30.75</td>
+
+<td class="border-nobottom warning">9.25</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td class="bg-info-light">Peanut Butter</td>
+
+<td class="border-nobottom info">34.0</td>
+
+<td class="border-nobottom info">14.63</td>
+
+</tr>
+
+<tr>
+
+<td class="bg-danger-light">Ham & Pickles</td>
+
+<td class="danger">49.25</td>
+
+<td class="danger">10.79</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="smallest fragment" data-fragment-index="1">
+
+<p>
+
+Key Aspects of the procedure:
+
+<ul>
+
+<li><span class="strong">Multiple Comparison Adjustment:</span> It adjusts for multiple comparisons to control the overall type I error rate.</li>
+
+<li><span class="strong">Pairwise Comparisons:</span>  It compares the mean of each group with every other group.</li>
+
+<li><span class="strong">Range Statistic:</span> Uses the studentized range distribution (q-distribution) to compute critical values.</li>
+
+<li><span class="strong">Confidence Intervals:</span>  Provides confidence intervals for the differences between group means, aiding in interpretation of results.</li>
+
+</ul>
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p>
+
+Calculations:
+
+<ul class="tiny">
+
+<li class="emoji-brain">Critical value: $Q=q_u\sqrt{\frac{MSW}{2}\left( \frac{1}{n_j}+\frac{1}{n_j}\right)}$</li>
+
+<li class="emoji-lightbulb">where $q_u$ is from the <span class="em">Studentized range</span> q-table, and $n_j$ is the number of n in each comparison group.</li>
+
+<li class="emoji-brain">For our experiment, $Q=3.565\sqrt{\frac{138.71}{2}(\frac{1}{8}+\frac{1}{8})}=\class{danger}{14.845}$</li>
+
+</ul>
+
+</p>
+
+<p class="bordered border-success fragment" data-fragment-index="3">
+
+Ham and Pickles are a success at Ant parties!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>But, what are some other post hoc methods? We can look at effect size.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Other methods of assessing the mean differences -->
+
+<!-- Welch's t-interval confidence interval -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Welch's t-interval in Post Hoc Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="smallest" style="align-content:start;justify-content:start;text-align:left;">
+
+<p>
+
+Welch's t-interval is a valuable tool for post hoc analysis in ANOVA,
+
+particularly when dealing with unequal variances and sample sizes among groups.
+
+It modifies the standard Student's t-interval by adjusting the degrees of
+
+freedom, resulting in a more accurate estimate for the confidence interval.
+
+This interval is crucial for understanding the range and significance of
+
+the mean differences, offering a clear, statistical way to compare group
+
+means.
+
+</p>
+
+<ul style="font-size:110%" class="fragment" data-fragment-index="1">
+
+<li>Welch's t-interval is more suitable than the standard t-interval
+
+in cases of <span class="em">unequal variances</span> and <span class="em">sample sizes</span>.</li>
+
+<li class="fragment" data-fragment-index="2">It offers a nuanced estimation by adjusting the degrees of freedom
+
+according to the sample data.</li>
+
+<li class="fragment" data-fragment-index="3">The 95% confidence interval provides a range within which the true
+
+mean difference is likely to lie.</li>
+
+<li class="fragment" data-fragment-index="4">This method enhances the reliability and accuracy of post hoc
+
+comparisons in ANOVA.</li>
+
+</ul>
+
+</div>
+
+<div class="smaller fragment" data-fragment-index="5">
+
+<p>
+
+The Welch's t-interval is calculated as follows:
+
+\[
+
+\bar{X}_1 - \bar{X}_2 \pm t_{\alpha/2, \nu} \times \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
+
+\]
+
+</p>
+
+<div class="fragment" data-fragment-index="6">
+
+<p>Where:</p>
+
+<ul>
+
+<li>\(\bar{X}_1, \bar{X}_2\) are the sample means,</li>
+
+<li>\(s_1^2, s_2^2\) are the sample variances,</li>
+
+<li>\(n_1, n_2\) are the sample sizes,</li>
+
+<li>\(t_{\alpha/2, \nu}\) is the t-value from the t-distribution for the
+
+desired confidence level (95% in this case) and adjusted degrees of
+
+freedom \(\nu\).</li>
+
+<li>Given \( \nu =
+
+\frac{
+
+\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2
+
+}
+
+{
+
+\frac{\left(\frac{s_1^2}{n_1}\right)^2}{n_1 - 1} + \frac{\left(\frac{s_2^2}{n_2}\right)^2}{n_2 - 1}
+
+}\), where \(s_1^2\) and \(s_2^2\) are the variances of the two samples, and \(n_1\) and \(n_2\) are the respective sample sizes.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="fragment bordered border-success" data-fragment-index="7" style="grid-column:1/3;">
+
+<p class="strong big">
+
+Better yet, Bootstrap!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+</div>
+
+</section>
+
+
+
+<!-- Welch's Confidence Interval: Ants -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Confidence Interval</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;" class="smallest">
+
+<p>
+
+Instead of using theory, use <span class="strong info">Bootstrapping</span> to estimate the effects!
+
+</p>
+
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;">
+
+<table class="font-size:60%;" id="ant-table">
+
+<thead>
+
+<tr>
+
+<th>Group</th>
+
+<th>$n$</th>
+
+<th>$\bar{x}$</th>
+
+<th>$s^2$</th>
+
+<th>$s$</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Ham &amp; Pickles</td>
+
+<td>8</td>
+
+<td>49.25</td>
+
+<td>116.50</td>
+
+<td>10.79</td>
+
+</tr>
+
+<tr>
+
+<td>Peanut Butter</td>
+
+<td>8</td>
+
+<td>34.00</td>
+
+<td>214.00</td>
+
+<td>14.63</td>
+
+</tr>
+
+<tr>
+
+<td>Vegemite</td>
+
+<td>8</td>
+
+<td>30.75</td>
+
+<td>85.64</td>
+
+<td>9.25</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div>
+
+<table id="ant-table" style="font-size:60%;">
+
+<thead>
+
+<tr>
+
+<th>Group1</th>
+
+<th>Group2</th>
+
+<th>Mean Difference</th>
+
+<th>95% CI Lower</th>
+
+<th>95% CI Upper</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="2">
+
+<td>Ham &amp; Pickles</td>
+
+<td>Peanut Butter</td>
+
+<td>15.25</td>
+
+<td>1.351</td>
+
+<td>29.149</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-success-white" data-fragment-index="3">
+
+<td>Ham &amp; Pickles</td>
+
+<td>Vegemite</td>
+
+<td>18.50</td>
+
+<td>7.695</td>
+
+<td>29.305</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="4">
+
+<td>Peanut Butter</td>
+
+<td>Vegemite</td>
+
+<td>3.25</td>
+
+<td>-10.106</td>
+
+<td>16.606</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div>
+
+<p>
+
+Key Aspects of the procedure:
+
+<ul class="tiny">
+
+<li><strong>Handling Unequal Variances:</strong> Use Two-Box approach to estimate Null, and Difference approach for effect size.</li>
+
+<li><strong>Adjustment of Degrees of Freedom:</strong> No assumptions for Degrees of Freedom, <span class="success">they're built into the data!</span></li>
+
+<li><strong>95% Confidence Interval:</strong> This interval shows the range where the true effect lies with 95% confidence.</li>
+
+<li><strong>Applicability in Multiple Comparisons:</strong> Useful in ANOVA post hoc testing for reliable pairwise group comparisons.</li>
+
+</ul>
+
+</p>
+
+<p class="fragment bordered border-success" data-fragment-index="5" style="grid-column:1/3;">
+
+Ham and Pickles are a success at Ant parties!
+
+</p>
+
+</div>
+
+<div>
+
+<p>
+
+Procedure:
+
+<ul class="tiny">
+
+<li class="emoji-lightbulb">Iterate over each pair of groups:</li>
+
+<li class="emoji-brain">Compare Group A and Group B from each pair with Two-Box Differences approach, generate a CI (e.g., BCa, Percentile, etc.)</li>
+
+<li class="emoji-brain">Compare Group A and Group B from each pair with Two-Box NHST approach, generate a p-value.</li>
+
+</ul>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Why am I using the t-interval here? Because we are comparing a difference in means,
+
+which we know to be t-distributed.
+
+</p>
+
+<p>
+
+Why Welch? Because low N (8), also have a look at the variances, would it be
+
+reasonable to think all 3 are the same?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- P-value Correction -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Correcting For Type I Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic smaller" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="left-justify small border-left-5x border-info" style="grid-column:1/3;">
+
+<p>
+
+P-value correction is a statistical technique used to adjust the significance
+
+levels of hypothesis tests when multiple comparisons are made. This adjustment is
+
+crucial to mitigate the problem of inflated Type I errors. In essence,
+
+p-value correction methods recalibrate the threshold for statistical
+
+significance to account for the number and nature of comparisons, ensuring
+
+that findings are not erroneously deemed significant due to chance alone.
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<h4>Family-Wise Error Rate (FWER) Methods</h4>
+
+<p>Aim to control the probability of making one or more type I errors in a family of comparisons.</p>
+
+<ul>
+
+<li><strong>Bonferroni Correction:</strong> Simplest FWER method. Multiplies each p-value by the number of comparisons. Best for small numbers of tests; can be overly conservative.</li>
+
+<li><strong>Holm-Bonferroni Method:</strong> Step-down procedure. Adjusts p-values in ascending order, less conservative than Bonferroni, better for medium numbers of tests.</li>
+
+</ul>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<h4>False Discovery Rate (FDR) Methods</h4>
+
+<p>Aim to control the expected proportion of false discoveries among the rejected hypotheses.</p>
+
+<ul>
+
+<li><span class="fragment highlight-pop" data-fragment-index="4"><strong>Benjamini-Hochberg Procedure:</strong> Step-up method for controlling FDR. Good for larger numbers of tests; balances discovery with error control.</span></li>
+
+<li><strong>Benjamini-Yekutieli Procedure:</strong> An extension of Benjamini-Hochberg, accounting for dependency between tests. Suitable when test statistics are not independent.</li>
+
+</ul>
+
+</div>
+
+<div class="fragment" data-fragment-index="3" style="grid-column:1/3;">
+
+<h4>Permutation-Based Corrections</h4>
+
+<p>Use permutation of the data to determine the distribution of the test statistic under the null hypothesis.</p>
+
+<ul>
+
+<li><strong>Westfall-Young Procedure:</strong> A permutation-based, step-down method. Particularly effective for correlated and dependent tests.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Wrap up -->
+
+
+
+<section>
+
+<style>
+
+#ant-ttable, #ant-ttable table, #ant-ttable td, #ant-ttable th {
+
+font-size: 80%;
+
+text-align: center;
+
+vertical-align: middle;
+
+padding: 4px;
+
+}
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>P-Value Adjustment in Multiple Comparisons (<span class="em">Ants!</span>)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;" class="smaller">
+
+<p>
+
+In multiple comparisons, like pairwise testing using Welch's t-test,
+
+p-value adjustment is crucial to control for false discovery rates.
+
+This adjustment reduces the chances of incorrectly declaring a result
+
+significant due to random chance in multiple tests.
+
+</p>
+
+</div>
+
+<div class="smallest" style="align-self:center;">
+
+<ul>
+
+<li class="fragment" data-fragment-index="1"><strong>Welch's t-Test:</strong> Used for each pairwise comparison to calculate p-values, accounting for unequal variances and sample sizes.</li>
+
+<li class="fragment" data-fragment-index="2"><strong>Benjamini-Hochberg Method:</strong> Recommended for controlling the false discovery rate (FDR) in multiple hypothesis testing. This method is particularly suitable for a small number of comparisons, like in our case with three tests.</li>
+
+<li class="fragment" data-fragment-index="3"><strong>Adjustment Process:</strong> The method ranks the p-values, adjusts them based on their rank and the total number of tests, providing a balance between discovering significant results and controlling for type I errors.</li>
+
+<li class="fragment" data-fragment-index="4"><strong>Result Interpretation:</strong> Adjusted p-values provide a more reliable basis for determining statistical significance in the context of multiple comparisons.</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<table id="ant-ttable" class="fragment" data-fragment-index="5">
+
+<thead>
+
+<tr>
+
+<th>Group1</th>
+
+<th>Group2</th>
+
+<th>t-statistic</th>
+
+<th>p-value</th>
+
+<th>Adjusted p-value</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="7">
+
+<td>Ham &amp; Pickles</td>
+
+<td>Peanut Butter</td>
+
+<td>2.372625</td>
+
+<td>0.033934</td>
+
+<td>0.050901</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-success-white" data-fragment-index="8">
+
+<td>Ham &amp; Pickles</td>
+
+<td>Vegemite</td>
+
+<td>3.680336</td>
+
+<td>0.002561</td>
+
+<td>0.007682</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="6">
+
+<td>Peanut Butter</td>
+
+<td>Vegemite</td>
+
+<td>0.531039</td>
+
+<td>0.605219</td>
+
+<td>0.605219</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="smallest fragment" style="padding-top: 2vmin;" data-fragment-index="3">
+
+<h4>
+
+Benjamini-Hochberg (BH) Procedure:
+
+</h4>
+
+<ol>
+
+<li>Rank the individual p-values in ascending order: \(p_{(1)}, p_{(2)}, \ldots, p_{(m)}\).</li>
+
+<li>For each p-value, calculate its BH critical value: \(\frac{i}{m} \times \alpha\), where \(i\) is the rank, \(m\) is the total number of tests, and \(\alpha\) is the desired FDR level.</li>
+
+<li>Find the largest \(p_{(i)}\) such that \(p_{(i)} \leq \frac{i}{m} \times \alpha\).</li>
+
+<li>Reject all null hypotheses corresponding to \(p_{(1)}, \ldots, p_{(i)}\).</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 09
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
