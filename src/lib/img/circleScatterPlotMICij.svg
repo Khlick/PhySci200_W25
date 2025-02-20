@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 250">
+  <!-- Generator: Adobe Illustrator 29.3.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 146)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: #0047ab;
+      }
+
+      .st2 {
+        fill: url(#polka_dots);
+      }
+
+      .st3, .st4, .st5, .st6, .st7 {
+        font-family: ArialMT, Arial;
+      }
+
+      .st3, .st5, .st6 {
+        font-size: 12px;
+      }
+
+      .st3, .st7 {
+        fill: #00a551;
+      }
+
+      .st4, .st8, .st7 {
+        font-size: 6px;
+      }
+
+      .st4, .st6 {
+        fill: #cb245a;
+      }
+
+      .st9 {
+        fill: #fff;
+      }
+
+      .st10, .st11, .st12 {
+        fill: none;
+      }
+
+      .st8 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+      }
+
+      .st1 {
+        opacity: .2;
+      }
+
+      .st11, .st13 {
+        stroke-miterlimit: 10;
+      }
+
+      .st11, .st13, .st12 {
+        stroke: #231f20;
+        stroke-width: .5px;
+      }
+
+      .st14 {
+        fill: #e30b5c;
+      }
+
+      .st15 {
+        fill: url(#New_Pattern_Swatch_2_copy);
+      }
+
+      .st13 {
+        fill: #80b3ff;
+      }
+
+      .st16 {
+        fill: #00a14b;
+      }
+
+      .st12 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st17 {
+        fill: #00408c;
+      }
+
+      .st18 {
+        fill: url(#New_Pattern_Swatch_2);
+      }
+    </style>
+    <symbol id="New_Symbol" viewBox="0 0 4 4">
+      <circle class="st17" cx="2" cy="2" r="2"/>
+    </symbol>
+    <symbol id="New_Symbol_1" viewBox="0 0 4.5 4.5">
+      <circle class="st13" cx="2.2" cy="2.2" r="2"/>
+    </symbol>
+    <pattern id="polka_dots" data-name="polka dots" x="0" y="0" width="8" height="110" patternTransform="translate(-106 -271)" patternUnits="userSpaceOnUse" viewBox="0 0 8 110">
+      <g>
+        <rect class="st10" width="8" height="110"/>
+        <circle class="st14" cx="7" cy="109" r=".2"/>
+        <circle class="st14" cx="5" cy="109" r=".2"/>
+        <circle class="st14" cx="3" cy="109" r=".2"/>
+        <circle class="st14" cx="1" cy="109" r=".2"/>
+        <circle class="st14" cx="8" cy="107" r=".2"/>
+        <circle class="st14" cx="6" cy="107" r=".2"/>
+        <circle class="st14" cx="4" cy="107" r=".2"/>
+        <circle class="st14" cx="2" cy="107" r=".2"/>
+        <circle class="st14" cx="0" cy="107" r=".2"/>
+        <circle class="st14" cx="7" cy="105" r=".2"/>
+        <circle class="st14" cx="5" cy="105" r=".2"/>
+        <circle class="st14" cx="3" cy="105" r=".2"/>
+        <circle class="st14" cx="1" cy="105" r=".2"/>
+        <circle class="st14" cx="8" cy="103" r=".2"/>
+        <circle class="st14" cx="6" cy="103" r=".2"/>
+        <circle class="st14" cx="4" cy="103" r=".2"/>
+        <circle class="st14" cx="2" cy="103" r=".2"/>
+        <circle class="st14" cx="0" cy="103" r=".2"/>
+        <circle class="st14" cx="7" cy="101" r=".2"/>
+        <circle class="st14" cx="5" cy="101" r=".2"/>
+        <circle class="st14" cx="3" cy="101" r=".2"/>
+        <circle class="st14" cx="1" cy="101" r=".2"/>
+        <circle class="st14" cx="8" cy="99" r=".2"/>
+        <circle class="st14" cx="6" cy="99" r=".2"/>
+        <circle class="st14" cx="4" cy="99" r=".2"/>
+        <circle class="st14" cx="2" cy="99" r=".2"/>
+        <circle class="st14" cx="0" cy="99" r=".2"/>
+        <circle class="st14" cx="7" cy="97" r=".2"/>
+        <circle class="st14" cx="5" cy="97" r=".2"/>
+        <circle class="st14" cx="3" cy="97" r=".2"/>
+        <circle class="st14" cx="1" cy="97" r=".2"/>
+        <circle class="st14" cx="8" cy="95" r=".2"/>
+        <circle class="st14" cx="6" cy="95" r=".2"/>
+        <circle class="st14" cx="4" cy="95" r=".2"/>
+        <circle class="st14" cx="2" cy="95" r=".2"/>
+        <circle class="st14" cx="0" cy="95" r=".2"/>
+        <circle class="st14" cx="7" cy="93" r=".2"/>
+        <circle class="st14" cx="5" cy="93" r=".2"/>
+        <circle class="st14" cx="3" cy="93" r=".2"/>
+        <circle class="st14" cx="1" cy="93" r=".2"/>
+        <circle class="st14" cx="8" cy="91" r=".2"/>
+        <circle class="st14" cx="6" cy="91" r=".2"/>
+        <circle class="st14" cx="4" cy="91" r=".2"/>
+        <circle class="st14" cx="2" cy="91" r=".2"/>
+        <circle class="st14" cx="0" cy="91" r=".2"/>
+        <circle class="st14" cx="7" cy="89" r=".2"/>
+        <circle class="st14" cx="5" cy="89" r=".2"/>
+        <circle class="st14" cx="3" cy="89" r=".2"/>
+        <circle class="st14" cx="1" cy="89" r=".2"/>
+        <circle class="st14" cx="8" cy="87" r=".2"/>
+        <circle class="st14" cx="6" cy="87" r=".2"/>
+        <circle class="st14" cx="4" cy="87" r=".2"/>
+        <circle class="st14" cx="2" cy="87" r=".2"/>
+        <circle class="st14" cx="0" cy="87" r=".2"/>
+        <circle class="st14" cx="7" cy="85" r=".2"/>
+        <circle class="st14" cx="5" cy="85" r=".2"/>
+        <circle class="st14" cx="3" cy="85" r=".2"/>
+        <circle class="st14" cx="1" cy="85" r=".2"/>
+        <circle class="st14" cx="8" cy="83" r=".2"/>
+        <circle class="st14" cx="6" cy="83" r=".2"/>
+        <circle class="st14" cx="4" cy="83" r=".2"/>
+        <circle class="st14" cx="2" cy="83" r=".2"/>
+        <circle class="st14" cx="0" cy="83" r=".2"/>
+        <circle class="st14" cx="7" cy="81" r=".2"/>
+        <circle class="st14" cx="5" cy="81" r=".2"/>
+        <circle class="st14" cx="3" cy="81" r=".2"/>
+        <circle class="st14" cx="1" cy="81" r=".2"/>
+        <circle class="st14" cx="8" cy="79" r=".2"/>
+        <circle class="st14" cx="6" cy="79" r=".2"/>
+        <circle class="st14" cx="4" cy="79" r=".2"/>
+        <circle class="st14" cx="2" cy="79" r=".2"/>
+        <circle class="st14" cx="0" cy="79" r=".2"/>
+        <circle class="st14" cx="7" cy="77" r=".2"/>
+        <circle class="st14" cx="5" cy="77" r=".2"/>
+        <circle class="st14" cx="3" cy="77" r=".2"/>
+        <circle class="st14" cx="1" cy="77" r=".2"/>
+        <circle class="st14" cx="8" cy="75" r=".2"/>
+        <circle class="st14" cx="6" cy="75" r=".2"/>
+        <circle class="st14" cx="4" cy="75" r=".2"/>
+        <circle class="st14" cx="2" cy="75" r=".2"/>
+        <circle class="st14" cx="0" cy="75" r=".2"/>
+        <circle class="st14" cx="7" cy="73" r=".2"/>
+        <circle class="st14" cx="5" cy="73" r=".2"/>
+        <circle class="st14" cx="3" cy="73" r=".2"/>
+        <circle class="st14" cx="1" cy="73" r=".2"/>
+        <circle class="st14" cx="8" cy="71" r=".2"/>
+        <circle class="st14" cx="6" cy="71" r=".2"/>
+        <circle class="st14" cx="4" cy="71" r=".2"/>
+        <circle class="st14" cx="2" cy="71" r=".2"/>
+        <circle class="st14" cx="0" cy="71" r=".2"/>
+        <circle class="st14" cx="7" cy="69" r=".2"/>
+        <circle class="st14" cx="5" cy="69" r=".2"/>
+        <circle class="st14" cx="3" cy="69" r=".2"/>
+        <circle class="st14" cx="1" cy="69" r=".2"/>
+        <circle class="st14" cx="8" cy="67" r=".2"/>
+        <circle class="st14" cx="6" cy="67" r=".2"/>
+        <circle class="st14" cx="4" cy="67" r=".2"/>
+        <circle class="st14" cx="2" cy="67" r=".2"/>
+        <circle class="st14" cx="0" cy="67" r=".2"/>
+        <circle class="st14" cx="7" cy="65" r=".2"/>
+        <circle class="st14" cx="5" cy="65" r=".2"/>
+        <circle class="st14" cx="3" cy="65" r=".2"/>
+        <circle class="st14" cx="1" cy="65" r=".2"/>
+        <circle class="st14" cx="8" cy="63" r=".2"/>
+        <circle class="st14" cx="6" cy="63" r=".2"/>
+        <circle class="st14" cx="4" cy="63" r=".2"/>
+        <circle class="st14" cx="2" cy="63" r=".2"/>
+        <circle class="st14" cx="0" cy="63" r=".2"/>
+        <circle class="st14" cx="7" cy="61" r=".2"/>
+        <circle class="st14" cx="5" cy="61" r=".2"/>
+        <circle class="st14" cx="3" cy="61" r=".2"/>
+        <circle class="st14" cx="1" cy="61" r=".2"/>
+        <circle class="st14" cx="8" cy="59" r=".2"/>
+        <circle class="st14" cx="6" cy="59" r=".2"/>
+        <circle class="st14" cx="4" cy="59" r=".2"/>
+        <circle class="st14" cx="2" cy="59" r=".2"/>
+        <circle class="st14" cx="0" cy="59" r=".2"/>
+        <circle class="st14" cx="7" cy="57" r=".2"/>
+        <circle class="st14" cx="5" cy="57" r=".2"/>
+        <circle class="st14" cx="3" cy="57" r=".2"/>
+        <circle class="st14" cx="1" cy="57" r=".2"/>
+        <circle class="st14" cx="8" cy="55" r=".2"/>
+        <circle class="st14" cx="6" cy="55" r=".2"/>
+        <circle class="st14" cx="4" cy="55" r=".2"/>
+        <circle class="st14" cx="2" cy="55" r=".2"/>
+        <circle class="st14" cx="0" cy="55" r=".2"/>
+        <circle class="st14" cx="7" cy="53" r=".2"/>
+        <circle class="st14" cx="5" cy="53" r=".2"/>
+        <circle class="st14" cx="3" cy="53" r=".2"/>
+        <circle class="st14" cx="1" cy="53" r=".2"/>
+        <circle class="st14" cx="8" cy="51" r=".2"/>
+        <circle class="st14" cx="6" cy="51" r=".2"/>
+        <circle class="st14" cx="4" cy="51" r=".2"/>
+        <circle class="st14" cx="2" cy="51" r=".2"/>
+        <circle class="st14" cx="0" cy="51" r=".2"/>
+        <circle class="st14" cx="7" cy="49" r=".2"/>
+        <circle class="st14" cx="5" cy="49" r=".2"/>
+        <circle class="st14" cx="3" cy="49" r=".2"/>
+        <circle class="st14" cx="1" cy="49" r=".2"/>
+        <circle class="st14" cx="8" cy="47" r=".2"/>
+        <circle class="st14" cx="6" cy="47" r=".2"/>
+        <circle class="st14" cx="4" cy="47" r=".2"/>
+        <circle class="st14" cx="2" cy="47" r=".2"/>
+        <circle class="st14" cx="0" cy="47" r=".2"/>
+        <circle class="st14" cx="7" cy="45" r=".2"/>
+        <circle class="st14" cx="5" cy="45" r=".2"/>
+        <circle class="st14" cx="3" cy="45" r=".2"/>
+        <circle class="st14" cx="1" cy="45" r=".2"/>
+        <circle class="st14" cx="8" cy="43" r=".2"/>
+        <circle class="st14" cx="6" cy="43" r=".2"/>
+        <circle class="st14" cx="4" cy="43" r=".2"/>
+        <circle class="st14" cx="2" cy="43" r=".2"/>
+        <circle class="st14" cx="0" cy="43" r=".2"/>
+        <circle class="st14" cx="7" cy="41" r=".2"/>
+        <circle class="st14" cx="5" cy="41" r=".2"/>
+        <circle class="st14" cx="3" cy="41" r=".2"/>
+        <circle class="st14" cx="1" cy="41" r=".2"/>
+        <circle class="st14" cx="8" cy="39" r=".2"/>
+        <circle class="st14" cx="6" cy="39" r=".2"/>
+        <circle class="st14" cx="4" cy="39" r=".2"/>
+        <circle class="st14" cx="2" cy="39" r=".2"/>
+        <circle class="st14" cx="0" cy="39" r=".2"/>
+        <circle class="st14" cx="7" cy="37" r=".2"/>
+        <circle class="st14" cx="5" cy="37" r=".2"/>
+        <circle class="st14" cx="3" cy="37" r=".2"/>
+        <circle class="st14" cx="1" cy="37" r=".2"/>
+        <circle class="st14" cx="8" cy="35" r=".2"/>
+        <circle class="st14" cx="6" cy="35" r=".2"/>
+        <circle class="st14" cx="4" cy="35" r=".2"/>
+        <circle class="st14" cx="2" cy="35" r=".2"/>
+        <circle class="st14" cx="0" cy="35" r=".2"/>
+        <circle class="st14" cx="7" cy="33" r=".2"/>
+        <circle class="st14" cx="5" cy="33" r=".2"/>
+        <circle class="st14" cx="3" cy="33" r=".2"/>
+        <circle class="st14" cx="1" cy="33" r=".2"/>
+        <circle class="st14" cx="8" cy="31" r=".2"/>
+        <circle class="st14" cx="6" cy="31" r=".2"/>
+        <circle class="st14" cx="4" cy="31" r=".2"/>
+        <circle class="st14" cx="2" cy="31" r=".2"/>
+        <circle class="st14" cx="0" cy="31" r=".2"/>
+        <circle class="st14" cx="7" cy="29" r=".2"/>
+        <circle class="st14" cx="5" cy="29" r=".2"/>
+        <circle class="st14" cx="3" cy="29" r=".2"/>
+        <circle class="st14" cx="1" cy="29" r=".2"/>
+        <circle class="st14" cx="8" cy="27" r=".2"/>
+        <circle class="st14" cx="6" cy="27" r=".2"/>
+        <circle class="st14" cx="4" cy="27" r=".2"/>
+        <circle class="st14" cx="2" cy="27" r=".2"/>
+        <circle class="st14" cx="0" cy="27" r=".2"/>
+        <circle class="st14" cx="7" cy="25" r=".2"/>
+        <circle class="st14" cx="5" cy="25" r=".2"/>
+        <circle class="st14" cx="3" cy="25" r=".2"/>
+        <circle class="st14" cx="1" cy="25" r=".2"/>
+        <circle class="st14" cx="8" cy="23" r=".2"/>
+        <circle class="st14" cx="6" cy="23" r=".2"/>
+        <circle class="st14" cx="4" cy="23" r=".2"/>
+        <circle class="st14" cx="2" cy="23" r=".2"/>
+        <circle class="st14" cx="0" cy="23" r=".2"/>
+        <circle class="st14" cx="7" cy="21" r=".2"/>
+        <circle class="st14" cx="5" cy="21" r=".2"/>
+        <circle class="st14" cx="3" cy="21" r=".2"/>
+        <circle class="st14" cx="1" cy="21" r=".2"/>
+        <circle class="st14" cx="8" cy="19" r=".2"/>
+        <circle class="st14" cx="6" cy="19" r=".2"/>
+        <circle class="st14" cx="4" cy="19" r=".2"/>
+        <circle class="st14" cx="2" cy="19" r=".2"/>
+        <circle class="st14" cx="0" cy="19" r=".2"/>
+        <circle class="st14" cx="7" cy="17" r=".2"/>
+        <circle class="st14" cx="5" cy="17" r=".2"/>
+        <circle class="st14" cx="3" cy="17" r=".2"/>
+        <circle class="st14" cx="1" cy="17" r=".2"/>
+        <circle class="st14" cx="8" cy="15" r=".2"/>
+        <circle class="st14" cx="6" cy="15" r=".2"/>
+        <circle class="st14" cx="4" cy="15" r=".2"/>
+        <circle class="st14" cx="2" cy="15" r=".2"/>
+        <circle class="st14" cx="0" cy="15" r=".2"/>
+        <circle class="st14" cx="7" cy="13" r=".2"/>
+        <circle class="st14" cx="5" cy="13" r=".2"/>
+        <circle class="st14" cx="3" cy="13" r=".2"/>
+        <circle class="st14" cx="1" cy="13" r=".2"/>
+        <circle class="st14" cx="8" cy="11" r=".2"/>
+        <circle class="st14" cx="6" cy="11" r=".2"/>
+        <circle class="st14" cx="4" cy="11" r=".2"/>
+        <circle class="st14" cx="2" cy="11" r=".2"/>
+        <circle class="st14" cx="0" cy="11" r=".2"/>
+        <circle class="st14" cx="7" cy="9" r=".2"/>
+        <circle class="st14" cx="5" cy="9" r=".2"/>
+        <circle class="st14" cx="3" cy="9" r=".2"/>
+        <circle class="st14" cx="1" cy="9" r=".2"/>
+        <circle class="st14" cx="8" cy="7" r=".2"/>
+        <circle class="st14" cx="6" cy="7" r=".2"/>
+        <circle class="st14" cx="4" cy="7" r=".2"/>
+        <circle class="st14" cx="2" cy="7" r=".2"/>
+        <circle class="st14" cx="0" cy="7" r=".2"/>
+        <circle class="st14" cx="7" cy="5" r=".2"/>
+        <circle class="st14" cx="5" cy="5" r=".2"/>
+        <circle class="st14" cx="3" cy="5" r=".2"/>
+        <circle class="st14" cx="1" cy="5" r=".2"/>
+        <circle class="st14" cx="8" cy="3" r=".2"/>
+        <circle class="st14" cx="6" cy="3" r=".2"/>
+        <circle class="st14" cx="4" cy="3" r=".2"/>
+        <circle class="st14" cx="2" cy="3" r=".2"/>
+        <circle class="st14" cx="0" cy="3" r=".2"/>
+        <circle class="st14" cx="7" cy="1" r=".2"/>
+        <circle class="st14" cx="5" cy="1" r=".2"/>
+        <circle class="st14" cx="3" cy="1" r=".2"/>
+        <circle class="st14" cx="1" cy="1" r=".2"/>
+      </g>
+    </pattern>
+    <pattern id="New_Pattern_Swatch_2_copy" data-name="New Pattern Swatch 2 copy" x="0" y="0" width="2" height="4" patternTransform="translate(-106 -271)" patternUnits="userSpaceOnUse" viewBox="0 0 2 4">
+      <g>
+        <rect class="st10" width="2" height="4"/>
+        <circle class="st16" cx="2" cy="4" r=".2"/>
+        <circle class="st16" cx="0" cy="4" r=".2"/>
+        <circle class="st16" cx="1" cy="2" r=".2"/>
+        <circle class="st16" cx="2" cy="0" r=".2"/>
+        <circle class="st16" cx="0" cy="0" r=".2"/>
+      </g>
+    </pattern>
+    <pattern id="New_Pattern_Swatch_2" data-name="New Pattern Swatch 2" x="0" y="0" width="2" height="6" patternTransform="translate(-106 -271)" patternUnits="userSpaceOnUse" viewBox="0 0 2 6">
+      <g>
+        <rect class="st10" width="2" height="6"/>
+        <circle class="st0" cx="2" cy="5" r=".2"/>
+        <circle class="st0" cx="0" cy="5" r=".2"/>
+        <circle class="st0" cx="1" cy="3" r=".2"/>
+        <circle class="st0" cx="2" cy="1" r=".2"/>
+        <circle class="st0" cx="0" cy="1" r=".2"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect class="st2" x="182.2" y="34.4" width="18" height="182.5"/>
+  <rect class="st15" x="36.9" y="71.3" width="181.4" height="18.1"/>
+  <use width="4" height="4" transform="translate(178.1 174.3)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(178.8 171.8)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(170.7 168.1)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(172.8 64.7)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(163.6 58.6)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(178.1 67.8)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(173.6 56)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(178.8 168.7)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(179.8 62.8)" xlink:href="#New_Symbol"/>
+  <use width="4" height="4" transform="translate(174.8 68.6)" xlink:href="#New_Symbol"/>
+  <g>
+    <line class="st11" x1="36.9" y1="225" x2="36.9" y2="228"/>
+    <line class="st11" x1="55" y1="225" x2="55" y2="228"/>
+    <line class="st11" x1="73.2" y1="225" x2="73.2" y2="228"/>
+    <line class="st11" x1="91.3" y1="225" x2="91.3" y2="228"/>
+    <line class="st11" x1="109.4" y1="225" x2="109.4" y2="228"/>
+    <line class="st11" x1="127.6" y1="225" x2="127.6" y2="228"/>
+    <line class="st11" x1="145.7" y1="225" x2="145.7" y2="228"/>
+    <line class="st11" x1="163.8" y1="225" x2="163.8" y2="228"/>
+    <line class="st11" x1="182" y1="225" x2="182" y2="228"/>
+    <line class="st11" x1="200.1" y1="225" x2="200.1" y2="228"/>
+    <polyline class="st11" points="218.2 228 218.2 225 36.9 225"/>
+    <line class="st11" x1="26.6" y1="217.2" x2="29.6" y2="217.2"/>
+    <line class="st11" x1="26.6" y1="199" x2="29.6" y2="199"/>
+    <line class="st11" x1="26.6" y1="180.7" x2="29.6" y2="180.7"/>
+    <line class="st11" x1="26.6" y1="162.5" x2="29.6" y2="162.5"/>
+    <line class="st11" x1="26.6" y1="144.2" x2="29.6" y2="144.2"/>
+    <line class="st11" x1="26.6" y1="126" x2="29.6" y2="126"/>
+    <line class="st11" x1="26.6" y1="107.7" x2="29.6" y2="107.7"/>
+    <line class="st11" x1="26.6" y1="89.5" x2="29.6" y2="89.5"/>
+    <line class="st11" x1="26.6" y1="71.2" x2="29.6" y2="71.2"/>
+    <line class="st11" x1="26.6" y1="53" x2="29.6" y2="53"/>
+    <polyline class="st11" points="26.6 34.7 29.6 34.7 29.6 217.2"/>
+  </g>
+  <text class="st8" transform="translate(51.4 233.8)"><tspan x="0" y="0">-2</tspan></text>
+  <text class="st8" transform="translate(88 233.8)"><tspan x="0" y="0">-1</tspan></text>
+  <text class="st8" transform="translate(125.7 233.8)"><tspan x="0" y="0">0</tspan></text>
+  <text class="st8" transform="translate(162.8 233.8) rotate(-2.3) scale(.8 1)"><tspan x="0" y="0">1</tspan></text>
+  <text class="st8" transform="translate(198.9 233.8)"><tspan x="0" y="0">2</tspan></text>
+  <text class="st8" transform="translate(18.9 198.9)"><tspan x="0" y="0">-2</tspan></text>
+  <text class="st8" transform="translate(18.9 162.8)"><tspan x="0" y="0">-1</tspan></text>
+  <text class="st8" transform="translate(20.7 126.8)"><tspan x="0" y="0">0</tspan></text>
+  <text class="st8" transform="translate(20.7 90.6)"><tspan x="0" y="0">1</tspan></text>
+  <text class="st8" transform="translate(20.7 54.6)"><tspan x="0" y="0">2</tspan></text>
+  <text class="st8" transform="translate(30.2 233.8)"><tspan x="0" y="0">-2.5</tspan></text>
+  <text class="st8" transform="translate(66.8 233.8)"><tspan x="0" y="0">-1.5</tspan></text>
+  <text class="st8" transform="translate(103.4 233.8)"><tspan x="0" y="0">-0.5</tspan></text>
+  <text class="st8" transform="translate(141.1 233.8)"><tspan x="0" y="0">0.5</tspan></text>
+  <text class="st8" transform="translate(177.7 233.8)"><tspan x="0" y="0">1.5</tspan></text>
+  <text class="st8" transform="translate(214.2 233.8)"><tspan x="0" y="0">2.5</tspan></text>
+  <text class="st8" transform="translate(14.6 217)"><tspan x="0" y="0">-2.5</tspan></text>
+  <text class="st8" transform="translate(14.6 180.9)"><tspan x="0" y="0">-1.5</tspan></text>
+  <text class="st8" transform="translate(14.6 144.8)"><tspan x="0" y="0">-0.5</tspan></text>
+  <text class="st8" transform="translate(16.4 108.7)"><tspan x="0" y="0">0.5</tspan></text>
+  <text class="st8" transform="translate(16.4 72.6)"><tspan x="0" y="0">1.5</tspan></text>
+  <text class="st8" transform="translate(16.4 36.5)"><tspan x="0" y="0">2.5</tspan></text>
+  <text class="st7" transform="translate(224.4 46.1)"><tspan x="0" y="0">1</tspan></text>
+  <text class="st4" transform="translate(42.3 30.9)"><tspan x="0" y="0">1</tspan></text>
+  <text class="st7" transform="translate(224.3 64.6) rotate(.7)"><tspan x="0" y="0">2</tspan></text>
+  <text class="st4" transform="translate(60.5 30.9) rotate(.7)"><tspan x="0" y="0">2</tspan></text>
+  <text class="st7" transform="translate(224.4 83.1)"><tspan x="0" y="0">3</tspan></text>
+  <text class="st4" transform="translate(78.7 30.9)"><tspan x="0" y="0">3</tspan></text>
+  <text class="st7" transform="translate(224.4 101.6)"><tspan x="0" y="0">4</tspan></text>
+  <text class="st4" transform="translate(97 30.9)"><tspan x="0" y="0">4</tspan></text>
+  <text class="st7" transform="translate(224.4 120.1)"><tspan x="0" y="0">5</tspan></text>
+  <text class="st4" transform="translate(115.2 30.9)"><tspan x="0" y="0">5</tspan></text>
+  <text class="st7" transform="translate(224.4 138.6)"><tspan x="0" y="0">6</tspan></text>
+  <text class="st4" transform="translate(133.4 30.9)"><tspan x="0" y="0">6</tspan></text>
+  <text class="st7" transform="translate(224.4 157.1)"><tspan x="0" y="0">7</tspan></text>
+  <text class="st4" transform="translate(151.7 30.9)"><tspan x="0" y="0">7</tspan></text>
+  <text class="st7" transform="translate(224.4 175.6)"><tspan x="0" y="0">8</tspan></text>
+  <text class="st4" transform="translate(169.9 30.9)"><tspan x="0" y="0">8</tspan></text>
+  <text class="st7" transform="translate(224.4 194.2)"><tspan x="0" y="0">9</tspan></text>
+  <text class="st4" transform="translate(188.1 30.9)"><tspan x="0" y="0">9</tspan></text>
+  <text class="st4" transform="translate(204.3 30.9)"><tspan x="0" y="0">10</tspan></text>
+  <text class="st7" transform="translate(220.2 212.7)"><tspan x="0" y="0">10</tspan></text>
+  <text class="st5" transform="translate(122.2 248.1)"><tspan x="0" y="0">X</tspan></text>
+  <text class="st5" transform="translate(2.8 128.2)"><tspan x="0" y="0">Y</tspan></text>
+  <text class="st3" transform="translate(234.2 128.2)"><tspan x="0" y="0">R</tspan></text>
+  <text class="st3" transform="translate(242.9 128.2) scale(.6)"><tspan x="0" y="0">i</tspan></text>
+  <text class="st6" transform="translate(121 15.5)"><tspan x="0" y="0">C</tspan></text>
+  <text class="st6" transform="translate(129.7 15.5) scale(.6)"><tspan x="0" y="0">j</tspan></text>
+  <rect class="st10" x="181.5" y="99.5" width="20" height="20"/>
+  <rect class="st9" x="182.1" y="71.3" width="18.1" height="18.1"/>
+  <rect class="st18" x="182.1" y="71.3" width="18.1" height="18.1"/>
+  <rect class="st1" x="182.1" y="71.3" width="18.1" height="18.1"/>
+  <g>
+    <line class="st12" x1="36.9" y1="217.2" x2="36.9" y2="34.7"/>
+    <line class="st12" x1="55" y1="217.2" x2="55" y2="34.7"/>
+    <line class="st12" x1="73.2" y1="217.2" x2="73.2" y2="34.7"/>
+    <line class="st12" x1="91.3" y1="217.2" x2="91.3" y2="34.7"/>
+    <line class="st12" x1="109.4" y1="217.2" x2="109.4" y2="34.7"/>
+    <line class="st12" x1="127.6" y1="217.2" x2="127.6" y2="34.7"/>
+    <line class="st12" x1="145.7" y1="217.2" x2="145.7" y2="34.7"/>
+    <line class="st12" x1="163.8" y1="217.2" x2="163.8" y2="34.7"/>
+    <line class="st12" x1="182" y1="217.2" x2="182" y2="34.7"/>
+    <line class="st12" x1="200.1" y1="217.2" x2="200.1" y2="34.7"/>
+    <line class="st12" x1="218.2" y1="217.2" x2="218.2" y2="34.7"/>
+    <line class="st12" x1="218.2" y1="217.2" x2="36.9" y2="217.2"/>
+    <line class="st12" x1="218.2" y1="199" x2="36.9" y2="199"/>
+    <line class="st12" x1="218.2" y1="180.7" x2="36.9" y2="180.7"/>
+    <line class="st12" x1="218.2" y1="162.5" x2="36.9" y2="162.5"/>
+    <line class="st12" x1="218.2" y1="144.2" x2="36.9" y2="144.2"/>
+    <line class="st12" x1="218.2" y1="126" x2="36.9" y2="126"/>
+    <line class="st12" x1="218.2" y1="107.7" x2="36.9" y2="107.7"/>
+    <line class="st12" x1="218.2" y1="89.5" x2="36.9" y2="89.5"/>
+    <line class="st12" x1="218.2" y1="71.2" x2="36.9" y2="71.2"/>
+    <line class="st12" x1="218.2" y1="53" x2="36.9" y2="53"/>
+    <line class="st12" x1="218.2" y1="34.7" x2="36.9" y2="34.7"/>
+  </g>
+  <g>
+    <use width="4" height="4" transform="translate(137.7 195.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(148.4 50.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(57.9 128)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(127.7 203.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(87.4 57.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(143.1 49)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(111.2 58.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(160.8 67.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(138.2 56)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(204.3 100.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(97.4 45.1)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(48.3 107.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(131 197)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(54 136.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(99.4 191.2)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(132.4 199.1)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(71.6 175)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(95.7 197)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(40.3 139.2)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(84 59.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(73 92.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(140.1 194.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(104.7 186.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(156.9 194.7)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(62.3 97)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(98.1 60.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(53.1 122.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(91.7 181)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(107.5 192.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(109.5 54.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(126.2 203.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(115 196.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(96.2 63.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(50.1 159.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(49.9 148.1)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(64.6 160.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(138.7 50.2)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(77.8 188.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(153.3 190.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(144.7 190.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(131.1 53.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(120.2 53.1)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(114.1 201.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(89.4 193.3)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(94.2 56.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(61.7 152)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(139.9 52.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(157.3 66)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(202.2 117.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(63.7 101.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(78.9 67.9)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(126.1 48.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(58.6 130.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(51.1 98.7)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(112.7 48.2)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(121.6 50.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(137.7 57.2)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(153.4 189.7)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(67.2 159.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(150.5 49.6)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(202 124.8)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(200.1 149.5)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(51.4 90.7)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(74.6 165.4)" xlink:href="#New_Symbol"/>
+    <use width="4" height="4" transform="translate(121.3 207.7)" xlink:href="#New_Symbol"/>
+  </g>
+  <use width="4.5" height="4.5" transform="translate(194.1 114.8)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(194.7 123.4)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(188.4 145.4)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(195.2 151.5)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(197 116.8)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(192.9 156.3)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(192.4 105.8)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(196.9 163.8)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(191.4 115.5)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(183.7 151.1)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(195 106.5)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(191.2 143)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(83.6 69.1)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(163 69.9)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(62.7 82.4)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(53.6 86)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(70.2 81.4)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(71.5 73.4)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(174.5 70.2)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(79.2 70.8)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(94.4 70.2)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(159.1 74.7)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(195.1 159.9)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(185.7 80.3)" xlink:href="#New_Symbol_1"/>
+  <use width="4.5" height="4.5" transform="translate(183.4 76.9)" xlink:href="#New_Symbol_1"/>
+</svg>

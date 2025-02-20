@@ -542,12 +542,6 @@ root {
   margin: 0 !important;
   padding: 0 !important; }
 
-.hljs-ln td {
-  padding: 0; }
-
-.hljs-ln-n:before {
-  content: attr(data-line-number); }
-
 .reveal .slides .l-multiple {
   display: flex;
   justify-content: space-around;
@@ -595,7 +589,8 @@ root {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  max-height: 90vh; }
   .reveal .slides .grid-generic > div {
     display: grid;
     width: 100%; }
@@ -658,6 +653,7 @@ root {
     align-items: center;
     align-content: center;
     height: 100%;
+    max-height: 90vh;
     width: 100%; }
     .reveal .slides .grid-wrapper .content > div {
       width: 100%; }
@@ -719,7 +715,7 @@ root {
 .reveal .slides .title-slide {
   margin: 0;
   padding: 0;
-  height: calc(var(--slide-height) * 0.99 * var(--slide-scale));
+  height: calc(var(--slide-height) * 0.9 * var(--slide-scale));
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -738,7 +734,7 @@ root {
     display: block;
     justify-content: right;
     align-items: center;
-    height: calc(var(--slide-height) * 0.15 * var(--slide-scale));
+    height: calc(var(--slide-height) * 0.14 * var(--slide-scale));
     width: 100%; }
     .reveal .slides .title-slide .headline h2, .reveal .slides .title-slide .headline h3 {
       font-weight: bold;
@@ -868,7 +864,16 @@ hr {
   display: block;
   overflow: hidden;
   max-height: 100%;
-  width: 100%; }
+  width: 100%;
+  tab-size: 4; }
+  .reveal section pre code.hljs {
+    padding: 0.8em; }
+
+.reveal section .code-wrapper code {
+  white-space-collapse: preserve-breaks;
+  text-wrap-style: pretty;
+  text-wrap-mode: wrap;
+  tab-size: 4; }
 
 .reveal section .graphic {
   max-width: 100%;
