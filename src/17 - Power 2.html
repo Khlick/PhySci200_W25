@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Statistical Power Part 2
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/power_1.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Statistical Power
+              </h2>
+              <h3>
+                Part 2
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 17
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Setup the bootstrap for power analysis</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Example of <span class="em">post hoc</span> power analysis</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="target"></i> Example of <span class="em">a priori</span> power analysis</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p><i class="target"></i> Positive Predictive Value</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p></p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Type 1 Probability -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type I Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:2vmin;justify-self:center;">
+
+<div>
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>5% of statistics will be in the most extreme 5%</li>
+
+<li>5% of statistics will give p-values less than 0.05</li>
+
+<li>5% of statistics will lead to rejecting H$_0$ at $\alpha=0.05$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+If $\alpha=0.05$, there is a 5% chance of a Type I error
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>1% of statistics will be in the most extreme 1%</li>
+
+<li>1% of statistics will give p-values less than 0.01</li>
+
+<li>1% of statistics will lead to rejecting H$_0$ at $\alpha=0.01$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+If $\alpha=0.01$, there is a 1% chance of a Type I error
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_3"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<p class="bg-danger-light black fragment" style="grid-column: 1/3;" data-fragment-index="2">
+
+For each test, the probability of making a Type I error <span class="strong">is $\alpha$</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 1 Error: -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Controlling For Type 1 Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="box-width">
+
+<p>
+
+Each test is carried out at $\alpha=0.05$, so the risk of <span class="danger">making a Type I error</span> (rejecting the null when we should not) is <span class="danger">$5\%$ <span class="u">each time</span></span>.
+
+</p>
+
+<p>
+
+The risk of making a Type I errors increases as we multiply the number of tests on the same data:
+
+</p>
+
+
+
+<ul style="font-size: 90%; margin-bottom:2vmin;">
+
+<li>
+
+At the $5\%$ significance level, the probability of making at least one type I error for <span class="strong">3 tests</span> would be <span class="strong">$14\%$</span>
+
+</li>
+
+<li>
+
+Comparing <span class="strong">4 means</span> (6 tests), this jumps to <span class="strong">$26\%$</span>
+
+</li>
+
+<li>
+
+Comparing <span class="strong">5 means</span> (10 tests), this jumps to <span class="strong">$40\%$</span>
+
+</li>
+
+</ul>
+
+
+
+<p class="framed bg-warning-light black" style="font-size: 80%;">
+
+We need to make multiple comparisons with an <span class="danger">overall</span> Type I error of $\alpha=0.05$ (or whichever level is specified). We need an alternative approach that uses one overall test that compares all means at once.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 1 Error for multiple tests -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Type 1 Errors Accumulate Rapidly</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width smaller" style="text-align:left;">
+
+<p class="mutedBlue">
+
+In a test at $\alpha = 0.05$, there is a 5% chance of getting a
+
+<span class="danger">false positive</span> if the null hypothesis is true.
+
+In 100 tests, each at $\alpha = 0.05$, we "expect 5 false positives" if all
+
+100 null hypotheses are true, but really, the probability of getting
+
+$k$ false-positives is determinable through the binomial distribution,
+
+$p(k\, |\, \alpha)$.
+
+</p>
+
+<p>
+
+We can calculate the probability of getting
+
+<span class="strong">exactly one</span> false positive, but we rarely care if there's only 1.
+
+</p>
+
+<p>
+
+Instead, we care usually if <span class="strong">one or more</span> false positives occur.
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" version="1.1"  viewBox="0 0 730 442" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+<style type="text/css">
+
+*{stroke-linecap:butt;stroke-linejoin:round;}
+
+</style>
+
+</defs>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_2"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_3"></use>
+
+<use xlink:href="lib/img/ALPHA_runningProb.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 2 Probability: significance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type II Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+
+
+<p class="bg-warning-light question">
+
+How can we reduce the probability of making a Type II Error
+
+</p>
+
+<p class="black smaller">
+
+That is, how could we increase the probability of rejecting the null when the
+
+null hypothesis is rejectable, i.e., <span class="em">false</span>?
+
+</p>
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="u-info left-justify">
+
+<span class="circled-bg-info">1</span>
+
+Increase the sample size
+
+</p>
+
+</div>
+
+<div>
+
+<p class="left-justify fragment u-pink" data-fragment-index=1>
+
+<span class="circled-bg-pink">2</span>
+
+Increase the significance level
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic box-width" style="grid-template-columns:7fr 3fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div data-fragment-index=1>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=4 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index=3 style="align-content: center;height:100%;">
+
+<p class="smaller info">
+
+Increase $\alpha$ to reduce the chance of Type II error.
+
+</p>
+
+<p class="smaller danger">
+
+Decrease $\alpha$ to reduce the chance of Type I error.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/power_4.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Power Analysis:
+                </h2>
+                <h3>
+                  Bootstrap
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Interactive Power Visualization -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power And Significance Level</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width" style="height:100%;">
+
+<table id="er-table-small">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject H$_0$</td>
+
+<td class="border-right bg-info-light">Do not reject H$_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+H$_0$ true
+
+</td>
+
+<td class="border-right">
+
+<p class="danger">$\alpha$: Type I Error</p>
+
+<p class="smallest">Probability of <span class="em">false positive</span>.</p>
+
+</td>
+
+<td class="border-right">
+
+<p class="success">$1-\alpha$</p>
+
+<p class="smallest">Probability of <span class="em">true negative</span>.</p>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">H$_0$ false</td>
+
+<td class="border-right border-bottom">
+
+<p class="success">$1-\beta$: Statistical Power</p>
+
+<p class="smallest">Probability of <span class="em">true positive</span>.</p>
+
+</td>
+
+<td class="border-right border-bottom">
+
+<p class="danger">$\beta$: Type II Error</p>
+
+<p class="smallest">Probability of <span class="em">false negative</span>.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div style="height:100%">
+
+<vizzy data-src="lib/interactives/errors-power.html" class="framed" style="height:50vh;width:100%;"></vizzy>
+
+<div class="left-justify smaller">
+
+<p class="smaller em">
+
+Statistical Power is the probability of rejecting the null hypothesis when it is false.
+
+</p>
+
+<p class="smaller info">
+
+Power depends heavily on the <span class="strong">effect size</span> of the alternative hypothesis, and the <span class="strong">sample sizes</span> of the study.
+
+</p>
+
+<p class="smaller danger em">
+
+The power of a test can be calculated by integrating the sampling distribution of the test statistic under the alternative hypothesis from the critical value to positive infinity.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note that beta is the integration of the Ha distribution from negative infinity to the z value corresponding to the Null distribution's alpha level.</p>
+
+<p><strong>Explanation for Students</strong></p>
+
+<p>When introducing this concept to students, it would be helpful to clarify:</p>
+
+<ul>
+
+<li><strong>Effect Size Consideration:</strong> The noncentral t-distribution considers the effect size you expect between groups. For instance, if you believe the new jet engine is more efficient by a certain margin, this margin (quantified by Cohen's d) influences the noncentrality parameter.</li>
+
+<li><strong>Connection to H1:</strong> This distribution directly relates to the hypothesis that there is a difference (i.e., H1). Unlike the central t-distribution, which is used under H0 (no difference), the noncentral t-distribution takes the presumed effect into account, making it the distribution of the test statistic under H1.</li>
+
+<li><strong>Standardization:</strong> The term "standardized" here implies that the effect size has been transformed into a scale that is comparable across different studies or contexts, factoring in the sample size and variance.</li>
+
+<li><strong>Usage in Power Calculations:</strong> Emphasize that this distribution is crucial for calculating the power of a test, which is the probability of correctly rejecting H0 when H1 is true. The area under the curve of the noncentral t-distribution beyond the critical value of the t-test (determined by the significance level alpha) gives us this probability.</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- Caculating \beta -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Caculating $1-\beta$ or $\alpha$</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/beta-error-pseudocode.jpg" alt="Beta Error Pseudocode">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note, I've updated the title to match what the psudocode does.</p>
+
+<p>
+
+Here, we are estimating the Type I error rate if the simulaion is of "no effect", or $H_0$ is true.
+
+</p>
+
+<p>
+
+Or, in our actual use case, we are detecting how often the test correctly rejects the null hypothesis when it is false, i.e., there is a true effect.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- T-Maze Example: Bootstrapping -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power For Two-Sample Tests</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Setup -->
+
+<div class="framed smallest left-justify" style="height:100%;">
+
+<p class="em left-justify no-margin">
+
+<span class="u">Scenario</span>: Assess the impact of APOE gene variations on spatial learning and memory in mice using the T-maze spontaneous alternation task.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+We have alternation rates for two groups of mice:
+
+</p>
+
+<ul class="fragment" data-fragment-index="2">
+
+<li>APOE4-h: 0.556 (0.496, 0.639)</li>
+
+<li>C57BL/6: 0.677 (0.602, 0.767)</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index="3">
+
+We want to test the difference in alternation rates between the two groups: $\Delta\hat{p} = \hat{p}_{\text{APOE4-h}} - \hat{p}_{\text{C57BL/6}} = 0.120\, (0.015,\, 0.226)$
+
+</p>
+
+<p class="fragment" data-fragment-index="4">
+
+We need to consider the <span class="danger">Null</span> and <span class="info">Effects</span> distributions.
+
+</p>
+
+</div>
+
+<div class="no-hang" data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: T-Maze Diagram -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">T-Maze Task</p>
+
+<p class="smallest no-hang">Testing spatial memory in APOE knockout vs wild-type mice</p>
+
+</div>
+
+<img src="lib/img/tmaze.svg" alt="tmaze" style="width:20%;margin-left:auto;margin-right:auto;">
+
+<img src="lib/img/TMaze_Groups_2samples.svg" alt="tmaze" style="width:60%;margin-left:auto;margin-right:auto;" class="fragment" data-fragment-index="1">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The T-maze is a widely used behavioral apparatus for evaluating spatial memory and learning in rodents. It consists of a start arm and two goal arms (left and right) forming a 'T' shape. The spontaneous alternation task leverages rodents' natural tendency to explore new environments, measuring their ability to remember and alternate between arms without external rewards.</p>
+
+<p>Reporting mean difference and 95% CI with BCa confidence intervals.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- T-Maze Example: Bootstrapping -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power For Two-Sample Tests</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Setup -->
+
+<div class="framed smallest left-justify" style="height:100%;">
+
+<p class="em no-margin">
+
+Using the One Box NHST Bootstrap, we can generate the Null Distribution of the test statistic.
+
+</p>
+
+<img src="lib/img/boxmodels_onebox.png" alt="boxmodels_onebox" style="width:30%;margin-left:auto;margin-right:auto;" class="graphic center-justify">
+
+<p>
+
+Here is the familiar NHST Null Distribution, specifying an $\alpha$ level of 0.05, we can set a critical level threshold at $H_{0,\text{crit}} = 0.128$
+
+</p>
+
+</div>
+
+<div class="no-hang" data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: T-Maze Diagram -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">T-Maze Task</p>
+
+<p class="smallest no-hang danger">The null distribution</p>
+
+</div>
+
+<img src="lib/img/tmaze.svg" alt="tmaze" style="width:20%;margin-left:auto;margin-right:auto;">
+
+<img src="lib/img/TMaze_Groups_2samples_h0.svg" alt="tmaze" style="width:60%;margin-left:auto;margin-right:auto;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This bootstrap distribution allows us to calculate a critical threshold based on our alpha level.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- T-Maze Example: Bootstrapping -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power For Two-Sample Tests</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Setup -->
+
+<div class="framed smallest left-justify" style="height:100%;">
+
+<p class="em no-margin">
+
+Using the Differences Bootstrap (Two Box Effects), we can generate the Effect Size Distribution of the test statistic.
+
+</p>
+
+<img src="lib/img/boxmodels_diff.png" alt="boxmodels_onebox" style="width:30%;margin-left:auto;margin-right:auto;" class="graphic center-justify">
+
+<p>
+
+If we consider this a <span class="strong">True Effect</span>, we can calculate the power of the test by integrating the distribution from the critical value of the Null Distribution to positive infinity.
+
+</p>
+
+</div>
+
+<div class="no-hang" data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: T-Maze Diagram -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify">T-Maze Task</p>
+
+<p class="smallest no-hang info">The Effects distribution</p>
+
+</div>
+
+<img src="lib/img/tmaze.svg" alt="tmaze" style="width:20%;margin-left:auto;margin-right:auto;">
+
+<img src="lib/img/TMaze_Groups_2samples_h1.svg" alt="tmaze" style="width:60%;margin-left:auto;margin-right:auto;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We show the BCA 95% CI for the effects distribution, but really, we care about the value of the Null Critical Level.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Power Analysis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparing Nulls and Effects</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-self:center;" class="half-width">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 1433 570" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/TMaze_Power_Analysis.svg#axes_1"></use>
+
+<use xlink:href="lib/img/TMaze_Power_Analysis.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/TMaze_Power_Analysis.svg#axes_3" class="fragment" data-fragment-index="3"></use>
+
+</svg>
+
+</div>
+
+<div class="full-width">
+
+<p class="left-justify sided border-danger small">
+
+The <span class="danger">Type II Error Rate</span> is the area under the <span class="info">Effects</span> distribution <span class="freezing-text">less extreme</span> than the Null critical value.
+
+</p>
+
+<p class="fragment smaller" data-fragment-index="1">That is:</p>
+
+<p class="fragment danger" data-fragment-index="1">
+
+$\beta = P(\text{Type II Error}) = P(\text{Fail to reject } H_0 | H_1 \text{ is true})$
+
+</p>
+
+<p class="left-justify sided border-info small fragment" data-fragment-index="2">
+
+The <span class="info">power</span> of the test is the area under the <span class="info">Effects</span> distribution <span class="excited-text">more extreme</span> than the Null critical value.
+
+</p>
+
+<p class="fragment smaller" data-fragment-index="3">That is:</p>
+
+<p class="fragment info" data-fragment-index="3">
+
+$1-\beta = P(\text{Power}) = P(\text{Reject } H_0 | H_1 \text{ is true})$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Introduction to Types of Power Analysis -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Introduction to Types of Power Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed border-muted">
+
+<p class="small"><strong>Statistical Power Analysis</strong> is a crucial aspect of experimental design, used to determine the likelihood that a study will detect an effect when there is an effect to be detected. It addresses two types of errors:</p>
+
+<ul>
+
+<li><strong>Type I Error ($\alpha$):</strong> Incorrectly rejecting the null hypothesis when it is true.</li>
+
+<li><strong>Type II Error ($\beta$):</strong> Failing to reject the null hypothesis when it is false.</li>
+
+</ul>
+
+</div>
+
+<p class="fragment" data-fragment-index="1">There are two primary types of power analysis:</p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="2"><strong><span class="em">A Posteriori</span> Power Analysis:</strong> Conducted after a study to evaluate the likelihood of committing a Type II error, i.e., failing to detect an effect that is present. This analysis is typically used to understand the power limitations of a completed study. <span class="em">Also referred to as Post Hoc, or <span class="s-quote">retrospective</span> power analysis.</span></li>
+
+<li class="fragment" data-fragment-index="3"><strong><span class="em"></span>A Priori</span> Power Analysis:</strong> Conducted before a study begins, it is used to determine the necessary sample size to achieve a desired power level, typically set to 80%, to confidently detect an expected effect.</li>
+
+</ul>
+
+<p class="fragment em smaller success" data-fragment-index="4">Understanding and applying these analyses help ensure that engineering studies are designed efficiently, with sufficient power to yield meaningful results.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+This slide provides a foundational understanding of statistical power and its role in minimizing errors in hypothesis testing. It sets the stage for the subsequent slides detailing specific methodologies and calculations for both post hoc and a priori power analyses in real-world engineering contexts.
+
+</aside>
+        </section>
+        <section>
+          <!-- Power Analysis: a priori -->
+
+
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power Analysis: <span class="em">a posteriori</span></h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:3fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="smaller quoted">In a prospective cohort study of 50,282 gravidas and their offspring, congentical malformation rates were similar in the children of over 1,000 women exposed and those not exposed to two components of Bendectin (doxylamine succinate and dicyclomine hydrochloride) during the first four lunar months of pregnancy. $\ldots$ <span class="fragment highlight-warning" data-fragment-index="1">The data presented here give no evidence that [Bendectin] taken during pregnancy are related to congenital malformations.</span> $\ldots$ <span class="fragment highlight-danger" data-fragment-index="1">Bendectin does not appear to be harmful for the fetus.</span></p>
+
+<p class="question bg-info-white fragment" data-fragment-index="2">What is the problem with this statement</p>
+
+<p class="question fragment" data-fragment-index="3">How can we test if the study had enough power to detect a difference if one existed</p>
+
+</div>
+
+<div class="tiny">
+
+<table class="styled-table">
+
+<tr class="smallest">
+
+<th rowspan="2" class="left-align">Malformations</th>
+
+<th colspan="2">Exposed (No. = 1,169)</th>
+
+<th colspan="2">Not exposed (No. = 49,113)</th>
+
+<th rowspan="2">Standardized Relative Risk</th>
+
+</tr>
+
+<tr class="smaller">
+
+<th>No.</th>
+
+<th>%</th>
+
+<th>No.</th>
+
+<th>%</th>
+
+</tr>
+
+<tr>
+
+<td class="italic">Uniform</td>
+
+<td>55</td>
+
+<td>4.7</td>
+
+<td>2,222</td>
+
+<td>4.5</td>
+
+<td>1.07</td>
+
+</tr>
+
+<tr>
+
+<td class="italic">Major</td>
+
+<td>36</td>
+
+<td>3.1</td>
+
+<td>1,357</td>
+
+<td>2.8</td>
+
+<td>1.06</td>
+
+</tr>
+
+<tr>
+
+<td>Central nervous</td>
+
+<td>7</td>
+
+<td>0.6</td>
+
+<td>259</td>
+
+<td>0.5</td>
+
+<td>1.23</td>
+
+</tr>
+
+<tr>
+
+<td>Cardiovascular</td>
+
+<td>5</td>
+
+<td>0.4</td>
+
+<td>399</td>
+
+<td>0.8</td>
+
+<td>0.61</td>
+
+</tr>
+
+<tr>
+
+<td>Musculoskeletal</td>
+
+<td>13</td>
+
+<td>1.1</td>
+
+<td>382</td>
+
+<td>0.8</td>
+
+<td>1.15</td>
+
+</tr>
+
+<tr>
+
+<td>Respiratory</td>
+
+<td>7</td>
+
+<td>0.6</td>
+
+<td>211</td>
+
+<td>0.4</td>
+
+<td>1.30</td>
+
+</tr>
+
+<tr>
+
+<td>Gastrointestinal</td>
+
+<td>12</td>
+
+<td>1.0</td>
+
+<td>289</td>
+
+<td>0.6</td>
+
+<td>1.46</td>
+
+</tr>
+
+<tr>
+
+<td>Hypospadias</td>
+
+<td>5</td>
+
+<td>0.9</td>
+
+<td>182</td>
+
+<td>0.7</td>
+
+<td>1.43</td>
+
+</tr>
+
+<tr>
+
+<td>Other genitourinary</td>
+
+<td>2</td>
+
+<td>0.2</td>
+
+<td>182</td>
+
+<td>0.4</td>
+
+<td>0.39</td>
+
+</tr>
+
+<tr>
+
+<td>Eye and ear</td>
+
+<td>2</td>
+
+<td>0.2</td>
+
+<td>119</td>
+
+<td>0.2</td>
+
+<td>0.64</td>
+
+</tr>
+
+<tr>
+
+<td>Syndromes</td>
+
+<td>3</td>
+
+<td>0.3</td>
+
+<td>112</td>
+
+<td>0.2</td>
+
+<td>1.10</td>
+
+</tr>
+
+<tr>
+
+<td>Tumors</td>
+
+<td>1</td>
+
+<td>0.1</td>
+
+<td>163</td>
+
+<td>0.3</td>
+
+<td>0.21</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>There are two more problems with this study we won't talk about. Eventually, and after some litigation, appeals by thousands of women, Doxylamine succinate was removed from the market, the company went to Canada where they had more legal troubles, before taking the dangerous compounds out of the drug altogether.</p>
+
+<ol>
+
+<li>In the results, the authors acknowledge high risks rates for respiratory, gastrointestinal, and central nercous system malformation, but call them "not statistically significant".</li>
+
+<li>The do some, frankly racist, bullshit. They use an unspecified "linear regression technique" to essentially remove non-white women from the study, essentially saying that non-white children had higher tendencies for malformations and low birth weight.</li>
+
+</ol>
+
+</aside>
+
+</section>
+
+
+
+<!-- Let's start with x2 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Testing The Association</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="grid-generic" style="grid-template-columns:auto 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify strong">
+
+Data:
+
+</p>
+
+<table border="1" class="gpt-styled-table smaller">
+
+<thead>
+
+<tr style="text-align: right;">
+
+<th></th>
+
+<th>Bendectin</th>
+
+<th>Control</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<th>Malformed</th>
+
+<td>148</td>
+
+<td>5876</td>
+
+</tr>
+
+<tr>
+
+<th>Normal</th>
+
+<td>1021</td>
+
+<td>43237</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p class="left-justify strong">
+
+Expected Table:
+
+</p>
+
+<table border="1" class="gpt-styled-table smaller">
+
+<thead>
+
+<tr style="text-align: right;">
+
+<th></th>
+
+<th>Bendectin</th>
+
+<th>Control</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<th>Malformed</th>
+
+<td>140.05</td>
+
+<td>5883.95</td>
+
+</tr>
+
+<tr>
+
+<th>Normal</th>
+
+<td>1028.95</td>
+
+<td>43229.05</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div>
+
+<p>
+
+For 1,169 exposed and 49,113 controls:<br />$\chi^2 = 0.5247$ and $|\chi| = 0.0660$, with 1 degree of freedom.
+
+</p>
+
+<p class="fragment strong big" data-fragment-index="1">$p_{\chi^2} = 0.468$, $p_{|\chi|} = 0.4618$</p>
+
+<div style="justify-content: center;"><img src="lib/img/bendectin_chi_bootstraps.svg" alt="" class="fragment" data-fragment-index="2"></div>
+
+</div>
+
+</div>
+
+<p class="fragment framed border-info" data-fragment-index="3">
+
+If there were an association, the power of the this study to actually detect it was $\approx 12\%$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The study didn't use chi squared, instead they used logistic regression but what do you think about how the model peformed when controls out-weighed exposed by 50 to 1?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What about risk? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What About Risk?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 3fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny">
+
+<table class="styled-table">
+
+<tr class="smallest">
+
+<th rowspan="2" class="left-align">Malformations</th>
+
+<th colspan="2">Exposed (No. = 1,169)</th>
+
+<th colspan="2">Not exposed (No. = 49,113)</th>
+
+<th rowspan="2">Standardized Relative Risk</th>
+
+</tr>
+
+<tr class="smaller">
+
+<th>No.</th>
+
+<th>%</th>
+
+<th>No.</th>
+
+<th>%</th>
+
+</tr>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="1">
+
+<td class="italic">Uniform</td>
+
+<td>55</td>
+
+<td>4.7</td>
+
+<td>2,222</td>
+
+<td>4.5</td>
+
+<td>1.07</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="1">
+
+<td class="italic">Major</td>
+
+<td>36</td>
+
+<td>3.1</td>
+
+<td>1,357</td>
+
+<td>2.8</td>
+
+<td>1.06</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="2">
+
+<td>Central nervous</td>
+
+<td>7</td>
+
+<td>0.6</td>
+
+<td>259</td>
+
+<td>0.5</td>
+
+<td>1.23</td>
+
+</tr>
+
+<tr>
+
+<td>Cardiovascular</td>
+
+<td>5</td>
+
+<td>0.4</td>
+
+<td>399</td>
+
+<td>0.8</td>
+
+<td>0.61</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="1">
+
+<td>Musculoskeletal</td>
+
+<td>13</td>
+
+<td>1.1</td>
+
+<td>382</td>
+
+<td>0.8</td>
+
+<td>1.15</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="2">
+
+<td>Respiratory</td>
+
+<td>7</td>
+
+<td>0.6</td>
+
+<td>211</td>
+
+<td>0.4</td>
+
+<td>1.30</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="2">
+
+<td>Gastrointestinal</td>
+
+<td>12</td>
+
+<td>1.0</td>
+
+<td>289</td>
+
+<td>0.6</td>
+
+<td>1.46</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-danger-white" data-fragment-index="2">
+
+<td>Hypospadias</td>
+
+<td>5</td>
+
+<td>0.9</td>
+
+<td>182</td>
+
+<td>0.7</td>
+
+<td>1.43</td>
+
+</tr>
+
+<tr>
+
+<td>Other genitourinary</td>
+
+<td>2</td>
+
+<td>0.2</td>
+
+<td>182</td>
+
+<td>0.4</td>
+
+<td>0.39</td>
+
+</tr>
+
+<tr>
+
+<td>Eye and ear</td>
+
+<td>2</td>
+
+<td>0.2</td>
+
+<td>119</td>
+
+<td>0.2</td>
+
+<td>0.64</td>
+
+</tr>
+
+<tr class="fragment highlight-bg-warning" data-fragment-index="1">
+
+<td>Syndromes</td>
+
+<td>3</td>
+
+<td>0.3</td>
+
+<td>112</td>
+
+<td>0.2</td>
+
+<td>1.10</td>
+
+</tr>
+
+<tr>
+
+<td>Tumors</td>
+
+<td>1</td>
+
+<td>0.1</td>
+
+<td>163</td>
+
+<td>0.3</td>
+
+<td>0.21</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div>
+
+<p>Interestingly, the authors did not directly calculate relative risk from the overall counts. After splitting into multiple categories, they systematically ignored high risk categories.</p>
+
+<p class="fragment u strong" data-fragment-index="3">
+
+Relative Risk
+
+</p>
+
+<div class="fragment smaller no-hang" data-fragment-index="3">
+
+$$RR = \frac{\text{Risk in Exposed Group}}{\text{Risk in Control Group}} = \frac{a/(a+b)}{c/(c+d)}$$
+
+<div class="fragment smallest no-hang" data-fragment-index="4">
+
+<p>For the matrix:</p>
+
+$$
+
+\begin{array}{|c|c|c|c|}
+
+\hline
+
+& \text{Outcome Present} & \text{Outcome Absent} & \text{Total} \\
+
+\hline
+
+\text{Exposed} & A & B & A + B \\
+
+\hline
+
+\text{Not Exposed} & C & D & C + D \\
+
+\hline
+
+\text{Total} & A + C & B + D & N \\
+
+\hline
+
+\end{array}
+
+$$
+
+</div>
+
+<p class="fragment" data-fragment-index="5" style="margin-top: 5px;">For the Bendectin study: $RR = \frac{148/(148+5876)}{1021/(1021+43237)} = 1.0650$ ($p = 0.1437$)</p>
+
+<p class="fragment strong" data-fragment-index="6">Let's run a power analysis to see if this study had enough power to detect this effect.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Here's something interesting the authors left off. They did not directly calculate relative risk from the data, like they used the logistic regression model. Instead, they broke the groups into multiple categories, and then systematically ignored high risk categories.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- What About Risk? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What About Risk?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny left-justify">
+
+<p>Resample a contingency table using multinomial resampling.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+
+<li><code>data_array</code>: 2D NumPy array representing the contingency table.</li>
+
+<li><code>axis</code>: Axis along which to perform the resampling.
+
+<br>0 for rows, 1 for columns, None for the entire table (default is None).</li>
+
+<li><code>isnull</code>: Boolean indicating whether to use uniform probabilities (default is False).</li>
+
+</ul>
+
+<p><strong>Returns:</strong></p>
+
+<ul>
+
+<li><code>resampled_table</code>: 2D NumPy array of the resampled contingency table.</li>
+
+</ul>
+
+<pre class="language-python">
+
+<code>def resample_table(data_array, axis=None, isnull=False):
+
+&nbsp;&nbsp;&nbsp;&nbsp;rng = np.random.default_rng()
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;if axis is None:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Resample the entire table as a single multinomial distribution
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = data_array.sum()
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if isnull:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probabilities = np.ones(data_array.size) / data_array.size
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probabilities = data_array.flatten() / total
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resampled_flat = rng.multinomial(total, probabilities)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resampled_table = resampled_flat.reshape(data_array.shape)
+
+&nbsp;&nbsp;&nbsp;&nbsp;else:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Resample along the specified axis
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def multinomial_resample_1d(counts):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = counts.sum()
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if isnull:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probabilities = np.ones_like(counts) / len(counts)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probabilities = counts / total
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return rng.multinomial(total, probabilities)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resampled_table = np.apply_along_axis(multinomial_resample_1d, axis, data_array)
+
+&nbsp;&nbsp;&nbsp;&nbsp;return resampled_table</code>
+
+</pre>
+
+</div>
+
+<div class="tiny left-justify">
+
+<p>Compute the risk along the specified axis in a contingency table.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+
+<li><code>table</code>: 2x2 NumPy array or Pandas DataFrame.</li>
+
+<li><code>axis</code>: Axis along which to compute the risk.
+
+<br>0 = column-wise (down rows),
+
+<br>1 = row-wise (across columns, default).</li>
+
+</ul>
+
+<p><strong>Returns:</strong></p>
+
+<ul>
+
+<li><code>Risk values</code>: NumPy array.</li>
+
+</ul>
+
+<pre class="language-python">
+
+<code>def get_risk(table, axis=0):
+
+&nbsp;&nbsp;&nbsp;&nbsp;if isinstance(table, pd.DataFrame):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table = table.values
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Sum along the specified axis
+
+&nbsp;&nbsp;&nbsp;&nbsp;sums = table.sum(axis=axis, keepdims=True)
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Compute risk
+
+&nbsp;&nbsp;&nbsp;&nbsp;risks = table / sums
+
+&nbsp;&nbsp;&nbsp;&nbsp;return risks
+
+
+
+def get_relative_risk(table, target, axis=1):
+
+&nbsp;&nbsp;&nbsp;&nbsp;if isinstance(table, pd.DataFrame):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if axis == 1:  # Comparing columns, target is a row name
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target_idx = table.index.get_loc(target)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:  # axis == 0, comparing rows, target is a column name
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target_idx = table.columns.get_loc(target)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table = table.values
+
+&nbsp;&nbsp;&nbsp;&nbsp;else:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target_idx = target  # Assume target is an index if table is a NumPy array
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Compute risks along the perpendicular axis
+
+&nbsp;&nbsp;&nbsp;&nbsp;risks = get_risk(table, axis=(axis+1)%2)
+
+&nbsp;&nbsp;&nbsp;&nbsp;if axis == 1:  # Relative risk across columns for the specified row
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relative_risk = risks[target_idx, 0] / risks[target_idx, 1]
+
+&nbsp;&nbsp;&nbsp;&nbsp;else:  # axis == 0, relative risk across rows for the specified column
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relative_risk = risks[0, target_idx] / risks[1, target_idx]
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;return relative_risk</code>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- What About Risk? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What About Risk?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny left-justify">
+
+<pre class="language-python">
+
+<code>def bootstrap_relative_risk(table,target,axis=1,B=10000):
+
+&nbsp;&nbsp;&nbsp;&nbsp;col_names = table.columns.tolist()
+
+&nbsp;&nbsp;&nbsp;&nbsp;row_names = table.index.tolist()
+
+&nbsp;&nbsp;&nbsp;&nbsp;data_array = table.to_numpy()
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;rr_actual = get_relative_risk(table,target,axis)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Initialize arrays to store bootstrap results
+
+&nbsp;&nbsp;&nbsp;&nbsp;rr_effect = np.zeros(B)
+
+&nbsp;&nbsp;&nbsp;&nbsp;rr_null = np.zeros(B)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Total count in the table
+
+&nbsp;&nbsp;&nbsp;&nbsp;total_count = data_array.sum()
+
+&nbsp;&nbsp;&nbsp;&nbsp;perp_axis = (axis + 1) % 2
+
+&nbsp;&nbsp;&nbsp;&nbsp;for b in range(B):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Bootstrap resampling for effect estimation
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resampled_table = pd.DataFrame(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resample_table(data_array,axis=perp_axis,isnull=False),
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columns=col_names,
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index=row_names
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Calculate relative risk for the resampled table
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rr_effect[b] = get_relative_risk(resampled_table, target, axis)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Permutation for null hypothesis testing
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permuted_table = pd.DataFrame(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resample_table(data_array,axis=axis,isnull=True),
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columns=col_names,
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index= row_names
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Calculate relative risk for the permuted table
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rr_null[b] = get_relative_risk(permuted_table, target, axis)
+
+&nbsp;&nbsp;&nbsp;&nbsp;return {
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"RelRisk": rr_actual,
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Null": rr_null,
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Effect": rr_effect
+
+&nbsp;&nbsp;&nbsp;&nbsp;}</code>
+
+</pre>
+
+</div>
+
+<div>
+
+<p>The relative risk is 1.0650 ($p = 0.1437$).</p>
+
+<p class="fragment" data-fragment-index="1">From bootstrap analysis, we see that the Type II Error Rate is 70%.</p>
+
+<p class="fragment" data-fragment-index="2">The power to detect this effect is 30%.</p>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 886 406" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/bendectin_rr_log.svg#axes_1"></use>
+
+<use xlink:href="lib/img/bendectin_rr_log.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/bendectin_rr_log.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Introduction to A Priori Power Calculation -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>A Priori</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>An <span class="em">a priori</span> power analysis is conducted <span class="u">before a study begins</span> to ensure that it is adequately powered to detect the expected effect. This type of analysis is crucial for determining the necessary sample size to achieve a specified level of statistical power, often set at 80% to minimize Type II errors.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+A priori power calculations are essential in planning scientific studies, ensuring that the sample size is large enough to detect meaningful effects, thereby preventing underpowered studies that might fail to identify significant differences or relationships.
+
+</aside>
+
+</section>
+
+
+
+<!-- Risk Ratio: Preventing Impotency -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Risk Ratio</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic left-justify" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>A research grup is trying to com up with a surgical technique that <span class="em">reduces</span> the risk of impotency due to prostate surgery.</p>
+
+<p class="fragment" data-fragment-index="1">
+
+A venture capitalist involved in the project thinks interest in the project will be high if the <span class="danger">current risk is reduced by 50%</span> or more.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+After some due diligence, the group has determined that the <span class="success">current risk</span> is 40%, and the target <span class="success">reduced risk</span> is 20%.
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+If the group's Null Hypothesis test is fixed at a <span class="danger">false positive rate</span> of 5%, what sample size will be required to detect a <span class="u">50% reduction</span> in risk with a <span class="info">false negative rate of $\beta=0.05$</span>? <span class="fragment" data-fragment-index="4">$\beta = 0.20$?</span>
+
+</p>
+
+<h4 class="fragment question" data-fragment-index="5">How do we set this up</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Risk Ratio: Preventing Impotency -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Risk Ratio: Preventing Impotency</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny half-width" style="justify-self:center;justify-content: center;">
+
+$$
+
+\begin{array}{|c|c|c|c|}
+
+\hline
+
+& \text{New Technique} & \text{Old Technique} & \text{Total} \\
+
+\hline
+
+\text{Impotency} & A & B & A + B \\
+
+\hline
+
+\text{No Impotency} & C & D & C + D \\
+
+\hline
+
+\text{Total} & A + C & B + D & N \\
+
+\hline
+
+\end{array}
+
+$$
+
+</div>
+
+<p class="left-justify small">
+
+We have no control over the outcome (impotency), but we can control the exposure (surgical technique).
+
+</p>
+
+<p class="left-justify small">We do have control over how many people we subject to each type of surgery, \( n_{\text{old}} \) and \( n_{\text{new}} \). These numbers are fixed:</p>
+
+<div class="fragment no-hang" data-fragment-index="1">
+
+$$
+
+\text{colSum}_1: A + C = n_{\text{new}}
+
+$$
+
+$$
+
+\text{colSum}_2: B + D = n_{\text{old}}
+
+$$
+
+</div>
+
+<p class="left-justify fragment" data-fragment-index="2">And the risks are defined as:</p>
+
+<div class="fragment no-hang" data-fragment-index="2">
+
+
+
+$$
+
+\frac{A}{n_{\text{new}}} = \text{risk}_{\text{new}}
+
+$$
+
+<br>
+
+$$
+
+\frac{B}{n_{\text{old}}} = \text{risk}_{\text{old}}
+
+$$
+
+</div>
+
+
+
+<p class="fragment strong" data-fragment-index="3">
+
+$
+
+RR = \frac{\text{risk}_{\text{new}}}{\text{risk}_{\text{old}}}
+
+$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Computing The Power -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Computing The Power</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic no-hang small" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>To compute the power, we have to simulate the sampling distributions for two different hypotheses about the risk ratio.</p>
+
+
+
+<ul>
+
+<li>The null hypothesis is that there is no difference between the risk of impotence in the two surgeries. Let us set the risk as the risk of impotence with the old surgery, which is 40%.</li>
+
+</ul>
+
+
+
+<div>
+
+$$
+
+H_0 : RR = 1
+
+$$
+
+<br />
+
+$$
+
+H_0 : \text{risk}_{\text{new}} \leftarrow \text{risk}_{\text{old}} = 40\%
+
+$$
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<ul>
+
+<li>The hypothesized effect size we want to compute the power for is \( RR = \frac{1}{2} \).</li>
+
+</ul>
+
+
+
+
+
+$$
+
+H_{\text{eff}} : RR = \frac{1}{2}
+
+$$
+
+$$
+
+H_{\text{eff}} : \text{risk}_{\text{new}} \leftarrow \frac{\text{risk}_{\text{old}}}{2} = \frac{40\%}{2}
+
+$$
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Simulating The Null (H_0) -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Simulating the Power</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>Let's start by simulating the Null Distribution with $n=20$.</p>
+
+<div class="left-justify tiny">
+
+<pre class="language-python">
+
+<code># Define parameters
+
+n_surgery = np.array([20, 20])  # (new, old)
+
+risk = 0.40  # Common for both groups
+
+alpha = 0.05
+
+deals = 10000  # Number of simulations
+
+
+
+# Initialize array to store risk ratio values
+
+RR_b = np.empty(deals)
+
+
+
+# Simulation loop
+
+for i in range(deals):
+
+&nbsp;&nbsp;&nbsp;&nbsp;# The null hypothesis is that the risks are equal.
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Simulate both around the old surgery's risk.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;new_b = np.random.choice(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["impotent", "normal"],
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size=n_surgery[0], p=[risk, 1-risk]
+
+&nbsp;&nbsp;&nbsp;&nbsp;)
+
+&nbsp;&nbsp;&nbsp;&nbsp;old_b = np.random.choice(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["impotent", "normal"],
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size=n_surgery[1], p=[risk, 1-risk]
+
+&nbsp;&nbsp;&nbsp;&nbsp;)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Count the number of "impotent" cases in each group
+
+&nbsp;&nbsp;&nbsp;&nbsp;n_impotent_b = np.array([
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np.sum(new_b == "impotent"),
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np.sum(old_b == "impotent")
+
+&nbsp;&nbsp;&nbsp;&nbsp;])
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Compute risk ratio
+
+&nbsp;&nbsp;&nbsp;&nbsp;risk_b = n_impotent_b / n_surgery  # Risk in each group
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Add small constant to denominator to prevent divide by zero
+
+&nbsp;&nbsp;&nbsp;&nbsp;RR_b[i] = risk_b[0] / (risk_b[1] + 1e-10)  # Relative Risk
+
+
+
+# Compute critical value
+
+RR_null = RR_b
+
+RR_crit = np.quantile(RR_null, alpha, method='median_unbiased')</code>
+
+</pre>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p>And the Effects:</p>
+
+<div class="left-justify tiny">
+
+<pre class="language-python">
+
+<code>n_surgery = np.array([20, 20])  # (new, old)
+
+risk = np.array([0.20, 0.40])  # (new, old)
+
+alpha = 0.05
+
+deals = 10000  # Number of simulations
+
+
+
+# Initialize array to store risk ratio values
+
+RR_b = np.empty(deals)
+
+
+
+# Simulation loop
+
+for i in range(deals):
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Simulate around the new effect size.
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;new_b = np.random.choice(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["impotent", "normal"],
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size=n_surgery[0], p=[risk[0], 1-risk[0]]
+
+&nbsp;&nbsp;&nbsp;&nbsp;)
+
+&nbsp;&nbsp;&nbsp;&nbsp;old_b = np.random.choice(
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["impotent", "normal"],
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size=n_surgery[1], p=[risk[1], 1-risk[1]]
+
+&nbsp;&nbsp;&nbsp;&nbsp;)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Count the number of "impotent" cases in each group
+
+&nbsp;&nbsp;&nbsp;&nbsp;n_impotent_b = np.array([
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np.sum(new_b == "impotent"),
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np.sum(old_b == "impotent")
+
+&nbsp;&nbsp;&nbsp;&nbsp;])
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Compute risk ratio
+
+&nbsp;&nbsp;&nbsp;&nbsp;risk_b = n_impotent_b / n_surgery  # Risk in each group
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Add small constant to denominator to prevent divide by zero
+
+&nbsp;&nbsp;&nbsp;&nbsp;RR_b[i] = risk_b[0] / (risk_b[1] + 1e-10)  # Relative Risk
+
+
+
+# Store effect size results
+
+RR_effect = RR_b
+
+
+
+# Compute beta and power
+
+beta = np.sum(RR_effect >= RR_crit) / deals
+
+power = np.sum(RR_effect <= RR_crit) / deals</code>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Simulating The Power -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Simulating The Power</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="half-width" style="justify-self:center;justify-content: center;">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="70vh" viewBox="0 0 1433 567" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<use xlink:href="lib/img/RR_Power_Analysis_impotency.svg#axes_1"></use>
+
+<use xlink:href="lib/img/RR_Power_Analysis_impotency.svg#axes_2" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/RR_Power_Analysis_impotency.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/RR_Power_Analysis_impotency.svg#axes_4" class="fragment" data-fragment-index="3"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Repeat this for multiple N -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Repeat this for multiple N</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="tiny">
+
+<pre class="language-python">
+
+<code># Define sample sizes
+
+n_sizes = np.arange(5,120,5)
+
+
+
+# Initialize arrays to store risk ratio values and power calculations
+
+RR_b = np.empty(10000)  # deals = 10000
+
+power = np.empty(len(n_sizes))
+
+
+
+alpha = 0.05
+
+deals = 10000  # Number of simulations
+
+risk_null = 0.40
+
+risk_effect = np.array([0.20, 0.40])
+
+
+
+# Loop through different sample sizes
+
+for j, n in enumerate(n_sizes):
+
+&nbsp;&nbsp;&nbsp;&nbsp;n_surgery = np.array([n, n])  # (new, old)
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Initialize arrays for both null and effect distributions
+
+&nbsp;&nbsp;&nbsp;&nbsp;RR_null = np.empty(deals)
+
+&nbsp;&nbsp;&nbsp;&nbsp;RR_effect = np.empty(deals)
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Run both simulations in the same loop
+
+&nbsp;&nbsp;&nbsp;&nbsp;for i in range(deals):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# NULL DISTRIBUTION - equal risks
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_outcomes_null = simulate_surgery_outcomes(n_surgery[0], risk_null)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_outcomes_null = simulate_surgery_outcomes(n_surgery[1], risk_null)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Compute risk ratio for null
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;risk_b_null = new_outcomes_null[0] / new_outcomes_null[1]
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;risk_b_null_old = old_outcomes_null[0] / old_outcomes_null[1]
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RR_null[i] = risk_b_null / (risk_b_null_old + 1e-10)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# EFFECT DISTRIBUTION - different risks
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_outcomes_effect = simulate_surgery_outcomes(n_surgery[0], risk_effect[0])
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_outcomes_effect = simulate_surgery_outcomes(n_surgery[1], risk_effect[1])
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Compute risk ratio for effect
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;risk_b_effect = new_outcomes_effect[0] / new_outcomes_effect[1]
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;risk_b_effect_old = old_outcomes_effect[0] / old_outcomes_effect[1]
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RR_effect[i] = risk_b_effect / (risk_b_effect_old + 1e-10)
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;# Compute critical value from null distribution
+
+&nbsp;&nbsp;&nbsp;&nbsp;RR_crit = np.sort(RR_null)[int(alpha * deals)]
+
+&nbsp;&nbsp;&nbsp;&nbsp;power[j] = np.sum(RR_effect <= RR_crit) / deals
+
+</pre>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<img src="lib/img/RR_Curves_impotency.svg" alt="">
+
+<div class="tiny">
+
+<pre class="language-python">
+
+<code># Helper Function
+
+def simulate_surgery_outcomes(n, risk):
+
+&nbsp;&nbsp;&nbsp;&nbsp;outcomes = np.random.choice(["impotent", "normal"], size=n, p=[risk, 1-risk])
+
+&nbsp;&nbsp;&nbsp;&nbsp;n_impotent = np.sum(outcomes == "impotent")
+
+&nbsp;&nbsp;&nbsp;&nbsp;return np.array([n_impotent, n])</code>
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 16
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.06,
+maxScale: 1.57,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

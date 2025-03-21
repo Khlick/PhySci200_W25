@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Statistical Power Part 1
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/fishers-tea-bg.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Statistical Power
+              </h2>
+              <h3>
+                Part 1
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 16
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Introduction to Statistical Power</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Types of Errors</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="target"></i> Other Sources of Errors</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p></p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/power_2.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Understanding Error
+                </h2>
+                <h3>
+                  Power And Uncertainty
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240,240,240,0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.6) !important;
+
+}
+
+</style>
+
+</section>
+
+
+
+<!-- Introduction to Power -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Inference</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="full-width"> <!-- LEFT -->
+
+<div class="full-width framed border-danger bg-danger-light">
+
+<h4 class="danger-dark">
+
+Hypothesis testing ($\alpha$ level)
+
+</h4>
+
+</div>
+
+<div class="full-width left-justify big">
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Hypothesis tests and p-values are most useful when you want to <span class="danger">test hypotheses about population parameters</span>.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+p-values quantify the <span class="danger">strength of evidence against the null hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="full-width"> <!-- RIGHT -->
+
+<div class="framed border-info bg-info-light">
+
+<h4 class="info-dark">
+
+$1-\alpha$ confidence intervals
+
+</h4>
+
+</div>
+
+<div class="full-width left-justify big">
+
+<p>
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Confidence intervals are most useful when you want to <span class="info">estimate population parameters</span>.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Confidence intervals give you a <span class="info">range of plausible values</span> for your parameter.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;">
+
+<p class="em">
+
+Note: Usually <span class="danger">$\alpha$=0.05</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Sir Ronald Fisher introduced the concept of the 0.05 level as a cut-off point for statistical significance, but he did not intend for it to become as definitive and universally applied as it has become in contemporary research. Fisher suggested that a p-value of 0.05 was a convenient threshold to consider a result sufficiently rare under the null hypothesis, thereby justifying its rejection.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The History of the Alpha Level in Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The History of the Alpha Level in Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify small fragment" data-fragment-index="1">
+
+The alpha level of 0.05, a standard threshold for statistical significance, was popularized by Ronald A. Fisher in the 1920s. Originally suggested as a convenient cut-off for rejecting the null hypothesis, it implied a result would only occur by chance about 1 in 20 times under the null hypothesis.
+
+</p>
+
+<div class="note-script fragment box-width" data-fragment-index="3">
+
+<p>
+
+It is convenient to take this point as a limit in judging whether a deviation is to be considered significant or not.
+
+</p>
+
+<p class="right-justify">-Sir Ronald Fisher</p>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p class="left-justify small">
+
+Despite its arbitrary nature, the 0.05 level became widely adopted due to its balance between Type I and Type II errors. Over time, it has become the conventional standard across various scientific disciplines.
+
+</p>
+
+<p class="left-justify small">
+
+Recent debates challenge this standard, suggesting adjustments or alternative approaches like confidence intervals or Bayesian statistics to better reflect the complexity of scientific evidence.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Discuss the origin and adoption of the 0.05 significance level. Highlight the ongoing debate about its appropriateness and the potential impact on research quality and reproducibility. Encourage students to think critically about the tools and conventions in statistical testing.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Pitfalls -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Formal Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<p class="sided border-danger">
+
+Hypothesis testing is very powerful, as it helps shed light on <span class="danger">whether an observed effect could be real</span> or just due to random chance.
+
+</p>
+
+<p class="sided border-pop">
+
+However, statistical significance <span class="u-pop">is not foolproof</span>, and <span class="pop">it is possible to make the wrong decision</span>, rejecting a true null hypothesis or not rejecting a false null hypothesis.
+
+</p>
+
+<p class="question">
+
+What common pitfalls are associated with formal hypothesis testing
+
+</p>
+
+<p class="question">
+
+What factors influence the chances of these errors occurring
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Mating Choice In Fruit Flies -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small">
+
+Let's look at a study in <span class="em">Drosophila melanogaster</span> (common fruit flies).
+
+</p>
+
+<p class="fragment small" data-fragment-index="1">
+
+Scientist sought to understand if having the choice of a mate would have an effect on "fitness" of offspring.
+
+</p>
+
+<div class="box-width fragment" data-fragment-index="1">
+
+<img src="lib/img/fruit-flies-mating-choice.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Original Paper -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small" style="grid-column:1/3;">
+
+Paper published in <span class="em">Nature</span> with p-value < 0.01.
+
+</p>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-title.png" class="framed" width=100%>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-table2.png" class="framed" width=100%>
+
+<div class="smaller fragment">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Concluded, based on the data, that mate choice improves offspring fitness (This went against conventional wisdom).
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Penn State Replication 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="left-justify small">
+
+600 female fruit flies, <span class="pop">randomly divided</span>:
+
+</p>
+
+<ul class="smaller left-justify">
+
+<li>
+
+300 placed in a cage with 900 males (<span class="pop strong">mate choice</span>)
+
+</li>
+
+<li>
+
+300 placed in individual vials with only one male each (<span class="pop strong">no mate choice</span>)
+
+</li>
+
+</ul>
+
+<p class="small" style="margin-top: 10px;">
+
+After mating, females were separated from the males and put in egg-laying chambers.
+
+</p>
+
+<div class="smaller down-3 framed border-info left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+200 larvae from each chamber were taken and placed in a cage with 200 mutant flies (for competition).
+
+<span class="info strong">Offspring survival rate</span> was measured.
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Penn State Replication 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Experiment repeated 10 times per day for 5 consecutive days.
+
+</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+A total of 50 runs, 10000 larvae tested in each group.
+
+</p>
+
+<table class="smaller down-5 center">
+
+<tbody>
+
+<tr>
+
+<td rowspan=2 class="border-right">Larvae <br>survived?</td>
+
+<td colspan=2 class="border-nobottom border-right">
+
+Mate choice?</td>
+
+<td class="border-nobottom"></td>
+
+</tr>
+
+<tr>
+
+<td>Yes</td>
+
+<td class="border-right">No</td>
+
+<td>Total</td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom border-right">
+
+Yes</td>
+
+<td class="border-nobottom">6067</td>
+
+<td class="border-nobottom border-right">5976</td>
+
+<td class="border-nobottom">12043</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">No</td>
+
+<td>3933</td>
+
+<td class="border-right">4024</td>
+
+<td>7957</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Total</td>
+
+<td>10000</td>
+
+<td class="border-right">10000</td>
+
+<td>20000</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p class="sided border-danger down-5">
+
+<span class="u em">Difference in survival rate:</span>
+
+$d=\hat{p}_\textrm{choice}-\hat{p}_\textrm{no choice}$ <br>
+
+$d=0.6067-0.5976=0.009$
+
+</p>
+
+<p class="framed border-danger fragment">
+
+One-tail p-value = 0.102
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Conflicting Results? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<p class="strong" style="grid-column:1/3;">
+
+In the case of mate choice and offspring survival, we saw 2 studies with different outcomes:
+
+</p>
+
+<div class="framed border-success" style="height:100%;">
+
+<p>
+
+One study found significant results,
+
+</p>
+
+<p>
+
+and they reported $p < 0.01$.
+
+</p>
+
+</div>
+
+<div class="framed border-danger" style="height:100%;">
+
+<p>
+
+One study found insignificant results,
+
+</p>
+
+<p>
+
+and they reported $p=0.102$.
+
+</p>
+
+</div>
+
+<p class="danger huge" style="grid-column:1/3;">Conflicting results?</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+How can this be? It turns out that while we focus a lot on the p-value
+
+(and the alpha, or type 1, error rate), there's more to the "error-story".
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Types Of Errors -->
+
+<style>
+
+#er-table td {
+
+text-align: center; /* Centers content horizontally */
+
+vertical-align: middle; /* Centers content vertically */
+
+font-size: 120%;
+
+}
+
+</style>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Significance Testing Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div data-id="stay-put" class="box-width" style="grid-column:1/3;align-self:start;justify-self:center;">
+
+<p class="left-justify u em">
+
+Errors can, and do, happen!
+
+</p>
+
+<ul class="small left-justify">
+
+<li>A <span class="danger">Type I</span> error is rejecting a true null (false positive)</li>
+
+<li>A <span class="danger">Type II</span> error is not rejecting a false null (false negative)</li>
+
+</ul>
+
+</div>
+
+<div data-id="do-change" style="grid-column:1/3;">
+
+<table id="er-table">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject H$_0$</td>
+
+<td class="border-right bg-info-light">Do not reject H$_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+H$_0$ true
+
+</td>
+
+<td class="border-right">
+
+<span class="danger"><i class="fas fa-exclamation-triangle"></i> Type I</span> error
+
+</td>
+
+<td class="border-right">
+
+<i class="far fa-smile fa-2x"></i>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">H$_0$ false</td>
+
+<td class="border-right border-bottom"><i class="far fa-smile fa-2x"></i></td>
+
+<td class="border-right border-bottom"><span class="danger"><i class="fas fa-exclamation-triangle"></i> Type II</span> error</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Significance Testing Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div data-id="stay-put" class="box-width" style="align-self:start;justify-self:center;">
+
+<p class="left-justify u em">
+
+Errors can, and do, happen!
+
+</p>
+
+<ul class="small left-justify">
+
+<li>A <span class="danger">Type I</span> error is rejecting a true null (false positive)</li>
+
+<li>A <span class="danger">Type II</span> error is not rejecting a false null (false negative)</li>
+
+</ul>
+
+</div>
+
+<div data-id="do-change" class="q3-width" style="align-self:start;justify-self:center;">
+
+<img src="lib/img/type1-type2-error.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- So what are the options? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What Kind Of Error Was Made?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="bg-warning-light">
+
+<p>
+
+<span class="em u">Option #1:</span> <br>
+
+The original study (p-value < 0.01) made a <span class="strong">Type I error</span>, and H$_0$ is really true.
+
+</p>
+
+</div>
+
+<div class="bg-info-light">
+
+<p>
+
+<span class="em u">Option #2:</span> <br>
+
+The second study (p-value = 0.102) made a <span class="strong">Type II error</span>, and H$_a$ is really true.
+
+</p>
+
+</div>
+
+<div class="bg-danger-light">
+
+<p>
+
+<span class="em u">Option #3:</span> <br>
+
+<span class="strong">No errors</span> were made; different experimental settings yield different results.
+
+</p>
+
+</div>
+
+<p class="quoted big full-width" style="grid-column: 1/4;">
+
+What is the probability of making a Type I or Type II error?
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 1 Probability -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type I Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:2vmin;justify-self:center;">
+
+<div>
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>5% of statistics will be in the most extreme 5%</li>
+
+<li>5% of statistics will give p-values less than 0.05</li>
+
+<li>5% of statistics will lead to rejecting H$_0$ at $\alpha=0.05$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+If $\alpha=0.05$, there is a 5% chance of a Type I error
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>1% of statistics will be in the most extreme 1%</li>
+
+<li>1% of statistics will give p-values less than 0.01</li>
+
+<li>1% of statistics will lead to rejecting H$_0$ at $\alpha=0.01$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+If $\alpha=0.01$, there is a 1% chance of a Type I error
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_3"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<p class="bg-danger-light black fragment" style="grid-column: 1/3;" data-fragment-index="2">
+
+For each test, the probability of making a Type I error <span class="strong">is $\alpha$</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 2 Probability: n -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type II Errors</h2>
+
+</div>
+
+<div class="content no-hang">
+
+<p class="bg-warning-light question">
+
+How can we reduce the probability of making a Type II Error
+
+</p>
+
+<p class="black smaller">
+
+That is, how could we increase the probability of rejecting the null when the
+
+null hypothesis is rejectable, i.e., <span class="em">false</span>?
+
+</p>
+
+<div class="row">
+
+<div class="col-50">
+
+<p class="u-info fragment left-justify" data-fragment-index=1>
+
+<span class="circled-bg-info">1</span>
+
+Increase the sample size
+
+</p>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index=2>
+
+<p class="fragment" data-fragment-index=2>
+
+Larger sample sizes <span class="strong">decrease the variability of the sampling distribution</span>.
+
+</p>
+
+<ul>
+
+<li class="fragment" data-fragment-index=3>
+
+With <span class="pop">small sample sizes</span>, even
+
+<span class="u-pop">large differences or effects may not be statistically
+
+significant</span>, and Type II errors are common.
+
+</li>
+
+<li class="fragment" data-fragment-index=4>
+
+But with <span class="pop">large sample sizes</span>, even a
+
+<span class="u-pop">very small difference or effect can be
+
+statistically significant</span>
+
+</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index=5>
+
+<i class="fas fa-arrow-circle-right success"></i>
+
+Increased $n$ reduces chances of Type II errors
+
+<span class="fragment" data-fragment-index=6><i class="fas fa-arrow-right"></i> increases
+
+<span class="strong u">statistical power</span>.</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Why do we care about the sampling distribution?
+
+</p>
+
+<p>
+
+Think about comparing Means, if the sampling distribution of 2 means are heavily overlapped,
+
+what's the liklihood that we'll be able to tell they are different or from different populations?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Type 2 Probability: n diagram -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Sample Size Impacts Detectability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:auto 1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="left-justify">
+
+<p>
+
+<span class="u em">Set 1:</span><br>
+
+Mean: 16 <br>
+
+SD: 5 <br>
+
+</p>
+
+<p class="down-3">
+
+<span class="u em">Set 2:</span><br>
+
+Mean: 20 <br>
+
+SD: 5 <br>
+
+</p>
+
+<p class="down-3">
+
+<span class="u em">Statistic:</span><br>
+
+<span class="success">$\bar{x}_2-\bar{x}_1=4$</span>
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:3.5fr 5fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 288 288" style="margin-top: 0;">
+
+<use xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 380 288" style="margin-top: 0;">
+
+<use xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_3"></use>
+
+<use xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div style="display:flex;flex-direction:row;gap:5vmin;grid-column:1/3;grid-row:2/3;">
+
+<div class="bg-info-light black full-width">
+
+<p>
+
+(n=9)<br>$p=0.1109$
+
+</p>
+
+</div>
+
+<div class="bg-warning-light black fragment full-width" data-fragment-index=1>
+
+<p>
+
+(n=15)<br>$p=0.0376$
+
+</p>
+
+</div>
+
+<div class="bg-danger-light black fragment full-width" data-fragment-index=2>
+
+<p>
+
+(n=21)<br>$p=0.0132$
+
+</p>
+
+</div>
+
+</div>
+
+<div style="grid-column:1/3;grid-row:3/4;" class="fragment" data-fragment-index="3">
+
+<p class="question">
+
+What is the Null Distribution comprised of
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Given two samples in my experiment, the Null Distribution of the Differences will take on a different shape depending on the sample size.
+
+</p>
+
+<p>
+
+This is the basis of the t-distribution's DOF!
+
+</p>
+
+<p>
+
+The Null Distribution is the sampling distribution of random chance differences between the two groups.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Type 2 Probability: significance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type II Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+
+
+<p class="bg-warning-light question">
+
+How can we reduce the probability of making a Type II Error
+
+</p>
+
+<p class="black smaller">
+
+That is, how could we increase the probability of rejecting the null when the
+
+null hypothesis is rejectable, i.e., <span class="em">false</span>?
+
+</p>
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="u-info left-justify">
+
+<span class="circled-bg-info">1</span>
+
+Increase the sample size
+
+</p>
+
+</div>
+
+<div>
+
+<p class="left-justify fragment u-pink" data-fragment-index=1>
+
+<span class="circled-bg-pink">2</span>
+
+Increase the significance level
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic box-width" style="grid-template-columns:7fr 3fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div data-fragment-index=1>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=4 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index=3 style="align-content: center;height:100%;">
+
+<p class="smaller info">
+
+Increase $\alpha$ to reduce the chance of Type II error.
+
+</p>
+
+<p class="smaller danger">
+
+Decrease $\alpha$ to reduce the chance of Type I error.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Significance Level And Errors -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Significance Level and Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small">
+
+While we wish to avoid both types of errors, in practice we must accept some trade-off between them:
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment small" data-fragment-index="0">
+
+<p class="strong">
+
+If we set <span class="pop">$\alpha$ too low</span>:
+
+</p>
+
+<ul>
+
+<li class="warning">It becomes more difficult to reject $H_0$ (conservative).</li>
+
+<li class="success">This decreases the probability of a Type I error (false positive).</li>
+
+<li class="danger">But increases the probability of a Type II error (false negative).</li>
+
+</ul>
+
+</div>
+
+<div class="fragment small" data-fragment-index="1">
+
+<p class="strong">
+
+If we set <span class="info">$\alpha$ too high</span>:
+
+</p>
+
+<ul>
+
+<li class="warning">It becomes easier to reject $H_0$ (liberal).</li>
+
+<li class="success">This decreases the probability of a Type II error (false negative).</li>
+
+<li class="danger">But increases the probability of a Type I error (false positive).</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<table id="er-table-small">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject $H_0$</td>
+
+<td class="border-right bg-info-light">Do not reject $H_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+$H_0$ true
+
+</td>
+
+<td class="border-right">
+
+<p class="danger">$\alpha$: Type I Error</p>
+
+<p class="fragment smallest">Probability of false positive.</p>
+
+</td>
+
+<td class="border-right">
+
+<p class="success">$1-\alpha$: Correct Decision</p>
+
+<p class="fragment smallest">Probability of true negative.</p>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">$H_0$ false</td>
+
+<td class="border-right border-bottom">
+
+<p class="success">$1-\beta$: Statistical Power</p>
+
+<p class="fragment smallest">Probability of true positive.</p>
+
+</td>
+
+<td class="border-right border-bottom">
+
+<p class="danger">$\beta$: Type II Error</p>
+
+<p class="fragment smallest">Probability of false negative.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Interactive Power Visualization -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power And Significance Level</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width" style="height:100%;">
+
+<table id="er-table-small">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject H$_0$</td>
+
+<td class="border-right bg-info-light">Do not reject H$_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+H$_0$ true
+
+</td>
+
+<td class="border-right">
+
+<p class="danger">$\alpha$: Type I Error</p>
+
+<p class="smallest">Probability of <span class="em">false positive</span>.</p>
+
+</td>
+
+<td class="border-right">
+
+<p class="success">$1-\alpha$</p>
+
+<p class="smallest">Probability of <span class="em">true negative</span>.</p>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">H$_0$ false</td>
+
+<td class="border-right border-bottom">
+
+<p class="success">$1-\beta$: Statistical Power</p>
+
+<p class="smallest">Probability of <span class="em">true positive</span>.</p>
+
+</td>
+
+<td class="border-right border-bottom">
+
+<p class="danger">$\beta$: Type II Error</p>
+
+<p class="smallest">Probability of <span class="em">false negative</span>.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div style="height:100%">
+
+<vizzy data-src="lib/interactives/errors-power.html" class="framed" style="height:50vh;width:100%;"></vizzy>
+
+<div class="left-justify smaller">
+
+<p class="smaller em">Recall that the CDF for the standard normal distribution is $\Phi(Z) = p$, where
+
+$\Phi(Z) = \int_{-\infty}^{Z} \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}} \, dz$.
+
+Thus, we find the inverse CDF, $\Phi^{-1}(p) = Z$, to get the Z-Value for our
+
+Type I and Type II error rates.
+
+</p>
+
+<p class="smaller em">
+
+We find our <span class="strong">Error Rates</span> relative to their sampling distributions: <span class="info">$H_0:\class{danger}{\alpha}$</span>, <span class="warning">$H_a:\class{muted}{\beta}$</span>.
+
+</p>
+
+<p class="smaller">
+
+Error rates are related by the $\alpha$ level. With $H_0\& H_a$ on the same
+
+data space, $\beta$ is $\Phi_a(\Phi^{-1}_0(\alpha))$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note that beta is the integration of the Ha distribution from negative infinity to the z value corresponding to the Null distribution's alpha level.</p>
+
+<p><strong>Explanation for Students</strong></p>
+
+<p>When introducing this concept to students, it would be helpful to clarify:</p>
+
+<ul>
+
+<li><strong>Effect Size Consideration:</strong> The noncentral t-distribution considers the effect size you expect between groups. For instance, if you believe the new jet engine is more efficient by a certain margin, this margin (quantified by Cohen's d) influences the noncentrality parameter.</li>
+
+<li><strong>Connection to H1:</strong> This distribution directly relates to the hypothesis that there is a difference (i.e., H1). Unlike the central t-distribution, which is used under H0 (no difference), the noncentral t-distribution takes the presumed effect into account, making it the distribution of the test statistic under H1.</li>
+
+<li><strong>Standardization:</strong> The term "standardized" here implies that the effect size has been transformed into a scale that is comparable across different studies or contexts, factoring in the sample size and variance.</li>
+
+<li><strong>Usage in Power Calculations:</strong> Emphasize that this distribution is crucial for calculating the power of a test, which is the probability of correctly rejecting H0 when H1 is true. The area under the curve of the noncentral t-distribution beyond the critical value of the t-test (determined by the significance level alpha) gives us this probability.</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Understanding Significance Level -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding The Significance Level</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<p class="em">
+
+The significance level $\alpha$, represents the <span class="success strong">tolerable probability of making a Type I error</span>.
+
+</p>
+
+<p class="fragment left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+<span class="info">If the consequences of a Type I error are severe</span> (for example, approving a new drug that is potentially dangerous) we might use a very small $\alpha$ (perhaps even $\alpha=0.005$).
+
+</p>
+
+<p class="fragment left-justify">
+
+<i class="fa fa-arrow-circle-right danger"></i>
+
+<span class="danger">If the consequences of a Type II error are severe</span> (for example, failing to diagnose a treatable disease), we would want to make it easier to reject $\mathrm{H}_0$, so
+
+we might use a relatively large $\alpha$.
+
+</p>
+
+<div class="grid-generic framed border-muted fragment" style="grid-template-columns:1fr 9fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%;align-content:center;">
+
+<p class="muted">
+
+Key idea <br>
+
+<i class="fas fa-lightbulb"></i>
+
+</p>
+
+</div>
+
+<p class="just-justify">
+
+Remember that there is always a <span class="pop">trade-off</span> between the two types of errors, so people usually use the common significance levels of <span class="pop">5%</span>, 10% or 1% (but where the perfect balance lies is a complicated question and the increasing subject of debate).
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Introduction to Types of Power Analysis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Introduction to Types of Power Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed border-muted">
+
+<p class="small"><strong>Statistical Power Analysis</strong> is a crucial aspect of experimental design, used to determine the likelihood that a study will detect an effect when there is an effect to be detected. It addresses two types of errors:</p>
+
+<ul>
+
+<li><strong>Type I Error ($\alpha$):</strong> Incorrectly rejecting the null hypothesis when it is true.</li>
+
+<li><strong>Type II Error ($\beta$):</strong> Failing to reject the null hypothesis when it is false.</li>
+
+</ul>
+
+</div>
+
+<p class="fragment" data-fragment-index="1">There are two primary types of power analysis:</p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="2"><strong>Post Hoc Power Analysis:</strong> Conducted after a study to evaluate the likelihood of committing a Type II error, i.e., failing to detect an effect that is present. This analysis is typically used to understand the power limitations of a completed study.</li>
+
+<li class="fragment" data-fragment-index="3"><strong>A Priori Power Analysis:</strong> Conducted before a study begins, it is used to determine the necessary sample size to achieve a desired power level, typically set to 80%, to confidently detect an expected effect.</li>
+
+</ul>
+
+<p class="fragment em smaller success" data-fragment-index="4">Understanding and applying these analyses help ensure that engineering studies are designed efficiently, with sufficient power to yield meaningful results.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+This slide provides a foundational understanding of statistical power and its role in minimizing errors in hypothesis testing. It sets the stage for the subsequent slides detailing specific methodologies and calculations for both post hoc and a priori power analyses in real-world engineering contexts.
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- False Positive Rate -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>False Positive Rate ($\alpha$)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/drummond-vowler2012-falsepositives.png" alt="Drummond and Vowler (2012) False Positives">
+
+</div>
+
+<div class="small left-justify">
+
+<p>
+
+In the long run, if we accept $p \approx 0.05$ as a threshold possibility, we
+
+make the correct decision 95 times in 100 experiments. We will misclassify 5%
+
+of experiments as positive when this is not the case. The type I error rate is the
+
+rate of classification of results as positive (different) when in fact there is no
+
+difference: the false positive rate. In the context of <span class="s-quote">trust</span> in results, a false
+
+positive rate of 5% is generally considered acceptable.
+
+</p>
+
+<p class="fragment info" data-fragment-index="1">
+
+$\alpha$ is the probability of saying there is an effect, where the effect is truly from random chance.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="foot-right">
+
+<p><a href="https://journals.physiology.org/doi/pdf/10.1152/advan.00118.2012">Drommond and Vowler, 2012</a></p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Jumping Frogs-->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jumping Frogs</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="big">
+
+<p class="question smaller">Does locale affect frog jumping</p>
+
+<p class="fragment smaller em" data-fragment-index="1">
+
+From ANOVA, we have the null hypothesis that if all the frogs are from the same population, then the mean jump distance will be the same. <span class="danger">The probability of observing at least this result is $p=0.37$</span>
+
+</p>
+
+</div>
+
+<div style="align-content: center;">
+
+<img src="lib/img/drummond-vowler2012-samples.png" alt="Drummond and Vowler (2012) False Positives">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="foot-right">
+
+<p><a href="https://journals.physiology.org/doi/pdf/10.1152/advan.00118.2012">Drommond and Vowler, 2012</a></p>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We could have observed this result 37 percent of the time just by chance. This is not enough to reject the null hypothesis.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Family Wise Error Rates -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Family Wise Error Rates</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="danger">
+
+Skipping an omnibus detection step can lead to conflated errors
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+<span class="s-quote">Family Wise Error Rate</span> is the probability of making at least one type I error across all comparisons.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+<span class="s-quote">False Discovery Rate</span> is the expected proportion of false positives among all significant results.
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+<span class="s-quote">Significant</span> results begin to show up by chance:
+
+</p>
+
+<p class="fragment smaller em" data-fragment-index="4">
+
+Original P values for all the possible comparisons, in order of size, are given
+
+in column 1. The comparisons are in the second column. In the third column,
+
+the critical P values required have been generated by dividing the originally
+
+chosen threshold of 0.05 by the number of comparisons remaining as the
+
+column is descended. In no case is the original P value less than the adjusted
+
+critical value: we conclude that none of the comparisons is significant.
+
+</p>
+
+</div>
+
+<div class="left-justify">
+
+<img src="lib/img/drummond-vowler2012-pvalues.png" alt="Drummond and Vowler (2012) False Positives" class="fragment" data-fragment-index="3">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Family Wise Error Rates -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Family Wise Error Rates</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="s-quote">
+
+In many instances, scientific papers are brimful of two-way comparisons and we cannot be sure that we are not just being presented with a chance finding that has resulted from a succession of comparisons, as the authors seek for something positive to report.
+
+</p>
+
+<p>
+
+The number of pairwise comparisons that can be made (dashed line)
+
+increases with the number of groups available. As the number of comparisons
+
+increases, the error rate (rate of false positive conclusions) also increases
+
+(continuous line).
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/drummond-vowler2012-rates.png" alt="Drummond and Vowler (2012) False Positives">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type II Error: False Negatives -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Type II Error: False Negatives ($\beta$)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Reducing the False Positive Rate ($\alpha$) increases the False Negative Rate ($\beta$).</p>
+
+<div class="half-width" style="align-content: center; justify-content: center;justify-self: center;">
+
+<img src="lib/img/drummond-vowler2012-fdr.png" alt="Drummond and Vowler (2012) False Positives" class="graphic">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Making false statements -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Powerless Statements</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="note-script bigger fragment box-width" data-fragment-index="1">
+
+<p>
+
+... at this point, I've spent a lot of time with the president. And not once have I seen him do something this was mean, or cruel, or wrong. Not once.
+
+</p>
+
+<p class="right-justify smaller">-Elon Musk (2025)</p>
+
+</div>
+
+<p class="fragment left-justify" data-fragment-index="1">
+
+We hear this claim all the time: <span class="s-quote">There is no evidence that X is toxic.</span>
+
+</p>
+
+<p class="fragment left-justify" data-fragment-index="2">
+
+This is not the same as saying <span class="s-quote">X is not toxic.</span>
+
+</p>
+
+<p class="fragment left-justify danger" data-fragment-index="3">
+
+If a Null Hypothesis cannot be rejected, this is not sufficent evidence that there is NO Effect.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We have to be careful about the language we use. Statements like "I've never seen him do anything mean, or cruel, or wrong" are not helpful. They are not helpful because they are not helpful.</p>
+
+<p>Carl Sagan famously said "extraordinary claims require extraordinary evidence", and "Absence of evidence is not evidence of absence".</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Caculating \beta -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Caculating $1-\beta$ or $\alpha$</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/beta-error-pseudocode.jpg" alt="Beta Error Pseudocode">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Comparison Of 2 Groups -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Comparison Of 2 Groups</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Simulate 3 different conditions: equal variance, unequal variance, and skew.</p>
+
+<img src="lib/img/power-3-conditions.jpg" alt="Power 3 Conditions">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- False Positve Rate -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>False Positve Rate</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="box-width" style="align-content: start; justify-content: center;justify-self: center;">
+
+<img src="lib/img/power-falsepositive-sim.jpg" alt="Power False Positives">
+
+</div>
+
+<div class="full-width smallest">
+
+<ul>
+
+<li>At \( n = 4, n = 6 \), false positive rates are very high for twobox, rank, permutation, and rank permutation test (upwards of 38%).</li>
+
+<li>At \( n = 4, n = 6 \), nonparametric (Mann-Whitney-Wilcoxon) doesn't have power to reject any hypotheses at \( \alpha = 0.5 \).</li>
+
+<li>At \( n = 4, n = 6 \), we can use Student, Welch, or bigbox. Welch has the lowest false positive rate (but we will see, also lowest power).</li>
+
+<li>Twobox bootstrap overfits until \( n \geq 60 \).</li>
+
+<li>At \( n \geq 30 \), rank-based tests (bootstrap and Mann-Whitney-Wilcoxon) all have higher false positive rates. This is explainable for the skew case, but not the others.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Results: Equal Var -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Results: Equal Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/power-equalvar1.jpg" alt="Equal Var 1">
+
+</div>
+
+<div>
+
+<img src="lib/img/power-equalvar2.jpg" alt="Equal Var 2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Results: Unequal Var -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Results: Unequal Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/power-unequalvar1.jpg" alt="Equal Var 1">
+
+</div>
+
+<div>
+
+<img src="lib/img/power-unequalvar2.jpg" alt="Equal Var 2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Results: Skew Var -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Results: Skewed Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/power-skewvar1.jpg" alt="Equal Var 1">
+
+</div>
+
+<div>
+
+<img src="lib/img/power-skewvar2.jpg" alt="Equal Var 2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Summary of Two-Group Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Summary of Two-Group Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<ul>
+
+<li>Nonparametric (Mann-Whitney-Wilcoxon) incurs a loss of power.</li>
+
+<li>At tiny sample sizes (4-6), rank bootstrap has problems with false positives.</li>
+
+<li>At samples \( n \leq 60 \), twobox overfits.</li>
+
+<li>Bigbox usually works well and is slightly more powerful than Student.</li>
+
+<li>There are always trade-offs between False Positive Rate and Power.</li>
+
+<li>There is no "uniformly most powerful test".</li>
+
+</ul>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 16
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.06,
+maxScale: 1.57,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

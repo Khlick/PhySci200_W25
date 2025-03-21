@@ -327,6 +327,10 @@ html.print-pdf .reveal content {
   display: inline-block !important;
   animation: wiggleAndColorChange 0.2s infinite; }
 
+.reveal section .freezing-text {
+  display: inline-block !important;
+  animation: shiverAndFreeze 0.85s infinite; }
+
 .reveal section table.latex-style-table-row-labels {
   border-collapse: separate;
   border-spacing: 0;
@@ -466,6 +470,21 @@ html.print-pdf .reveal content {
   .reveal section table.gpt-table-styled tr:hover {
     background-color: #f1f1f1; }
 
+.reveal section table.gpt-styled-table-2 {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; }
+  .reveal section table.gpt-styled-table-2 th, .reveal section table.gpt-styled-table-2 td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center; }
+  .reveal section table.gpt-styled-table-2 th {
+    background-color: #f2f2f2; }
+  .reveal section table.gpt-styled-table-2 .left-align {
+    text-align: left; }
+  .reveal section table.gpt-styled-table-2 .italic {
+    font-style: italic; }
+
 .reveal section .icon-left {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -534,6 +553,38 @@ html.print-pdf .reveal content {
   75% {
     transform: translate(2px, 2px) rotate(1deg);
     color: #ff5e5b; } }
+
+@keyframes shiverAndFreeze {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    color: #005587; }
+  5% {
+    transform: scale(0.95);
+    color: #4686b5; }
+  10% {
+    transform: translate(-2px, 0) rotate(-1deg) scale(0.95);
+    color: #005587; }
+  15% {
+    transform: translate(2px, 0) rotate(1deg) scale(0.95);
+    color: #4686b5; }
+  20% {
+    transform: translate(-2px, 0) rotate(-1deg) scale(0.95);
+    color: #005587; }
+  30% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    color: #4686b5; }
+  50% {
+    transform: translate(-1px, 0) rotate(-0.5deg) scale(1);
+    color: #005587; }
+  60% {
+    transform: translate(1px, 0) rotate(0.5deg) scale(1);
+    color: #4686b5; }
+  70% {
+    transform: translate(-1px, 0) rotate(-0.5deg) scale(1);
+    color: #005587; }
+  80% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    color: #4686b5; } }
 
 root {
   --google-font-color-notocoloremoji:colrv1; }
