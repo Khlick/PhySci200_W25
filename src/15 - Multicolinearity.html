@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Multicolinearity Handling Bigger Data
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/vs.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/correlation-bg-3.webp" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Multicolinearity
+              </h2>
+              <h3>
+                Handling Bigger Data
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                PS200 Winter 2025
+              </p>
+              <p class="byinfo">
+                Lecture 15
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Recap Bootstrap Models</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Multicolinearity and Variance Inflation Factor</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="target"></i> Regression Methods overview</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p></p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Regression Bootstrap -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Regression Bootstrap</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<img src="lib/img/regression-bootstrap-ci95.svg" class="unbordered flat" width="100%">
+
+</div>
+
+<div class="left-justify">
+
+<table border="1" class="smaller gpt-table-styled full-width">
+
+<tr>
+
+<th>Feature</th>
+
+<th>Resampling (x, y) Pairs</th>
+
+<th>Resampling Residuals</th>
+
+</tr>
+
+<tr>
+
+<td><strong>Assumption on x</strong></td>
+
+<td>x values are random</td>
+
+<td>x values are fixed</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Source of variation</strong></td>
+
+<td>Entire dataset (joint x, y distribution)</td>
+
+<td>Conditional distribution of errors</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Effect on parameter variability</strong></td>
+
+<td>Captures both sampling variability and model uncertainty</td>
+
+<td>Captures uncertainty in noise but not in model specification</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Best suited for</strong></td>
+
+<td>Nonparametric settings, observational studies</td>
+
+<td>Parametric regression models, controlled experiments</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Linear regression NHST</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:80%;">
+
+<img src="lib/img/regression-nhst.svg" class="unbordered flat" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Colinearity -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Colinearity</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p style="grid-column: 1/3;" class="small sided border-info">Colinearity is when two or more predictor variables are highly correlated with each other.</p>
+
+<div>
+
+<p>Multiple regression with no collinearity: <span class="fragment success" data-fragment-index="1">Fit the surface</span></p>
+
+<img src="lib/img/multiple-regression-3d.png" alt="" class="graphic full-width">
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p>Multiple regression with collinearity: <span class="fragment success">Infinite number of solutions</span></p>
+
+<img src="lib/img/multiple-regression-3d-collinear.png" alt="" class="graphic full-width">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Potential Solutions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Potential Solutions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify smaller">
+
+<ol>
+
+<li class="fragment" data-fragment-index="1"><strong>Variance Inflation Factor (VIF):</strong>
+
+<ul>
+
+<li><strong>Calculate VIF:</strong> Assess the degree of multicollinearity by computing the VIF for each predictor. A VIF value exceeding 5 or 10 indicates significant multicollinearity.</li>
+
+<li><strong>Iterative Removal:</strong> Remove predictors with the highest VIF values one at a time, recalculating VIFs after each removal, until all VIFs are below the chosen threshold.</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="2"><strong>Stepwise Regression:</strong>
+
+<ul>
+
+<li><strong>Procedure:</strong> Automatically add or remove predictors based on specific criteria (e.g., p-values) to identify a subset of variables that contribute significantly to the model.</li>
+
+<li><strong>Caution:</strong> Stepwise regression can sometimes remove important variables whose significance is affected by multicollinearity. It's essential to assess multicollinearity before applying stepwise methods.</li>
+
+</ul>
+
+</li>
+
+<li class="fragment" data-fragment-index="3"><strong>Alternative Methods:</strong>
+
+<ul>
+
+<li><strong>Principal Component Analysis (PCA):</strong> Transform correlated predictors into a set of uncorrelated components.</li>
+
+<li><strong>Regularization Techniques:</strong> Apply methods like Ridge Regression or LASSO, which can handle multicollinearity by adding a penalty to the regression coefficients.</li>
+
+</ul>
+
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- VIF -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>VIF</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="fragment" data-fragment-index="1">VIF measures how much the variance of a regression coefficient increases due to multicollinearity</p>
+
+<div class="fragment" data-fragment-index="2">
+
+<p class="math">VIF<sub>j</sub> = 1/(1-R<sub>j</sub><sup>2</sup>)</p>
+
+<p class="small">where R<sub>j</sub><sup>2</sup> is from regressing predictor j on all other predictors</p>
+
+</div>
+
+<ul class="fragment small" data-fragment-index="3">
+
+<li>VIF = 1: No correlation with other predictors</li>
+
+<li>VIF > 5: Moderate multicollinearity</li>
+
+<li>VIF > 10: Severe multicollinearity</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 15
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2025</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.06,
+maxScale: 1.57,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+minScale: 0.4,
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+output: {
+displayOverflow: "linebreak",
+linebreaks: {
+inline: true,
+width: "100%",
+lineleading: 0.2,
+LinebreakVisitor: null,
+},
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ps200_logo.svg",
+text: "Welcome to PS200!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
